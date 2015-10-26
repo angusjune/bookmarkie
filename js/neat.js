@@ -64,13 +64,13 @@ function init() {
 		'edit-dialog-button': 'save'
 	}, function(msg, id){
 		var el = $(id), m = _m(msg);
-		if (el.tagName == 'COMMAND') el.label = m;
+		if (el.tagName == 'MENUITEM') el.label = m;
 		el.textContent = m;
 	});
 
 	// RTL indicator
-	var rtl = (body.getComputedStyle('direction') == 'rtl');
-	if (rtl) body.addClass('rtl');
+	// var rtl = (body.getComputedStyle('direction') == 'rtl');
+	// if (rtl) body.addClass('rtl');
 
 	// Init some variables
 	var opens = localStorage.opens ? JSON.parse(localStorage.opens) : [];
@@ -270,6 +270,7 @@ function init() {
 	var prevValue = '';
 
 	var search = function(){
+		// var value = searchInput.value;
 		var value = searchInput.value.trim();
 		localStorage.searchQuery = value;
 		if (value == ''){
@@ -282,9 +283,11 @@ function init() {
 		if (value == prevValue) return;
 		prevValue = value;
 		searchMode = true;
+
 		chrome.bookmarks.search(value, function(results){
 			var v = value.toLowerCase();
 			var vPattern = new RegExp('^' + value.escapeRegExp().replace(/\s+/g, '.*'), 'ig');
+
 			if (results.length > 1){
 				results.sort(function(a, b){
 					var aTitle = a.title;
@@ -304,12 +307,17 @@ function init() {
 				});
 				results = results.slice(0, 100); // 100 is enough
 			}
+
 			var html = '<ul role="list">';
 			for (var i = 0, l = results.length; i < l; i++){
 				var result = results[i];
-				var id = result.id;
-				html += '<li data-parentid="' + result.parentId + '" id="results-item-' + id + '" role="listitem">'
-					+ generateBookmarkHTML(result.title, result.url);
+				
+				if (result.url) {
+					var id = result.id;
+					html += '<li data-parentid="' + result.parentId + '" id="results-item-' + id + '" role="listitem">'
+						+ generateBookmarkHTML(result.title, result.url);
+				}
+
 			}
 			html += '</ul>';
 			$tree.style.display = 'none';
@@ -330,6 +338,7 @@ function init() {
 			vPattern = null;
 			lis = null;
 		});
+
 	};
 	searchInput.addEventListener('input', search);
 
@@ -823,7 +832,7 @@ function init() {
 		e.stopPropagation();
 		if (!currentContext) return;
 		var el = e.target;
-		if (el.tagName != 'COMMAND') return;
+		if (el.tagName != 'MENUITEM') return;
 		var url = currentContext.href;
 		switch (el.id){
 			case 'bookmark-new-tab':
@@ -861,7 +870,7 @@ function init() {
 	var folderContextHandler = function(e){
 		if (!currentContext) return;
 		var el = e.target;
-		if (el.tagName != 'COMMAND') return;
+		if (el.tagName != 'MENUITEM') return;
 		var li = currentContext.parentNode;
 		var id = li.id.replace('neat-tree-item-', '');
 		chrome.bookmarks.getChildren(id, function(children){
@@ -1127,7 +1136,7 @@ function init() {
 				if (metaKey){ // cmd + down (Mac)
 					menu.lastElementChild.focus();
 				} else {
-					if (item.tagName == 'COMMAND'){
+					if (item.tagName == 'MENUITEM'){
 						var nextItem = item.nextElementSibling;
 						if (nextItem && nextItem.tagName == 'HR') nextItem = nextItem.nextElementSibling;
 						if (nextItem){
@@ -1145,7 +1154,7 @@ function init() {
 				if (metaKey){ // cmd + up (Mac)
 					menu.firstElementChild.focus();
 				} else {
-					if (item.tagName == 'COMMAND'){
+					if (item.tagName == 'MENUITEM'){
 						var prevItem = item.previousElementSibling;
 						if (prevItem && prevItem.tagName == 'HR') prevItem = prevItem.previousElementSibling;
 						if (prevItem){
