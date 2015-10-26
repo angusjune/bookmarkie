@@ -1,79 +1,94 @@
 <!doctype html>
 <link rel="stylesheet" href="css/options.css">
-<link rel="stylesheet" href="css/codemirror.css">
+<link rel="stylesheet" href="css/wtf-forms.css">
 <script src="js/options.js"></script>
 <script src="js/neatools.js"></script>
-<script src="js/codemirror.js"></script>
-<h1>
-	<img src="images/icon128.png" width="32" height="32" alt="">
-	<span id="extName"></span>
-	<span id="version"></span>
-	<small>
-		<span id="options"></span>
-	</small>
-</h1>
-<fieldset>
-	<legend id="general"></legend>
-	<input type="checkbox" id="click-new-tab" />
-	<label for="click-new-tab" id="optionClickNewTab"></label>
-	<br />
-	<br />
-	<input type="checkbox" id="open-new-tab-bg" />
-	<label for="open-new-tab-bg" id="optionOpenNewTab"></label>
-	<br />
-	<br />
-	<input type="checkbox" id="close-unused-folders" />
-	<label for="close-unused-folders" id="optionCloseUnusedFolders"></label>
-	<br />
-	<br />
-	<input type="checkbox" id="popup-stay-open" />
-	<label for="popup-stay-open" id="optionPopupStays"></label>
-	<br />
-	<br />
-	<input type="checkbox" id="confirm-open-folder" />
-	<label for="confirm-open-folder" id="optionConfirmOpenFolder"></label>
-	<br />
-	<br />
-	<input type="checkbox" id="remember-prev-state" />
-	<label for="remember-prev-state" id="optionRememberPrevState"></label>
-</fieldset>
-<fieldset>
-	<legend id="accessibility"></legend>
-	<div>
-		<label id="optionZoom"></label>&nbsp;
-		<input type="number" min="90" max="150" step="10" value="100" id="zoom-input">%
-	</div>
-</fieldset>
-<fieldset>
-	<legend id="customIcon"></legend>
-	<div id="custom-icon-preview">
-		<img src="images/icon38.png" width="19" height="19" alt="">
-	</div>
-	<label id="customIconText"></label>
-	<input type="file" id="custom-icon-file">
-</fieldset>
-<fieldset>
-	<legend id="resetSettings"></legend>
-	<div>
-		<span id="resetText"></span>
-		<button type="button" id="reset-button" name="reset">
-			<span id="reset"></span>
-		</button>
-	</div>
-</fieldset>
-<fieldset>
-	<legend id="customStyles"></legend>
-	<p>
-		<span id="customStylesText"></span>
-	</p>
-	<textarea id="userstyle"></textarea>
-</fieldset>
-<div id="footer">
-	<p id="optionsFooterText1"></p>
-	<p id="optionsFooterText2"></p>
-	<p id="optionsFooterText3"></p>
-	<p id="optionsFooterText4"></p>
-	<p id="optionsFooterText5"></p>
-	<p id="optionsFooterText6"></p>
-	<p id="optionsFooterText7"></p>
+
+<div class="container">
+	<h1>
+		<img src="images/icon128.png" width="32" height="32" alt="">
+		<span id="extName"></span>
+		<span id="version"></span>
+		<small>
+			<span id="options"></span>
+		</small>
+	</h1>
+
+	<fieldset>
+		<legend id="general"></legend>
+
+		<ul class="options-list">
+			<li>
+				<label class="control checkbox">
+				  <input type="checkbox" id="click-new-tab">
+				  <span class="control-indicator"></span>
+					<span id="optionClickNewTab"></span>
+				</label>
+
+				<!-- <input type="checkbox" id="click-new-tab" />
+				<label for="click-new-tab" id="optionClickNewTab"></label> -->
+			</li>
+
+			<li>
+				<label class="control checkbox">
+				  <input type="checkbox" id="open-new-tab-bg">
+				  <span class="control-indicator"></span>
+					<span id="optionOpenNewTab"></span>
+				</label>
+				<!-- <input type="checkbox" id="open-new-tab-bg" />
+				<label for="open-new-tab-bg" id="optionOpenNewTab"></label> -->
+			</li>
+
+			<li>
+				<label class="control checkbox">
+					<input type="checkbox" id="close-unused-folders" />
+				  <span class="control-indicator"></span>
+					<span id="optionCloseUnusedFolders"></span>
+				</label>
+
+				<!-- <input type="checkbox" id="close-unused-folders" />
+				<label for="close-unused-folders" id="optionCloseUnusedFolders"></label> -->
+			</li>
+
+			<li>
+				<label class="control checkbox">
+					<input type="checkbox" id="popup-stay-open" />
+				  <span class="control-indicator"></span>
+					<span id="optionPopupStays"></span>
+				</label>
+
+				<!-- <input type="checkbox" id="popup-stay-open" />
+				<label for="popup-stay-open" id="optionPopupStays"></label> -->
+			</li>
+
+			<li>
+				<label class="control checkbox">
+					<input type="checkbox" id="confirm-open-folder" />
+				  <span class="control-indicator"></span>
+					<span id="optionConfirmOpenFolder"></span>
+				</label>
+
+				<!-- <input type="checkbox" id="confirm-open-folder" />
+				<label for="confirm-open-folder" id="optionConfirmOpenFolder"></label> -->
+			</li>
+
+			<li>
+				<label class="control checkbox">
+					<input type="checkbox" id="remember-prev-state" />
+				  <span class="control-indicator"></span>
+					<span id="optionRememberPrevState"></span>
+				</label>
+
+				<!-- <input type="checkbox" id="remember-prev-state" />
+				<label for="remember-prev-state" id="optionRememberPrevState"></label> -->
+			</li>
+
+		</ul>
+
+	</fieldset>
+
+	<footer class="footer">
+		<p id="optionsFooterText"></p>
+	</footer>
+
 </div>
