@@ -1,26 +1,33 @@
 window.addEventListener('load', init, false);
+var os = (navigator.platform.toLowerCase().match(/mac|win|linux/i) || ['other'])[0];
+var _m = chrome.i18n.getMessage;
+
+var extName = _m('extName');
 
 function init() {
 	// i18n of text strings
-	$('extName').innerHTML = chrome.i18n.getMessage('extName');
+	$('extName').innerHTML = extName;
 	$('version').innerHTML = chrome.app.getDetails().version // undocumented method!
-	$('options').innerHTML = chrome.i18n.getMessage('options');
-	$('general').innerHTML = chrome.i18n.getMessage('general');
-	$('optionClickNewTab').innerHTML = chrome.i18n.getMessage('optionClickNewTab');
-	$('optionOpenNewTab').innerHTML = chrome.i18n.getMessage('optionOpenNewTab');
-	$('optionCloseUnusedFolders').innerHTML = chrome.i18n.getMessage('optionCloseUnusedFolders');
-	$('optionPopupStays').innerHTML = chrome.i18n.getMessage('optionPopupStays');
-	$('optionConfirmOpenFolder').innerHTML = chrome.i18n.getMessage('optionConfirmOpenFolder');
-	$('optionRememberPrevState').innerHTML = chrome.i18n.getMessage('optionRememberPrevState');
-	var extName = chrome.i18n.getMessage('extName');
-	var version = chrome.i18n.getMessage('version');
+	$('options').innerHTML = _m('options');
+	$('general').innerHTML = _m('general');
+
+	// Distinct mac and other users
+	$('optionClickNewTab').innerHTML = _m('optionClickNewTab');
+	if (os == 'mac') {
+		$('optionOpenNewTab').innerHTML = _m('optionOpenNewTabMac');
+	} else {
+		$('optionOpenNewTab').innerHTML = _m('optionOpenNewTab');
+	}
+
+	$('optionCloseUnusedFolders').innerHTML = _m('optionCloseUnusedFolders');
+	$('optionPopupStays').innerHTML = _m('optionPopupStays');
+	$('optionConfirmOpenFolder').innerHTML = _m('optionConfirmOpenFolder');
+	$('optionRememberPrevState').innerHTML = _m('optionRememberPrevState');
 
 	var neatGithub = '<a href="http://github.com/cheeaun/neat-bookmarks">Neat Bookmarks</a>';
 	var linkCheeAun = '<a href="http://twitter.com/cheeaun">Lim Chee Aun</a>';
-	$('optionsFooterText').innerHTML = chrome.i18n.getMessage('optionsFooterText7', [neatGithub, linkCheeAun]);
+	$('optionsFooterText').innerHTML = _m('optionsFooterText7', [neatGithub]);
 };
-
-var _m = chrome.i18n.getMessage;
 
 var __m = function(){
 	document.write(_m.apply(this, arguments));
