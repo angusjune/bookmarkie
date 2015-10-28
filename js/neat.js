@@ -27,7 +27,7 @@ function init() {
 	};
 	// popdown toast when an error occurs
 	window.addEventListener('error', function(){
-		AlertDialog.open('<strong>' + _m('errorOccured') + '</strong><br>' + _m('reportedToDeveloper'));
+		AlertDialog.open(_m('errorOccured'));
 	}, false);
 
 	// Platform detection
@@ -69,8 +69,8 @@ function init() {
 	});
 
 	// RTL indicator
-	// var rtl = (body.getComputedStyle('direction') == 'rtl');
-	// if (rtl) body.addClass('rtl');
+	var rtl = (body.getComputedStyle('direction') == 'rtl');
+	if (rtl) body.addClass('rtl');
 
 	// Init some variables
 	var opens = localStorage.opens ? JSON.parse(localStorage.opens) : [];
@@ -99,10 +99,35 @@ function init() {
 		}
 	};
 
+	var getBase64Image = function(img) {
+    // Create an empty canvas element
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    // Copy the image contents to the canvas
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+
+    // Get the data-URL formatted image
+    // Firefox supports PNG and JPEG. You could check img.src to
+    // guess the original format, but be aware the using "image/jpg"
+    // will re-encode the image.
+    var dataURL = canvas.toDataURL("image/png");
+
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+ }
+
 	var generateBookmarkHTML = function(title, url, extras){
 		if (!extras) extras = '';
 		var u = url.htmlspecialchars();
-		var favicon = 'chrome://favicon/' + u;
+		var favicon = 'chrome://favicon/size/16@2x/' + u;
+
+		// var imgUri  = getBase64Image(favicon + '.png');
+		// if(imgUri == 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAMklEQVR4AWMgEkT9R4INWBUgKX0Q1YBXQYQCkhKEMDILogSnAhhEV4AGRqoCTEhkPAMAbO9DU+cdCDkAAAAASUVORK5CYII='){
+		// 	favicon = 'images/empty38.png';
+		// }
+
 		var tooltipURL = url;
 		if (/^javascript:/i.test(url)){
 			if (url.length > 140) tooltipURL = url.slice(0, 140) + '...';
@@ -270,7 +295,6 @@ function init() {
 	var prevValue = '';
 
 	var search = function(){
-		// var value = searchInput.value;
 		var value = searchInput.value.trim();
 		localStorage.searchQuery = value;
 		if (value == ''){
@@ -311,7 +335,7 @@ function init() {
 			var html = '<ul role="list">';
 			for (var i = 0, l = results.length; i < l; i++){
 				var result = results[i];
-				
+
 				if (result.url) {
 					var id = result.id;
 					html += '<li data-parentid="' + result.parentId + '" id="results-item-' + id + '" role="listitem">'
