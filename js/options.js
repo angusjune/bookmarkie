@@ -73,7 +73,3 @@ document.addEventListener('DOMContentLoaded', function(){
 		return;
 	}
 });
-
-onerror = function(){
-	chrome.extension.sendRequest({error: [].slice.call(arguments)})
-};

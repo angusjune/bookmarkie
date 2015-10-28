@@ -1,23 +1,23 @@
-var reportError = function(msg, url, line){
-	var txt = '_s=3f41da182f664057b74bd124b53958a0&_r=img'
-		+ '&Msg=' + escape(msg)
-		+ '&URL=' + escape(url)
-		+ '&Line=' + line
-		+ '&Platform=' + escape(navigator.platform)
-		+ '&UserAgent=' + escape(navigator.userAgent);
-	var i = document.createElement('img');
-	i.setAttribute('src', (('https:' == document.location.protocol) ? 'https://errorstack.appspot.com' : 'http://www.errorstack.com') + '/submit?' + txt);
-	document.body.appendChild(i);
-	i.onload = function(){
-		document.body.removeChild(i);
-	};
-};
-
-window.onerror = reportError;
-
-chrome.extension.onRequest.addListener(function(request){
-	if (request.error) reportError.apply(null, request.error);
-});
+// var reportError = function(msg, url, line){
+// 	var txt = '_s=3f41da182f664057b74bd124b53958a0&_r=img'
+// 		+ '&Msg=' + escape(msg)
+// 		+ '&URL=' + escape(url)
+// 		+ '&Line=' + line
+// 		+ '&Platform=' + escape(navigator.platform)
+// 		+ '&UserAgent=' + escape(navigator.userAgent);
+// 	var i = document.createElement('img');
+// 	i.setAttribute('src', (('https:' == document.location.protocol) ? 'https://errorstack.appspot.com' : 'http://www.errorstack.com') + '/submit?' + txt);
+// 	document.body.appendChild(i);
+// 	i.onload = function(){
+// 		document.body.removeChild(i);
+// 	};
+// };
+//
+// window.onerror = reportError;
+//
+// chrome.extension.onRequest.addListener(function(request){
+// 	if (request.error) reportError.apply(null, request.error);
+// });
 
 if (chrome.omnibox){
 	var setSuggest = function(description){
@@ -25,14 +25,14 @@ if (chrome.omnibox){
 			description: description
 		});
 	};
-	
+
 	var omniboxValue = null;
 	var firstResult = null;
 	var resetSuggest = function(){
 		omniboxValue = null;
 		firstResult = null;
 		setSuggest('<url><match>*</match></url> ' + chrome.i18n.getMessage('searchBookmarks'));
-		
+
 	};
 	resetSuggest();
 
@@ -134,11 +134,11 @@ if (chrome.omnibox){
 	});
 }
 
-if (localStorage.customIcon){
-	var canvas = document.createElement('canvas');
-	var ctx = canvas.getContext('2d');
-	var customIcon = JSON.parse(localStorage.customIcon);
-	var imageData = ctx.getImageData(0, 0, 19, 19);
-	for (var key in customIcon) imageData.data[key] = customIcon[key];
-	chrome.browserAction.setIcon({imageData: imageData});
-}
+// if (localStorage.customIcon){
+// 	var canvas = document.createElement('canvas');
+// 	var ctx = canvas.getContext('2d');
+// 	var customIcon = JSON.parse(localStorage.customIcon);
+// 	var imageData = ctx.getImageData(0, 0, 19, 19);
+// 	for (var key in customIcon) imageData.data[key] = customIcon[key];
+// 	chrome.browserAction.setIcon({imageData: imageData});
+// }
