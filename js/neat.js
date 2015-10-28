@@ -1247,6 +1247,7 @@ function init() {
 		}
 	});
 	var scrollTree, scrollTreeInterval = 100, scrollTreeSpot = 10;
+	var scrollTreeSpeed = 20;
 	var stopScrollTree = function(){
 		clearInterval(scrollTree);
 		scrollTree = null;
@@ -1280,14 +1281,14 @@ function init() {
 				if (treeScrollTop == 0){
 					stopScrollTree();
 				} else if (!scrollTree) scrollTree = setInterval(function(){
-					$tree.scrollByLines(-1);
+					$tree.scrollTop -= scrollTreeSpeed;
 					dropOverlay.style.left = '-999px';
 				}, scrollTreeInterval);
 			} else if (clientY >= treeBottom - scrollTreeSpot){
 				if (treeScrollTop == (treeScrollHeight - treeOffsetHeight)){
 					stopScrollTree();
 				} else if (!scrollTree) scrollTree = setInterval(function(){
-					$tree.scrollByLines(1);
+					$tree.scrollTop += scrollTreeSpeed;
 					dropOverlay.style.left = '-999px';
 				}, scrollTreeInterval);
 			} else {
