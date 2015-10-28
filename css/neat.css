@@ -1,6 +1,13 @@
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+	font-size: 12px;
+}
+
 body{
-	direction: __MSG_@@bidi_dir__;
-	font: menu;
+	font-family: "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "Hiragino Sans GB", "Source Han Sans CN", "Source Han Sans SC", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
 	color: #151515;
 	background-color: #fafafa;
 	margin: 0;
@@ -8,83 +15,70 @@ body{
 	cursor: default;
 	-webkit-user-drag: none;
 	-webkit-user-select: none;
+	-webkit-font-smoothing: antialiased;
 	overflow: hidden;
 	width: 320px;
 	height: 530px;
 	min-height: 500px;
-	max-height: 600px; /* prevent double scrollbars in popup */
+	max-height: 500px; /* prevent double scrollbars in popup */
 }
-body.linux{
-	font-size: 12px;
-}
+
 body.transitional{
 	-webkit-transition-property: height;
 }
-body[data-zoom='90']>*:not(menu),
-body[data-zoom='90'] menu[type=context] command{
-	zoom: .9;
+
+.input {
+	padding: 0.3rem;
+	background-color: #fefefe;
+	border: 1px solid #eee;
+	border-radius: 3px;
+	-webkit-transition: all ease-out 0.2s;
 }
-body[data-zoom='90'] #drop-overlay.bookmark{ /* zooming out makes the line too hard to see */
-	border-top: 0;
+
+.input:focus {
+	outline: none;
+	background-color: #fff;
+	border-color: #3498db;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
 }
-body[data-zoom='110']>*:not(menu),
-body[data-zoom='110'] menu[type=context] command{
-	zoom: 1.1;
-}
-body[data-zoom='120']>*:not(menu),
-body[data-zoom='120'] menu[type=context] command{
-	zoom: 1.2;
-}
-body[data-zoom='130']>*:not(menu),
-body[data-zoom='130'] menu[type=context] command{
-	zoom: 1.3;
-}
-body[data-zoom='140']>*:not(menu),
-body[data-zoom='140'] menu[type=context] command{
-	zoom: 1.4;
-}
-body[data-zoom='150']>*:not(menu),
-body[data-zoom='150'] menu[type=context] command{
-	zoom: 1.5;
-}
-input{
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-	font: menu;
-}
-body.linux input{
-	font-size: 12px;
-}
-#container{
+
+.container{
 	background-color: #f3f3f3;
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
-	display: box;
-	box-orient: vertical;
 	position: absolute;
 	top: 0;
 	right: 0;
 	bottom: 0;
 	left: 0;
 }
-#search{
+
+.search{
 	padding: 0 2px 2px;
 }
-#search input{
+.search .input{
+	/*font-size: 14px;*/
 	width: 100%;
 	margin: 2px 0;
-	padding: 2px;
+	padding: 4px;
+	background-image: url(../images/search.svg);
+	background-repeat: no-repeat;
+	background-position: left;
 }
+
+.search .input:focus {
+	background-image: url(../images/search-blue.svg);
+}
+
 #results,
 #tree{
 	outline: 0;
 	padding: 3px 0;
-	-webkit-box-shadow: inset 0 4px 4px -4px rgba(0,0,0,.1);
+	/*box-shadow: inset 0 4px 4px -4px rgba(0,0,0,.1);*/
 	-webkit-box-flex: 1;
-	box-flex: 1;
-	text-shadow: 0 1px #f6f6f6;
+	/*text-shadow: 0 1px #f6f6f6;*/
 	position: relative;
-    overflow-y: auto;
+  overflow-y: auto;
 }
 #results ul,
 #results ul li,
@@ -92,14 +86,14 @@ body.linux input{
 #tree ul li{
 	list-style: none;
 	margin: 0;
-	padding: 0;
+	padding: 2px 0;
 	display: block;
 }
 #results ul li a,
 #tree ul li a,
 #tree ul li span{
 	display: block;
-	line-height: 1.67em;
+	line-height: 1.67rem;
 	padding: 0 4px;
 	text-decoration: none;
 	color: #000;
@@ -118,7 +112,7 @@ body.linux input{
 	position: relative;
 	width: 0;
 	height: 0;
-	border-width: 4.5px 0 4.5px 8px;
+	border-width: 4px 0 4px 6px;
 	border-color: transparent transparent transparent #84919f;
 	border-style: solid;
 	margin: 0 4px;
@@ -128,26 +122,22 @@ body.linux input{
 .chrome-536 #tree ul li span .twisty{ /* Chrome build 536 dev bug */
 	-webkit-transition-duration: 0s;
 }
-.rtl #tree ul li span .twisty{
-	-webkit-transform: scaleX(-1);
-}
+
 #tree ul li.open>span .twisty{
 	-webkit-transform: rotate(90deg);
 }
-.rtl #tree ul li.open>span .twisty{
-	-webkit-transform: scaleX(-1) rotate(90deg);
-}
+
 #results ul li a img,
 #results ul li span img,
 #tree ul li a img,
 #tree ul li span img{
 	margin-top: -2px;
 	vertical-align: middle;
-	margin-__MSG_@@bidi_end_edge__: 4px;
+	margin-right: 4px;
 }
 #results ul li a img,
 #tree ul li a img{
-	margin-__MSG_@@bidi_start_edge__: 16px;
+	margin-left: 16px;
 }
 #results ul li i,
 #tree ul li i{
@@ -155,7 +145,11 @@ body.linux input{
 }
 #results ul li a:hover i,
 #tree ul li a:hover i{
-	text-decoration: underline;
+	/*text-decoration: underline;*/
+	background-image: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.6) 50%);
+	background-repeat: repeat-x;
+	background-position: 0 1rem;
+	background-size: 2px 2px;
 }
 #results ul li a:active,
 #results ul li a.active,
@@ -166,12 +160,9 @@ body.linux input{
 #tree ul li span.active,
 #tree ul li a:focus,
 #tree ul li span:focus,
-menu[type=context] command:focus{
+.context-menu menuitem:focus{
 	color: #fff;
-	background-color: #4687cb;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#6fa6de), to(#1e6cbb));
-	-webkit-box-shadow: 0 -1px #5594d2;
-	text-shadow: 0 0 rgba(255,255,255,.5), 0 1px rgba(0,0,0,.5);
+	background-color: #3498db;
 	outline: 0;
 }
 .searchFocus #results ul>li:first-child a{
@@ -213,18 +204,15 @@ menu[type=context] command:focus{
 	white-space: nowrap;
 	line-height: 1em;
 	padding: .3em;
-	padding-__MSG_@@bidi_end_edge__: .5em;
+	padding-right: .5em;
 	-webkit-mask-image: -webkit-gradient(linear, left top, 320 top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
 	pointer-events: none;
 	cursor: default;
 }
-.rtl #bookmark-clone{
-	margin-left: 24px;
-	-webkit-mask-image: -webkit-gradient(linear, right top, -320 top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
-}
+
 #bookmark-clone img{
 	vertical-align: text-top;
-	margin-__MSG_@@bidi_end_edge__: 4px;
+	margin-right: 4px;
 }
 #bookmark-clone i{
 	font-style: normal;
@@ -240,7 +228,7 @@ menu[type=context] command:focus{
 	-box-sizing: border-box;
 }
 #drop-overlay.bookmark{
-	margin-__MSG_@@bidi_start_edge__: -3px;
+	margin-right: -3px;
 	height: 3px;
 	background-color: #000;
 	border: 1px solid #fff;
@@ -251,7 +239,7 @@ menu[type=context] command:focus{
 	border-radius: 2px;
 }
 
-menu[type=context]{
+.context-menu {
 	-webkit-transition: opacity .3s;
 	opacity: 0;
 	margin: 0;
@@ -259,31 +247,23 @@ menu[type=context]{
 	list-style: none;
 	position: absolute;
 	left: -999px;
-	border: 1px solid #bbb;
-	border-radius: 5px;
+	border-radius: 3px;
 	background-color: rgba(255,255,255,.96);
 	box-shadow: 0 2px 6px rgba(0,0,0,.2);
-	-webkit-box-shadow: 0 2px 6px rgba(0,0,0,.2);
 	outline: 0;
 	max-width: 100%;
 }
-menu[type=context] command{
+.context-menu menuitem{
 	display: block;
 	padding: 0 10px;
-	line-height: 20px;
-	text-shadow: none;
+	line-height: 26px;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+	text-transform: capitalize;
 }
-/* convert title-style to sentence-style capitalization, for Windows */
-.win menu[type=context] command{
-	text-transform: lowercase;
-}
-.win menu[type=context] command:first-letter{
-	text-transform: uppercase;
-}
-menu[type=context] hr{
+
+.context-menu hr{
 	border: 0;
 	padding: 0;
 	height: 1px;
@@ -292,9 +272,9 @@ menu[type=context] hr{
 	pointer-events: none;
 }
 
-menu[type=context].hide-editables hr,
-menu[type=context].hide-editables #folder-edit,
-menu[type=context].hide-editables #folder-delete{
+.context-menu.hide-editables hr,
+.context-menu.hide-editables #folder-edit,
+.context-menu.hide-editables #folder-delete{
 	display: none;
 }
 
@@ -302,7 +282,7 @@ menu[type=context].hide-editables #folder-delete{
 	position: absolute;
 	width: 4px;
 	height: 100%;
-	__MSG_@@bidi_start_edge__: 0;
+	right: 0;
 	top: 0;
 	cursor: col-resize;
 }
@@ -326,6 +306,10 @@ menu[type=context].hide-editables #folder-delete{
 	opacity: 1;
 }
 
+.needAlert .container, .needConfirm .container, .needEdit .container {
+	-webkit-filter: blur(1px) saturate(0);
+}
+
 .dialog{
 	position: absolute;
 	top: -150px;
@@ -333,42 +317,77 @@ menu[type=context].hide-editables #folder-delete{
 	right: 0;
 	opacity: 0;
 	background-color: #fff;
-	padding: 1em;
+	padding: 1.2rem 1rem;
 	border-bottom: 1px solid #e0e0e0;
-	-webkit-box-shadow: 0 0 100px rgba(0,0,0,.1);
 	box-shadow: 0 0 100px rgba(0,0,0,.1);
 }
 .transitional .dialog{
 	-webkit-transition-property: opacity, top;
 	-webkit-transition-duration: .3s;
 }
-.dialog-text{
-	padding: 0;
+.dialog-title{
+	padding: 0 0 0.4rem;
 	margin: 0;
-	line-height: 1.4em;
-	font-size: 110%;
+	font-size: 1rem;
 }
+
 .dialog .buttons{
-	margin: 1em 0 0;
-	text-align: __MSG_@@bidi_end_edge__;
+	text-align: right;
+	padding-top: 0.3rem;
 }
-.dialog .buttons button{
-	padding: .3em 1.5em;
+
+.dialog .input {
+	margin-bottom: 0.4rem;
 }
+
+.button{
+	padding: 0.4rem 1rem;
+	border-radius: 2px;
+	background: transparent;
+	color: #1b1b1b;
+	border: 0;
+	cursor: pointer;
+	text-transform: uppercase;
+	outline: none;
+	-webkit-transition: all ease-in-out 0.25s;
+}
+
+.button:hover {
+	background: #eee;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.button:active {
+	box-shadow: 0 3px 4px rgba(0,0,0,0.2);
+}
+
+.button-primary {
+	border: 0;
+	background: #3498db;
+	color: #fff;
+}
+
+.button-primary:hover {
+	background: #49AAEA;
+}
+
+.button-primary:active {
+	background: #3498db;
+}
+
 .dialog pre{
 	white-space: pre-line;
 	margin: 0;
 	padding: 5px;
-	line-height: 1.1em;
+	/*line-height: 1.1em;*/
 	-webkit-user-select: text;
 	cursor: text;
 	background-color: #fafafa;
-	text-shadow: none;
 }
 
-#edit-dialog .dialog-text{
+#edit-dialog .dialog-title{
 	margin: 0;
-	font-weight: bold;
+	/*font-weight: bold;*/
 }
 #edit-dialog input{
 	width: 100%;
@@ -380,8 +399,8 @@ menu[type=context].hide-editables #folder-delete{
 #edit-dialog .buttons{
 	margin: 0;
 }
-#edit-dialog .buttons button{
-	font-weight: bold;
+#edit-dialog .button{
+	/*font-weight: bold;*/
 }
 
 .needAlert #alert-dialog,
@@ -390,15 +409,3 @@ menu[type=context].hide-editables #folder-delete{
 	top: 0;
 	opacity: 1;
 }
-
-/* current Gmail-style scrollbar */
-/*::-webkit-scrollbar {
-	width: 9px;
-	background: #eee; /* same color as the background */
-/*}
-::-webkit-scrollbar-thumb {
-	background-color: rgba(0,0,0,0.2);
-	border-top: 1px solid rgba(0,0,0,0.1);
-	border-bottom: 1px solid rgba(0,0,0,0.07);
-	border-left: 1px solid rgba(0,0,0,0.1);
-}*/
