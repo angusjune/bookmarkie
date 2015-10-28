@@ -121,6 +121,9 @@
   "nope": {
     "message": "Nope"
   },
+  "cancel": {
+    "message": "Cancel"
+  },
   "noTitle": {
     "description": "The title for untitled bookmarks with no http(s) URL or untitled folders.",
     "message": "(no title)"
@@ -148,7 +151,7 @@
     "message": "Open in New Window"
   },
   "optionClickNewTab": {
-    "message": "Left-click opens bookmark in new tab."
+    "message": "Always open bookmarks in new tabs."
   },
   "optionCloseUnusedFolders": {
     "message": "Close unused folders when opening a folder."
@@ -158,6 +161,10 @@
   },
   "optionOpenNewTab": {
     "message": "Middle-click or control-click opens bookmark in new background tab (instead of foreground)."
+  },
+  "optionOpenNewTabMac": {
+    "description": "For mac users",
+    "message": "Middle-click or ⌘-click opens bookmark in new background tab"
   },
   "optionPopupStays": {
     "message": "Popup stays open when opening (left-clicking) bookmarks."
@@ -221,11 +228,8 @@
     }
   },
   "optionsFooterText7": {
-    "message": "Based on $neatGithub$ by $linkCheeAun$",
+    "message": "Based on $neatGithub$",
     "placeholders": {
-      "linkCheeAun": {
-        "content": "$2"
-      },
       "neatGithub": {
         "content": "$1"
       }

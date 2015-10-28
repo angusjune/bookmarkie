@@ -61,7 +61,8 @@ function init() {
 		'folder-new-incognito-window': 'openBookmarksIncognitoWindow',
 		'folder-edit': 'edit',
 		'folder-delete': 'deleteEllipsis',
-		'edit-dialog-button': 'save'
+		'edit-dialog-button': 'save',
+		'edit-dialog-cancel': 'cancel'
 	}, function(msg, id){
 		var el = $(id), m = _m(msg);
 		if (el.tagName == 'MENUITEM') el.label = m;
@@ -459,6 +460,11 @@ function init() {
 		ConfirmDialog.close();
 	}, false);
 
+	$('edit-dialog-cancel').addEventListener('click', function(){
+		EditDialog.justClose();
+		return false;
+	}, false);
+
 	// Confirm dialog
 	var ConfirmDialog = {
 		open: function(opts){
@@ -517,6 +523,9 @@ function init() {
 				url = 'http://' + url;
 			}
 			EditDialog.fn($('edit-dialog-name').value, url);
+			body.removeClass('needEdit');
+		},
+		justClose: function() {
 			body.removeClass('needEdit');
 		},
 		fn: function(){}

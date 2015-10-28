@@ -102,7 +102,7 @@
   },
   "extDesc": {
     "description": "扩展描述",
-    "message": "灵巧实用的弹出书签"
+    "message": "简单，漂亮，优雅的弹出书签"
   },
   "extName": {
     "description": "扩展名",
@@ -119,6 +119,9 @@
     "message": "名字"
   },
   "nope": {
+    "message": "取消"
+  },
+  "cancel": {
     "message": "取消"
   },
   "noTitle": {
@@ -148,7 +151,7 @@
     "message": "在新窗口中打开"
   },
   "optionClickNewTab": {
-    "message": "左键单击书签即在新标签页中打开"
+    "message": "总在新标签页打开书签"
   },
   "optionCloseUnusedFolders": {
     "message": "展开文件夹时折叠其它已展开的文件夹"
@@ -158,6 +161,10 @@
   },
   "optionOpenNewTab": {
     "message": "鼠标中键或按住 Ctrl 键左击时在后台打开书签"
+  },
+  "optionOpenNewTabMac": {
+    "description": "For mac users",
+    "message": "鼠标中键或按住 ⌘ 键左击时在后台打开书签"
   },
   "optionPopupStays": {
     "message": "打开（鼠标左击）书签时不关闭弹出页面"
@@ -221,11 +228,8 @@
     }
   },
   "optionsFooterText7": {
-    "message": "基于 $linkCheeAun$ 的 $neatGithub$ 开发",
+    "message": "基于 $neatGithub$ 开发",
     "placeholders": {
-      "linkCheeAun": {
-        "content": "$2"
-      },
       "neatGithub": {
         "content": "$1"
       }
@@ -273,7 +277,7 @@
   },
   "searchBookmarks": {
     "description": "搜索框里的提示文字",
-    "message": "书签搜索"
+    "message": "搜索书签"
   },
   "url": {
     "message": "网址"
