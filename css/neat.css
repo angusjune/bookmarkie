@@ -60,7 +60,7 @@ body.transitional{
 	/*font-size: 14px;*/
 	width: 100%;
 	margin: 2px 0;
-	padding: 4px;
+	padding: 4px 4px 4px 20px;
 	background-image: url(../images/search.svg);
 	background-repeat: no-repeat;
 	background-position: left;
