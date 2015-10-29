@@ -160,7 +160,7 @@ body.transitional{
 #tree ul li span.active,
 #tree ul li a:focus,
 #tree ul li span:focus,
-.context-menu menuitem:focus{
+.context-menu command:focus{
 	color: #fff;
 	background-color: #3498db;
 	outline: 0;
@@ -253,7 +253,7 @@ body.transitional{
 	outline: 0;
 	max-width: 100%;
 }
-.context-menu menuitem{
+.context-menu command{
 	display: block;
 	padding: 0 10px;
 	line-height: 26px;
