@@ -43,31 +43,36 @@ body.transitional{
 }
 
 .container{
-	background-color: #f3f3f3;
+	/*background-color: #f3f3f3;*/
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
 	position: absolute;
-	top: 0;
+	top: 23px;
 	right: 0;
 	bottom: 0;
 	left: 0;
 }
 
 .search{
-	padding: 0 2px 2px;
+	/*padding: 0 2px 2px;*/
 }
 .search .input{
 	/*font-size: 14px;*/
+	border: 0;
+	border-radius: 0;
 	width: 100%;
-	margin: 2px 0;
-	padding: 4px 4px 4px 20px;
-	background-image: url(../images/search.svg);
+	margin: 0;
+	padding: 4px;
+	/*background-image: url(../images/search.svg);*/
 	background-repeat: no-repeat;
 	background-position: left;
+	background-color: transparent;
 }
 
 .search .input:focus {
 	background-image: url(../images/search-blue.svg);
+	background-color: #fff;
+	padding-left: 20px;
 }
 
 #results,
