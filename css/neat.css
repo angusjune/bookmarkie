@@ -321,10 +321,9 @@ body.transitional{
 	left: 0;
 	right: 0;
 	opacity: 0;
-	background-color: #fff;
+	background-color: rgba(255, 255, 255, 0.9);
 	padding: 1.2rem 1rem;
-	border-bottom: 1px solid #e0e0e0;
-	box-shadow: 0 0 100px rgba(0,0,0,.1);
+	box-shadow: 0 2px 20px rgba(0,0,0,.1);
 }
 .transitional .dialog{
 	-webkit-transition-property: opacity, top;
