@@ -70,6 +70,35 @@
 
 	</fieldset>
 
+	<fieldset>
+		<legend id="appearance"></legend>
+
+		<ul class="options-list">
+
+			<li>
+				<h5>弹窗高度</h5>
+				<label class="control radio">
+					<input type="radio" id="height-default" name="panel-height" checked />
+				  <span class="control-indicator"></span>
+					<span id="heightDefault"></span>
+				</label>
+
+				<label class="control radio">
+					<input type="radio" id="height-custom" name="panel-height" />
+				  <span class="control-indicator"></span>
+					<span id="heightCustom"></span>
+				</label>
+
+				<input type="text" id="height-value" value="80%" placeholder="自定义高度" disabled="true">
+				<p>
+					<small><span class="height-value-tip">使用以 px 或 % 为单位的数值</span>，例如：600px, 92% 等。</small>
+				</p>
+			</li>
+
+		</ul>
+
+	</fieldset>
+
 	<footer class="footer">
 		<p id="optionsFooterText"></p>
 	</footer>

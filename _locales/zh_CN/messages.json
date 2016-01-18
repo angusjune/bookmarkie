@@ -111,6 +111,15 @@
   "general": {
     "message": "常规设置"
   },
+  "appearance": {
+    "message": "样式设置"
+  },
+  "heightDefault": {
+    "message": "默认"
+  },
+  "heightCustom": {
+    "message": "自定义"
+  },
   "ignore": {
     "message": "忽略"
   },

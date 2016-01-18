@@ -10,6 +10,9 @@ function init() {
 	$('version').innerHTML = chrome.app.getDetails().version // undocumented method!
 	$('options').innerHTML = _m('options');
 	$('general').innerHTML = _m('general');
+	$('appearance').innerHTML = _m('appearance');
+	$('heightDefault').innerHTML = _m('heightDefault');
+	$('heightCustom').innerHTML = _m('heightCustom');
 
 	// Distinct mac and other users
 	$('optionClickNewTab').innerHTML = _m('optionClickNewTab');
@@ -70,6 +73,23 @@ document.addEventListener('DOMContentLoaded', function(){
 	rememberPrevState.checked = !localStorage.dontRememberState;
 	rememberPrevState.addEventListener('change', function(){
 		localStorage.dontRememberState = rememberPrevState.checked ? '' : '1';
+	});
+
+	var heightDefault = $('height-default');
+	var heightCustom  = $('height-default');
+	var heightValue   = $('height-value');
+	var heightVal = heightValue.value.toLowerCase().replace(' ', '');
+	console.log(heightVal);
+	heightDefault.checked = localStorage.isHeightDefault;
+	heightDefault.addEventListener('change', function(){
+		localStorage.isHeightDefault = heightDefault.checked ? '' : '1';
+	});
+	heightCustom.addEventListener('change', function(){
+		if (heightVal.match(/(\d+%)|(\d+px)/i)) {
+
+		} else {
+			document.querySelector('.height-value-tip')
+		}
 	});
 });
 

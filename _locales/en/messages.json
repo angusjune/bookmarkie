@@ -111,6 +111,15 @@
   "general": {
     "message": "General Settings"
   },
+  "appearance": {
+    "message": "Appearance Settings"
+  },
+  "heightDefault": {
+    "message": "Default"
+  },
+  "heightCustom": {
+    "message": "Custom"
+  },
   "ignore": {
     "message": "Ignore"
   },
