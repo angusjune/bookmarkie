@@ -1,106 +1,80 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="css/options.css">
-<link rel="stylesheet" href="css/wtf-forms.css">
-<script src="js/options.js"></script>
-<script src="js/neatools.js"></script>
+<html>
 
-<div class="container">
-	<h1>
-		<img src="images/icon128.png" width="32" height="32" alt="">
-		<span id="extName"></span>
-		<span id="version"></span>
-		<small>
-			<span id="options"></span>
-		</small>
-	</h1>
+<head>
+	<!-- <link rel="stylesheet" href="css/material.min.css"> -->
+	<link rel="stylesheet" href="css/options.css">
+	<!-- <link rel="stylesheet" href="css/wtf-forms.css"> -->
 
-	<fieldset>
-		<legend id="general"></legend>
+</head>
 
-		<ul class="options-list">
-			<li>
-				<label class="control checkbox">
-				  <input type="checkbox" id="click-new-tab">
-				  <span class="control-indicator"></span>
-					<span id="optionClickNewTab"></span>
-				</label>
-			</li>
+<body>
 
-			<li>
-				<label class="control checkbox">
-				  <input type="checkbox" id="open-new-tab-bg">
-				  <span class="control-indicator"></span>
-					<span id="optionOpenNewTab"></span>
-				</label>
-			</li>
+	<section>
+		<h3 data-msg="general">General</h3>
 
-			<li>
-				<label class="control checkbox">
-					<input type="checkbox" id="close-unused-folders" />
-				  <span class="control-indicator"></span>
-					<span id="optionCloseUnusedFolders"></span>
-				</label>
-			</li>
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" id="always-open-new-tab">
+				<span data-msg="optionClickNewTab">Always open bookmark in new tab</span>
+			</label>
+		</div>
 
-			<li>
-				<label class="control checkbox">
-					<input type="checkbox" id="popup-stay-open" />
-				  <span class="control-indicator"></span>
-					<span id="optionPopupStays"></span>
-				</label>
-			</li>
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" id="open-new-tab-in-bg">
+				<span data-msg="optionOpenNewTab" id="optionOpenNewTab">Open new tab in background</span>
+			</label>
+		</div>
 
-			<li>
-				<label class="control checkbox">
-					<input type="checkbox" id="confirm-open-folder" />
-				  <span class="control-indicator"></span>
-					<span id="optionConfirmOpenFolder"></span>
-				</label>
-			</li>
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" id="close-other-folders">
+				<span data-msg="optionCloseUnusedFolders">Close other folders</span>
+			</label>
+		</div>
 
-			<li>
-				<label class="control checkbox">
-					<input type="checkbox" id="remember-prev-state" />
-				  <span class="control-indicator"></span>
-					<span id="optionRememberPrevState"></span>
-				</label>
-			</li>
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" id="popup-stay-open">
+				<span data-msg="optionPopupStays">Popup stay open when bookmark open</span>
+			</label>
+		</div>
 
-		</ul>
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" id="remember-last-state">
+				<span data-msg="optionRememberPrevState">Remember last state when popup open</span>
+			</label>
+		</div>
 
-	</fieldset>
+	</section>
 
-	<fieldset>
-		<legend id="appearance"></legend>
+	<section>
+		<h3 data-msg="appearance">Appearance</h3>
 
-		<ul class="options-list">
+		<div class="textfield">
+			<label class="textfield__label" data-msg="panelHeight" for="panel-height">
+				Panel Height
+			</label>
+			<form action="#">
+				<input class="textfield__input" type="text" id="panel-height" value="500px" pattern="(\d+%)|(\d+px)" title="Invalid" required>
+				<button class="textfield__btn" data-msg="confirm" id="btn-confirm-ph" type="button">Confirm</button>
+				<button class="textfield__btn" data-msg="reset" id="btn-reset-ph" type="reset">Reset</button>
+				<div class="warning-msg" data-msg="phWarning">Wrong format</div>
+			</form>
 
-			<li>
-				<h5>弹窗高度</h5>
-				<label class="control radio">
-					<input type="radio" id="height-default" name="panel-height" checked />
-				  <span class="control-indicator"></span>
-					<span id="heightDefault"></span>
-				</label>
+		</div>
 
-				<label class="control radio">
-					<input type="radio" id="height-custom" name="panel-height" />
-				  <span class="control-indicator"></span>
-					<span id="heightCustom"></span>
-				</label>
-
-				<input type="text" id="height-value" value="80%" placeholder="自定义高度" disabled="true">
-				<p>
-					<small><span class="height-value-tip">使用以 px 或 % 为单位的数值</span>，例如：600px, 92% 等。</small>
-				</p>
-			</li>
-
-		</ul>
-
-	</fieldset>
+	</section>
 
 	<footer class="footer">
 		<p id="optionsFooterText"></p>
 	</footer>
 
-</div>
+	<script src="js/material.min.js"></script>
+	<script src="js/options.js"></script>
+	<script src="js/neatools.js"></script>
+</body>
+
+</html>

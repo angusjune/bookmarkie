@@ -114,7 +114,7 @@
   "appearance": {
     "message": "样式设置"
   },
-  "heightDefault": {
+  "msgHeightDefault": {
     "message": "默认"
   },
   "heightCustom": {
@@ -290,5 +290,16 @@
   },
   "url": {
     "message": "网址"
+  },
+  "confirm": {
+    "message": "确认"
+  },
+  "panelHeight": {
+    "description": "选项菜单中弹出窗高度",
+    "message": "弹出窗高度"
+  },
+  "phWarning": {
+    "description": "选项弹窗高度格式错误提示",
+    "message": "使用以 px 或 % 为单位的数值，例如：600px, 92%"
   }
 }

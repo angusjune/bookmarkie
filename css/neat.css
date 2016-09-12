@@ -18,9 +18,9 @@ body{
 	-webkit-font-smoothing: antialiased;
 	overflow: hidden;
 	width: 320px;
-	height: 530px;
-	min-height: 500px;
-	max-height: 500px; /* prevent double scrollbars in popup */
+	/*height: 530px;*/
+	/*min-height: 500px;*/
+	/*max-height: 500px; /* prevent double scrollbars in popup */*/
 }
 
 body.transitional{

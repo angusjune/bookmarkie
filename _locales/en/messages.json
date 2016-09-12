@@ -114,7 +114,7 @@
   "appearance": {
     "message": "Appearance Settings"
   },
-  "heightDefault": {
+  "msgHeightDefault": {
     "message": "Default"
   },
   "heightCustom": {
@@ -290,5 +290,16 @@
   },
   "url": {
     "message": "URL"
+  },
+  "confirm": {
+    "message": "Confirm"
+  },
+  "panelHeight": {
+    "description": "Option popup height",
+    "message": "Popup Height"
+  },
+  "phWarning": {
+    "description": "",
+    "message": "Use numbers with \"px\" or \"%\" as unit，e.g：600px, 92%"
   }
 }
