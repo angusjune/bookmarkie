@@ -29,7 +29,7 @@ chrome.storage.sync.get({
 	panelHeight       = items.panelHeight;
 	opens = JSON.parse(items.opens);
 
-	console.log(items);
+	console.log(opens);
 });
 
 function init() {
