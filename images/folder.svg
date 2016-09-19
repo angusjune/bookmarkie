@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>folder</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Even-Neater-Bookmarks" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="folder">
+            <g id="ic_folder_black_18px">
+                <polygon id="Shape" points="0 0 16 0 16 16 0 16"></polygon>
+                <path d="M8.33333333,4 L8.31640625,3.94921875 C8.13904572,3.41713715 7.55097324,3 6.99707067,3 L2.00292933,3 C1.43788135,3 1,3.44724809 1,3.99895656 L1,4.9982205 L1,13.0046024 C1,13.5443356 1.45078007,14 2.00684547,14 L13.9931545,14 C14.5500512,14 15,13.5543453 15,13.0046024 L15,4.99539757 C15,4.4556644 14.5492199,4 13.9931545,4 L8.33333333,4 Z" id="Combined-Shape" fill="#919191"></path>
+            </g>
+        </g>
+    </g>
+</svg>

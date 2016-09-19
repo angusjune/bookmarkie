@@ -133,7 +133,7 @@ function init() {
 		var tooltipURL = url;
 		if (/^javascript:/i.test(url)){
 			if (url.length > 140) tooltipURL = url.slice(0, 140) + '...';
-			favicon = 'images/document-code38.png';
+			favicon = 'images/document-code.svg';
 		}
 		tooltipURL = tooltipURL.htmlspecialchars();
 		var name = title.htmlspecialchars() || (httpsPattern.test(url) ? url.replace(httpsPattern, '') : _m('noTitle'));
@@ -167,7 +167,7 @@ function init() {
 				/* @ altered */
 				html += '<li class="parent' + open + '"' + idHTML + ' role="treeitem" aria-expanded="' + isOpen + '" data-parentid="' + parentID + '">'
 					+ '<span tabindex="0" style="-webkit-padding-start: ' + paddingStart + 'px"><b class="twisty"></b>'
-					+ '<img src="images/folder32.png" width="16" height="16" alt=""><i>' + (title || _m('noTitle')) + '</i>' + '</span>';
+					+ '<i class="icon-folder"></i><i>' + (title || _m('noTitle')) + '</i>' + '</span>';
 				/* @ end of altered */
 
 				if (isOpen){

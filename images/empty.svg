@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>empty</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Even-Neater-Bookmarks" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="empty">
+            <g id="ic_insert_drive_file_black_18px">
+                <polygon id="Shape" points="0 0 16 0 16 16 0 16"></polygon>
+                <path d="M2,2.00684547 C2,1.45078007 2.45303631,1 2.99703014,1 L10,1 L14,5 L14,14.0046024 C14,14.5543453 13.544239,15 12.9975267,15 L3.00247329,15 C2.44882258,15 2,14.5500512 2,13.9931545 L2,2.00684547 Z M9,2 L13,6 L9,6 L9,2 Z" id="Combined-Shape" fill="#919191"></path>
+            </g>
+        </g>
+    </g>
+</svg>

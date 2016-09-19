@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>folder-opened</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="1" y="4" width="14" height="10" rx="1"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="14" height="10" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Even-Neater-Bookmarks" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="folder-opened">
+            <g id="ic_folder_black_18px">
+                <polygon id="Shape" points="0 0 16 0 16 16 0 16"></polygon>
+                <use id="Combined-Shape" stroke="#919191" mask="url(#mask-2)" stroke-width="2" xlink:href="#path-1"></use>
+                <path d="M1,4 C1,3.44771525 1.43788135,3 2.00292933,3 L6.99707067,3 C7.55097324,3 8.11096621,3.44386482 8.2441411,3.97656441 L8.5,5 L1,5 L1,4 Z" id="Rectangle-2" fill="#919191"></path>
+            </g>
+        </g>
+    </g>
+</svg>

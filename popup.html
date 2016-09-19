@@ -3,61 +3,74 @@
 <link rel="stylesheet" href="css/neat.css">
 
 <div class="search" role="search">
-	<input class="input" id="search-input" results="0" autofocus>
+	<input class="input input--search" id="search-input" autofocus>
 </div>
 
-<div class="container">	
-
-	<div id="tree" tabindex="-1"></div>
-
-	<div id="results" tabindex="-1" style="display: none"></div>
+<div class="container">
+	<div class="tree" id="tree" tabindex="-1"></div>
+	<div class="results" id="results" tabindex="-1" style="display: none"></div>
 </div>
 
-<div id="drop-overlay"></div>
-<div id="bookmark-clone"></div>
+<div class="drop-overlay" id="drop-overlay"></div>
+<div class="bookmark-clone" id="bookmark-clone"></div>
 
-<menu class="context-menu" id="bookmark-context-menu" type="context" tabindex="-1">
-	<command id="bookmark-new-tab" tabindex="-1">
-	<command id="bookmark-new-window" tabindex="-1">
-	<command id="bookmark-new-incognito-window" tabindex="-1">
+<menu class="context-menu context-menu--bookmark" id="bookmark-context-menu" type="context" tabindex="-1">
+	<command class="cmd cmd--bookmark-new-tab" id="bookmark-new-tab" tabindex="-1">
+	<command class="cmd cmd--bookmark-new-window" id="bookmark-new-window" tabindex="-1">
+	<command class="cmd cmd--bookmark-new-incognito-window" id="bookmark-new-incognito-window" tabindex="-1">
 	<hr>
-	<command id="bookmark-edit" tabindex="-1">
-	<command id="bookmark-delete" tabindex="-1">
+	<command class="cmd cmd--bookmark-edit" id="bookmark-edit" tabindex="-1">
+	<command class="cmd cmd--bookmark-delete" id="bookmark-delete" tabindex="-1">
 </menu>
 
-<menu class="context-menu" id="folder-context-menu" type="context" tabindex="-1">
-	<command id="folder-window" tabindex="-1">
-	<command id="folder-new-window" tabindex="-1">
-	<command id="folder-new-incognito-window" tabindex="-1">
+<menu class="context-menu context-menu--folder" id="folder-context-menu" type="context" tabindex="-1">
+	<command class="cmd cmd--folder-window" id="folder-window" tabindex="-1">
+	<command class="cmd cmd--folder-new-window" id="folder-new-window" tabindex="-1">
+	<command class="cmd cmd--folder-new-new-incognito-window" id="folder-new-incognito-window" tabindex="-1">
 	<hr>
-	<command id="folder-edit" tabindex="-1">
-	<command id="folder-delete" tabindex="-1">
+	<command class="cmd cmd--folder-edit" id="folder-edit" tabindex="-1">
+	<command class="cmd cmd--folder-delete" id="folder-delete" tabindex="-1">
 </menu>
 
-<div id="resizer"></div>
-<div id="cover"></div>
-<div id="alert-dialog" class="dialog" role="dialog">
-	<h1 id="alert-dialog-text" class="dialog-title"></h1>
-</div>
-<div id="confirm-dialog" class="dialog" role="dialog">
-	<h1 id="confirm-dialog-text" class="dialog-title"></h1>
+<div class="resizer" id="resizer"></div>
+<div class="cover" id="cover"></div>
 
-	<div class="buttons">
-		<button class="button" id="confirm-dialog-button-2"></button>
-		<button class="button button-primary" id="confirm-dialog-button-1"></button>
+<div class="dialog dialog--normal dialog--alert" id="alert-dialog" role="dialog">
+	<h1 class="dialog__title" id="alert-dialog-text" ></h1>
+
+	<div class="dialog__footer">
+		<button class="button" id="alert-dialog-cancel" type="button"></button>
 	</div>
-
 </div>
-<div id="edit-dialog" class="dialog" role="dialog">
-		<h1 id="edit-dialog-text" class="dialog-title"></h1>
-		<form>
-			<input class="input" id="edit-dialog-name">
-			<input class="input" type="url" id="edit-dialog-url" aria-required="true" required>
 
-			<div class="buttons">
-				<button class="button" id="edit-dialog-cancel" type="button"></button>
-				<button class="button button-primary" id="edit-dialog-button" type="submit"></button>
+<div class="dialog dialog--normal dialog--confirm" id="confirm-dialog" role="dialog">
+	<h1 class="dialog__title" id="confirm-dialog-text"></h1>
+
+	<div class="dialog__footer">
+		<button class="button" id="confirm-dialog-button-2"></button>
+		<button class="button button--primary" id="confirm-dialog-button-1"></button>
+	</div>
+</div>
+
+<div class="dialog dialog--normal dialog--edit" id="edit-dialog" role="dialog">
+		<h1 class="dialog__title" id="edit-dialog-text"></h1>
+		<form>
+
+			<div class="textfield">
+				<label class="label" for="edit-dialog-name" id="label-edit-dialog-name"></label>
+				<input class="input" id="edit-dialog-name">
 			</div>
+
+			<div class="textfield">
+				<label class="label" for="edit-dialog-url" id="label-edit-dialog-url"></label>
+				<input class="input" type="url" id="edit-dialog-url" aria-required="true" required>
+			</div>
+
+			<div class="dialog__footer">
+				<button class="button" id="edit-dialog-cancel" type="button"></button>
+				<button class="button button--primary" id="edit-dialog-button" type="submit"></button>
+			</div>
+			
 		</form>
 </div>
 
