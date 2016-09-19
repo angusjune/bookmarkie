@@ -1,6 +1,6 @@
 {
 	"name": "__MSG_extName__",
-	"version": "1.1.1",
+	"version": "2.0.0",
 	"short_name": "Bookmarks",
 	"manifest_version": 2,
 	"description": "__MSG_extDesc__",
@@ -16,17 +16,22 @@
 		},
 		"default_popup": "popup.html"
 	},
-	"options_page": "options.html",
+	"options_ui": {
+		"page": "options.html",
+		"chrome_style": true
+	},
 	"background": {
 		"scripts": ["js/background.js"]
 	},
 	"permissions": [
-		"<all_urls>",
+		"http://*/*",
+    "https://*/*",
 		"chrome://favicon/",
 		"bookmarks",
-		"tabs"
+		"tabs",
+		"storage"
 	],
-	"minimum_chrome_version": "9",
+	"minimum_chrome_version": "40",
 	"default_locale": "en",
 	"omnibox": {
 		"keyword" : "*"

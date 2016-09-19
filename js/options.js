@@ -1,102 +1,192 @@
-window.addEventListener('load', init, false);
+window.addEventListener('load', getMessage, false);
 var os = (navigator.platform.toLowerCase().match(/mac|win|linux/i) || ['other'])[0];
 var _m = chrome.i18n.getMessage;
 
 var extName = _m('extName');
 
-function init() {
+function getMessage() {
 	// i18n of text strings
-	$('extName').innerHTML = extName;
-	$('version').innerHTML = chrome.app.getDetails().version // undocumented method!
-	$('options').innerHTML = _m('options');
-	$('general').innerHTML = _m('general');
-	$('appearance').innerHTML = _m('appearance');
-	$('heightDefault').innerHTML = _m('heightDefault');
-	$('heightCustom').innerHTML = _m('heightCustom');
 
-	// Distinct mac and other users
-	$('optionClickNewTab').innerHTML = _m('optionClickNewTab');
+	// Distinct mac and windows
 	if (os == 'mac') {
-		$('optionOpenNewTab').innerHTML = _m('optionOpenNewTabMac');
-	} else {
-		$('optionOpenNewTab').innerHTML = _m('optionOpenNewTab');
+		$('optionOpenNewTab').dataset.msg = 'optionOpenNewTabMac';
 	}
 
-	$('optionCloseUnusedFolders').innerHTML = _m('optionCloseUnusedFolders');
-	$('optionPopupStays').innerHTML = _m('optionPopupStays');
-	$('optionConfirmOpenFolder').innerHTML = _m('optionConfirmOpenFolder');
-	$('optionRememberPrevState').innerHTML = _m('optionRememberPrevState');
-
 	var neatGithub = '<a href="http://github.com/cheeaun/neat-bookmarks">Neat Bookmarks</a>';
-	var linkCheeAun = '<a href="http://twitter.com/cheeaun">Lim Chee Aun</a>';
 	$('optionsFooterText').innerHTML = _m('optionsFooterText7', [neatGithub]);
+
+
+	var elements = document.querySelectorAll('[data-msg]');
+	Array.prototype.forEach.call(elements, function (el, i) {
+		el.textContent = _m(el.dataset.msg);
+	});
+
 };
 
-var __m = function(){
-	document.write(_m.apply(this, arguments));
-};
+function optionSaved() {
+	console.log('Saved');
+}
+
+function setOption(name, value) {
+	chrome.storage.sync.set({
+		name: value
+	},optionSaved);
+}
 
 document.addEventListener('DOMContentLoaded', function(){
-	document.title = _m('extName') + ' ' + _m('options');
 
-	var clickNewTab = $('click-new-tab');
-	clickNewTab.checked = !!localStorage.leftClickNewTab;
-	clickNewTab.addEventListener('change', function(){
-		localStorage.leftClickNewTab = clickNewTab.checked ? '1' : '';
+	var alwaysOpenNewTab   = $('always-open-new-tab'),
+			openNewTabInBg     = $('open-new-tab-in-bg'),
+			closeOtherFolders  = $('close-other-folders'),
+			popupStayOpen      = $('popup-stay-open'),
+			// confirmOpenMultiple = $('confirm-open-multiple'),
+			rememberLastState  = $('remember-last-state'),
+			btnConfirmPh       = $('btn-confirm-ph'),
+			panelHeight        = $('panel-height');
+			// isHeightDefault     = $('remember-prev-state'),
+			// customHeightVal     = $('remember-prev-state');
+
+	chrome.storage.sync.get({
+		alwaysOpenNewTab:    false,
+		openNewTabInBg:      false,
+		closeOtherFolders:   false,
+		popupStayOpen:       false,
+		// confirmOpenMultiple: true,
+		rememberLastState:   true,
+		panelHeight: '500px'
+		// isHeightDefault:     true,
+		// customHeightVal:     '600px'
+	}, function(items){
+		alwaysOpenNewTab.checked  = items.alwaysOpenNewTab;
+		openNewTabInBg.checked    = items.openNewTabInBg;
+		closeOtherFolders.checked = items.closeOtherFolders;
+		popupStayOpen.checked     = items.popupStayOpen;
+		rememberLastState.checked = items.rememberLastState;
+		panelHeight.value         = items.panelHeight;
 	});
 
-	var openNewTabBg = $('open-new-tab-bg');
-	openNewTabBg.checked = !!localStorage.middleClickBgTab;
-	openNewTabBg.addEventListener('change', function(){
-		localStorage.middleClickBgTab = openNewTabBg.checked ? '1' : '';
+/* Always open bookmarks in a new tab */
+
+	// var clickNewTab = $('click-new-tab');
+	// clickNewTab.checked = !!localStorage.leftClickNewTab;
+	alwaysOpenNewTab.addEventListener('change', function(){
+		// localStorage.leftClickNewTab = clickNewTab.checked ? '1' : '';
+		// setOption('alwaysOpenNewTab', alwaysOpenNewTab.checked);
+		chrome.storage.sync.set({
+			alwaysOpenNewTab: alwaysOpenNewTab.checked
+		},optionSaved);
 	});
 
-	var closeUnusedFolders = $('close-unused-folders');
-	closeUnusedFolders.checked = !!localStorage.closeUnusedFolders;
-	closeUnusedFolders.addEventListener('change', function(){
-		localStorage.closeUnusedFolders = closeUnusedFolders.checked ? '1' : '';
+	/* Open bookmark in background while holding cmd */
+
+	// var openNewTabBg = $('open-new-tab-bg');
+	// openNewTabBg.checked = !!localStorage.middleClickBgTab;
+	openNewTabInBg.addEventListener('change', function(){
+		// setOption('openNewTabInBg', openNewTabInBg.checked);
+		chrome.storage.sync.set({
+			openNewTabInBg: openNewTabInBg.checked
+		},optionSaved);
 	});
 
-	var popupStayOpen = $('popup-stay-open');
-	popupStayOpen.checked = !!localStorage.bookmarkClickStayOpen;
+	/* Close others folders when opening a new one */
+
+	// var closeUnusedFolders = $('close-unused-folders');
+	// closeUnusedFolders.checked = !!localStorage.closeUnusedFolders;
+	closeOtherFolders.addEventListener('change', function(){
+		// localStorage.closeUnusedFolders = closeUnusedFolders.checked ? '1' : '';
+		// setOption('closeOtherFolders', closeOtherFolders.checked);
+		chrome.storage.sync.set({
+			closeOtherFolders: closeOtherFolders.checked
+		},optionSaved);
+	});
+
+	/* Popup stay open when opening a bookmark */
+
+	// var popupStayOpen = $('popup-stay-open');
+	// popupStayOpen.checked = !!localStorage.bookmarkClickStayOpen;
 	popupStayOpen.addEventListener('change', function(){
-		localStorage.bookmarkClickStayOpen = popupStayOpen.checked ? '1' : '';
+		// localStorage.bookmarkClickStayOpen = popupStayOpen.checked ? '1' : '';
+		// setOption('popupStayOpen', popupStayOpen.checked);
+		chrome.storage.sync.set({
+			popupStayOpen: popupStayOpen.checked
+		},optionSaved);
 	});
 
-	var confirmOpenFolder = $('confirm-open-folder');
-	confirmOpenFolder.checked = !localStorage.dontConfirmOpenFolder;
-	confirmOpenFolder.addEventListener('change', function(){
-		localStorage.dontConfirmOpenFolder = confirmOpenFolder.checked ? '' : '1';
+	/* Confirm when trying to open multiple bookmarks */
+
+	// var confirmOpenFolder = $('confirm-open-folder');
+	// confirmOpenFolder.checked = !localStorage.dontConfirmOpenFolder;
+	// confirmOpenFolder.addEventListener('change', function(){
+	// 	localStorage.dontConfirmOpenFolder = confirmOpenFolder.checked ? '' : '1';
+	// });
+
+/* Remember last state */
+
+	// var rememberPrevState = $('remember-prev-state');
+	// rememberPrevState.checked = !localStorage.dontRememberState;
+	rememberLastState.addEventListener('change', function(){
+		// localStorage.dontRememberState = rememberPrevState.checked ? '' : '1';
+		// setOption('rememberLastState', rememberLastState.checked);
+		chrome.storage.sync.set({
+			rememberLastState: rememberLastState.checked
+		},optionSaved);
 	});
 
-	var rememberPrevState = $('remember-prev-state');
-	rememberPrevState.checked = !localStorage.dontRememberState;
-	rememberPrevState.addEventListener('change', function(){
-		localStorage.dontRememberState = rememberPrevState.checked ? '' : '1';
-	});
+	btnConfirmPh.addEventListener('click', function(){
+		var heightVal = panelHeight.value;
 
-	var heightDefault = $('height-default');
-	var heightCustom  = $('height-default');
-	var heightValue   = $('height-value');
-	var heightVal = heightValue.value.toLowerCase().replace(' ', '');
-	console.log(heightVal);
-	heightDefault.checked = localStorage.isHeightDefault;
-	heightDefault.addEventListener('change', function(){
-		localStorage.isHeightDefault = heightDefault.checked ? '' : '1';
-	});
-	heightCustom.addEventListener('change', function(){
 		if (heightVal.match(/(\d+%)|(\d+px)/i)) {
-
-		} else {
-			document.querySelector('.height-value-tip')
+			chrome.storage.sync.set({
+				panelHeight: heightVal
+			}, optionSaved);
 		}
 	});
+
+
+/* Customize panel height */
+
+// 	var heightDefault = $('height-default');
+// 	var heightCustom  = $('height-custom');
+// 	var heightValue   = $('height-value');
+// 	var heightVal = heightValue.value.toLowerCase().replace(' ', '');
+//
+// 	console.log(heightVal);
+//
+// 	localStorage.isHeightDefault = localStorage.isHeightDefault ? localStorage.isHeightDefault : true;
+//
+// 	var isHeightDefault = localStorage.isHeightDefault;
+//
+// 	if (isHeightDefault) {
+// 		heightDefault.checked = true;
+// 	} else {
+// 		heightCustom.checked = true;
+// 	}
+//
+// 	heightDefault.addEventListener('change', function(){
+// 		localStorage.isHeightDefault = heightDefault.checked ? '' : '1';
+// 	});
+//
+// 	heightCustom.addEventListener('change', function(){
+//
+//
+// 		if (heightVal.match(/(\d+%)|(\d+px)/i)) {
+// 			localStorage.customHeight = heightVal;
+// 			console.log(localStorage.customHeight + 'lc');
+//
+// 		} else {
+// 			document.querySelector('.height-value-tip')
+// 		}
+// 	});
+//
+// 	heightValue.addEventListener('focus', function(){
+// 		heightCustom.checked = true;
+// 	});
 });
 
 document.addEventListener('DOMContentLoaded', function(){
 	// check if options can be saved locally
-	if (window.localStorage == null) {
-		alert("LocalStorage must be enabled for managing options.");
+	if (chrome.storage == null) {
+		alert("Chrome storage not available");
 		return;
 	}
 });

@@ -1,15 +1,51 @@
 window.addEventListener('load', init, false);
 
+var alwaysOpenNewTab ,
+		openNewTabInBg,
+		closeOtherFolders,
+		popupStayOpen,
+		rememberLastState,
+		btnConfirmPh,
+		panelHeight,
+		opens;
+
+chrome.storage.sync.get({
+	alwaysOpenNewTab:    false,
+	openNewTabInBg:      false,
+	closeOtherFolders:   false,
+	popupStayOpen:       false,
+	// confirmOpenMultiple: true,
+	rememberLastState:   true,
+	panelHeight: '500px',
+	opens: []
+	// isHeightDefault:     true,
+	// customHeightVal:     '600px'
+}, function(items){
+	alwaysOpenNewTab  = items.alwaysOpenNewTab;
+	openNewTabInBg    = items.openNewTabInBg;
+	closeOtherFolders = items.closeOtherFolders;
+	popupStayOpen     = items.popupStayOpen;
+	rememberLastState = items.rememberLastState;
+	panelHeight       = items.panelHeight;
+	opens = JSON.parse(items.opens);
+
+	console.log(items);
+});
+
 function init() {
-	if (localStorage.popupHeight) document.body.style.height = localStorage.popupHeight + 'px';
-	if (localStorage.popupWidth) document.body.style.width = localStorage.popupWidth + 'px';
+	if (panelHeight != null) {
+		document.body.style.height = panelHeight;
+		console.log('ph: ' + panelHeight);
+	}
+	// if (localStorage.popupHeight) document.body.style.height = localStorage.popupHeight + 'px';
+	// if (localStorage.popupWidth) document.body.style.width = localStorage.popupWidth + 'px';
 };
 
 (function(window){
-	var document = window.document;
-	var chrome = window.chrome;
-	var localStorage = window.localStorage;
-	var navigator = window.navigator;
+	// var document = window.document;
+	// var chrome = window.chrome;
+	// var localStorage = window.localStorage;
+	// var navigator = window.navigator;
 	var body = document.body;
 	var _m = chrome.i18n.getMessage;
 	var _b = chrome.extension.getBackgroundPage().console;
@@ -75,8 +111,8 @@ function init() {
 	if (rtl) body.addClass('rtl');
 
 	// Init some variables
-	var opens = localStorage.opens ? JSON.parse(localStorage.opens) : [];
-	var rememberState = !localStorage.dontRememberState;
+	// var opens = localStorage.opens ? JSON.parse(localStorage.opens) : [];
+	// var rememberState = !localStorage.dontRememberState;
 	var a = document.createElement('a');
 	var httpsPattern = /^https?:\/\//i;
 
@@ -101,24 +137,24 @@ function init() {
 		}
 	};
 
-	var getBase64Image = function(img) {
-    // Create an empty canvas element
-    var canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-
-    // Copy the image contents to the canvas
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-
-    // Get the data-URL formatted image
-    // Firefox supports PNG and JPEG. You could check img.src to
-    // guess the original format, but be aware the using "image/jpg"
-    // will re-encode the image.
-    var dataURL = canvas.toDataURL("image/png");
-
-    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
- }
+ // var getBase64Image = function(img) {
+ //    // Create an empty canvas element
+ //    var canvas = document.createElement("canvas");
+ //    canvas.width = img.width;
+ //    canvas.height = img.height;
+ //
+ //    // Copy the image contents to the canvas
+ //    var ctx = canvas.getContext("2d");
+ //    ctx.drawImage(img, 0, 0);
+ //
+ //    // Get the data-URL formatted image
+ //    // Firefox supports PNG and JPEG. You could check img.src to
+ //    // guess the original format, but be aware the using "image/jpg"
+ //    // will re-encode the image.
+ //    var dataURL = canvas.toDataURL("image/png");
+ //
+ //    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+ // }
 
 	var generateBookmarkHTML = function(title, url, extras){
 		if (!extras) extras = '';
@@ -159,7 +195,7 @@ function init() {
 			if (isFolder){
 				var isOpen = false;
 				var open = '';
-				if (rememberState){
+				if (rememberLastState){
 					isOpen = opens.contains(id);
 					if (isOpen) open = ' open';
 				}
@@ -202,7 +238,7 @@ function init() {
 		$tree.innerHTML = html;
 
 		// recall scroll position (from top of popup) when tree opened
-		if (rememberState) $tree.scrollTop = localStorage.scrollTop || 0;
+		if (rememberLastState) $tree.scrollTop = localStorage.scrollTop || 0;
 
 		var focusID = localStorage.focusID;
 		if (typeof focusID != 'undefined' && focusID != null){
@@ -279,7 +315,11 @@ function init() {
 		opens = Array.map(function(li){
 			return li.id.replace('neat-tree-item-', '');
 		}, opens);
-		localStorage.opens = JSON.stringify(opens);
+
+		chrome.storage.sync.set({
+			opens: JSON.stringify(opens)
+		});
+		// localStorage.opens = JSON.stringify(opens);
 	});
 	// Force middle clicks to trigger the focus event
 	$tree.addEventListener('mouseup', function(e){
@@ -423,7 +463,7 @@ function init() {
 	});
 
 	// Saved search query
-	if (rememberState && localStorage.searchQuery){
+	if (rememberLastState && localStorage.searchQuery){
 		searchInput.value = localStorage.searchQuery;
 		search();
 		searchInput.select();
@@ -441,6 +481,9 @@ function init() {
 				body.style.webkitTransitionDuration = (fullHeight < window.innerHeight) ? '.3s' : '.1s';
 				var maxHeight = screen.height - window.screenY - 50;
 				var height = Math.max(200, Math.min(fullHeight, maxHeight));
+				// body.style.height
+				console.log('max height: ' + maxHeight);
+				console.log('full height: ' + fullHeight);
 				body.style.height = height + 'px';
 				localStorage.popupHeight = height;
 			}
@@ -533,8 +576,10 @@ function init() {
 	};
 
 	// Bookmark handling
-	var dontConfirmOpenFolder = !!localStorage.dontConfirmOpenFolder;
-	var bookmarkClickStayOpen = !!localStorage.bookmarkClickStayOpen;
+	// var dontConfirmOpenFolder = !!localStorage.dontConfirmOpenFolder;
+	var dontConfirmOpenFolder = false;
+	// var bookmarkClickStayOpen = !!localStorage.bookmarkClickStayOpen;
+	var bookmarkClickStayOpen = popupStayOpen;
 	var openBookmarksLimit = 10;
 	var actions = {
 		openBookmark: function(url){
@@ -725,8 +770,10 @@ function init() {
 		}
 	};
 
-	var middleClickBgTab = !!localStorage.middleClickBgTab;
-	var leftClickNewTab = !!localStorage.leftClickNewTab;
+	// var middleClickBgTab = !!localStorage.middleClickBgTab;
+	var middleClickBgTab = openNewTabInBg;
+	// var leftClickNewTab = !!localStorage.leftClickNewTab;
+	var leftClickNewTab = alwaysOpenNewTab;
 	var noOpenBookmark = false;
 	var bookmarkHandler = function(e){
 		e.preventDefault();
