@@ -207,9 +207,17 @@ function init() {
 				/* @ end of altered */
 
 				if (isOpen){
+
+					// Foldr opened style
+					// html += '<img src="images/empty38.png" width="16" height="16" alt=""><i>' + (title || _m('noTitle')) + '</i>' + '</span>';
+
 					if (children){
 						html += generateHTML(children, level + 1);
 					} else {
+
+						// Folder not opened style
+						// html += '<img src="images/folder32.png" width="16" height="16" alt=""><i>' + (title || _m('noTitle')) + '</i>' + '</span>';
+
 						(function(_id){
 							chrome.bookmarks.getChildren(_id, function(children){
 								var html = generateHTML(children, level + 1);
