@@ -6,8 +6,7 @@ var alwaysOpenNewTab ,
 		popupStayOpen,
 		rememberLastState,
 		btnConfirmPh,
-		panelHeight,
-		opens;
+		panelHeight;
 
 chrome.storage.sync.get({
 	alwaysOpenNewTab:    false,
@@ -17,7 +16,7 @@ chrome.storage.sync.get({
 	// confirmOpenMultiple: true,
 	rememberLastState:   true,
 	panelHeight: '500px',
-	opens: []
+	// opens: []
 	// isHeightDefault:     true,
 	// customHeightVal:     '600px'
 }, function(items){
@@ -27,7 +26,7 @@ chrome.storage.sync.get({
 	popupStayOpen     = items.popupStayOpen;
 	rememberLastState = items.rememberLastState;
 	panelHeight       = items.panelHeight;
-	opens = JSON.parse(items.opens);
+	// opens = JSON.parse(items.opens);
 
 	console.log(items);
 });
@@ -111,7 +110,7 @@ function init() {
 	if (rtl) body.addClass('rtl');
 
 	// Init some variables
-	// var opens = localStorage.opens ? JSON.parse(localStorage.opens) : [];
+	var opens = localStorage.opens ? JSON.parse(localStorage.opens) : [];
 	// var rememberState = !localStorage.dontRememberState;
 	var a = document.createElement('a');
 	var httpsPattern = /^https?:\/\//i;
@@ -169,7 +168,7 @@ function init() {
 		var tooltipURL = url;
 		if (/^javascript:/i.test(url)){
 			if (url.length > 140) tooltipURL = url.slice(0, 140) + '...';
-			favicon = 'images/document-code38.png';
+			favicon = 'images/document-code.svg';
 		}
 		tooltipURL = tooltipURL.htmlspecialchars();
 		var name = title.htmlspecialchars() || (httpsPattern.test(url) ? url.replace(httpsPattern, '') : _m('noTitle'));
@@ -198,12 +197,14 @@ function init() {
 				if (rememberLastState){
 					isOpen = opens.contains(id);
 					if (isOpen) open = ' open';
+					console.log('id: ' + id);
+					console.log('open: ' + open);
 				}
 
 				/* @ altered */
 				html += '<li class="parent' + open + '"' + idHTML + ' role="treeitem" aria-expanded="' + isOpen + '" data-parentid="' + parentID + '">'
 					+ '<span tabindex="0" style="-webkit-padding-start: ' + paddingStart + 'px"><b class="twisty"></b>'
-					+ '<img src="images/folder32.png" width="16" height="16" alt=""><i>' + (title || _m('noTitle')) + '</i>' + '</span>';
+					+ '<i class="icon-folder"></i><i>' + (title || _m('noTitle')) + '</i>' + '</span>';
 				/* @ end of altered */
 
 				if (isOpen){
@@ -324,10 +325,10 @@ function init() {
 			return li.id.replace('neat-tree-item-', '');
 		}, opens);
 
-		chrome.storage.sync.set({
-			opens: JSON.stringify(opens)
-		});
-		// localStorage.opens = JSON.stringify(opens);
+		// chrome.storage.sync.set({
+		// 	opens: JSON.stringify(opens)
+		// });
+		localStorage.opens = JSON.stringify(opens);
 	});
 	// Force middle clicks to trigger the focus event
 	$tree.addEventListener('mouseup', function(e){
