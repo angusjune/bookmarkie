@@ -108,6 +108,9 @@
     "description": "The extension name.",
     "message": "Bookmarkie"
   },
+  "extActionTitle": {
+    "message": "Your Bookmarks"
+  },
   "general": {
     "message": "General Settings"
   },

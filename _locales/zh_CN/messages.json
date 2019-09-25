@@ -98,7 +98,7 @@
     "message": "编辑 ..."
   },
   "errorOccured": {
-    "message": "喔唷，出错了……"
+    "message": "出错了"
   },
   "extDesc": {
     "description": "扩展描述",
@@ -107,6 +107,9 @@
   "extName": {
     "description": "扩展名",
     "message": "Bookmarkie"
+  },
+  "extActionTitle": {
+    "message": "查看书签"
   },
   "general": {
     "message": "常规设置"
