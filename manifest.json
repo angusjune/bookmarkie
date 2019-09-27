@@ -33,9 +33,6 @@
 		"tabs",
 		"storage"
 	],
-	"minimum_chrome_version": "40",
-	"default_locale": "en",
-	"omnibox": {
-		"keyword" : "*"
-	}
+	"minimum_chrome_version": "63",
+	"default_locale": "en"
 }

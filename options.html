@@ -3,146 +3,170 @@
 
 <head>
 	<link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
-	<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+	<script src="js/material-components-web.min.js"></script>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 	<link rel="stylesheet" href="css/options.css">
-
-	<style>
-		.mdc-checkbox { 
-			--mdc-theme-primary: #9c27b0;
-		}
-	</style>
 </head>
 
 <body>
 
-	<section>
-		<h2 data-msg="general">General</h2>
+	<section class="section">
+		<h2 data-msg="general" class="mdc-typography--subtitle1">General</h2>
 
-		<div class="mdc-form-field">
-			<!-- <label>
-				<input type="checkbox" id="always-open-new-tab">
-				<span data-msg="optionClickNewTab">Always open bookmark in new tab</span>
-			</label> -->
-			<div class="mdc-checkbox">
-				<input type="checkbox" class="mdc-checkbox__native-control" id="always-open-new-tab"/>
-				<div class="mdc-checkbox__background">
-					<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-					<path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-					</svg>
-					<div class="mdc-checkbox__mixedmark"></div>
-				</div>
-			</div>
-			<label data-msg="optionClickNewTab" for="always-open-new-tab">Always open bookmark in new tab</label>
-		</div>
+		<div class="mdc-card">
 
-		<div class="mdc-form-field">
-			<!-- <label>
-				<input type="checkbox" id="open-new-tab-in-bg">
-				<span data-msg="optionOpenNewTab" id="optionOpenNewTab">Open new tab in background</span>
-			</label> -->
-			<div class="mdc-checkbox">
-				<input type="checkbox" class="mdc-checkbox__native-control" id="open-new-tab-in-bg"/>
-				<div class="mdc-checkbox__background">
-					<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-					<path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-					</svg>
-					<div class="mdc-checkbox__mixedmark"></div>
-				</div>
-			</div>
-			<label data-msg="optionOpenNewTab" for="open-new-tab-in-bg">Open new tab in background</label>
-		</div>
+			<div class="mdc-list" role="group">
 
-		<div class="mdc-form-field">
-			<!-- <label>
-				<input type="checkbox" id="close-other-folders">
-				<span data-msg="optionCloseUnusedFolders">Close other folders</span>
-			</label> -->
-			<div class="mdc-checkbox">
-				<input type="checkbox" class="mdc-checkbox__native-control" id="close-other-folders"/>
-				<div class="mdc-checkbox__background">
-					<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-					<path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-					</svg>
-					<div class="mdc-checkbox__mixedmark"></div>
-				</div>
-			</div>
-			<label data-msg="optionCloseUnusedFolders" for="close-other-folders">Close other folders</label>
-		</div>
+				<label for="openNewTabsNative" class="mdc-list-item" role="checkbox" aria-checked="false">
+					<span data-msg="openNewTab">Always open bookmarks in new tabs</span>
 
-		<div class="mdc-form-field">
-			<!-- <label>
-				<input type="checkbox" id="popup-stay-open">
-				<span data-msg="optionPopupStays">Popup stay open when bookmark open</span>
-			</label> -->
-			<div class="mdc-checkbox">
-				<input type="checkbox" class="mdc-checkbox__native-control" id="popup-stay-open"/>
-				<div class="mdc-checkbox__background">
-					<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-					<path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-					</svg>
-					<div class="mdc-checkbox__mixedmark"></div>
-				</div>
-			</div>
-			<label data-msg="optionPopupStays" for="popup-stay-open">Popup stay open when bookmark open</label>
-		</div>
-
-		<div class="mdc-form-field">
-			<!-- <label>
-				<input type="checkbox" id="remember-last-state">
-				<span data-msg="optionRememberPrevState">Remember last state when popup open</span>
-			</label> -->
-			<div class="mdc-checkbox">
-				<input type="checkbox" class="mdc-checkbox__native-control" id="remember-last-state"/>
-				<div class="mdc-checkbox__background">
-					<svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-					<path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-					</svg>
-					<div class="mdc-checkbox__mixedmark"></div>
-				</div>
-			</div>
-			<label data-msg="optionRememberPrevState" for="remember-last-state">Remember last state when popup open</label>
-		</div>
-
-	</section>
-
-	<section>
-		<h2 data-msg="appearance">Appearance</h2>
-
-		<div class="mdc-form-field">
-			<!-- <label class="textfield__label" data-msg="panelHeight" for="panel-height">
-				Panel Height
-			</label>
-			<form action="#">
-				<input class="textfield__input" type="text" id="panel-height" value="500px" pattern="(\d+%)|(\d+px)" title="Invalid" required>
-				<button class="textfield__btn" data-msg="confirm" id="btn-confirm-ph" type="button">Confirm</button>
-				<button class="textfield__btn" data-msg="reset" id="btn-reset-ph" type="reset">Reset</button>
-				<div class="warning-msg" data-msg="phWarning">Wrong format</div>
-			</form> -->
-
-			<div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon">
-				<i class="material-icons mdc-text-field__icon">height</i>
-				<input class="mdc-text-field__input" id="panel-height" value="500px" pattern="(\d+%)|(\d+px)" title="Invalid" required>
-				<div class="mdc-notched-outline">
-					<div class="mdc-notched-outline__leading"></div>
-					<div class="mdc-notched-outline__notch">
-					<label data-msg="panelHeight" for="panel-height" class="mdc-floating-label">Panel Height</label>
+					<div class="mdc-switch mdc-switch--checked mdc-list-item__meta" id="openNewTabs">
+						<div class="mdc-switch__track"></div>
+						<div class="mdc-switch__thumb-underlay">
+							<div class="mdc-switch__thumb">
+								<input id="openNewTabsNative" type="checkbox" class="mdc-switch__native-control" role="switch">
+							</div>
+						</div>
 					</div>
-					<div class="mdc-notched-outline__trailing"></div>
+				</label>
+
+				<label for="openTabsInBgNative" class="mdc-list-item" role="checkbox" aria-checked="false">
+					<span data-msg="optionOpenNewTab" id="optionOpenNewTab">Open new tabs in background</span>
+
+					<div class="mdc-switch mdc-switch--checked mdc-list-item__meta" id="openTabsInBg">
+						<div class="mdc-switch__track"></div>
+						<div class="mdc-switch__thumb-underlay">
+							<div class="mdc-switch__thumb">
+								<input id="openTabsInBgNative" type="checkbox" class="mdc-switch__native-control" role="switch">
+							</div>
+						</div>
+					</div>
+				</label>
+
+			</div>
+
+			<hr class="mdc-list-divider">
+
+			<div class="mdc-list" role="group">
+
+				<label for="closeOtherFoldersNative" class="mdc-list-item" role="checkbox" aria-checked="false">
+					<span data-msg="optionCloseUnusedFolders">Close other folders</span>
+
+					<div class="mdc-switch mdc-switch--checked mdc-list-item__meta" id="closeOtherFolders">
+						<div class="mdc-switch__track"></div>
+						<div class="mdc-switch__thumb-underlay">
+							<div class="mdc-switch__thumb">
+								<input id="closeOtherFoldersNative" type="checkbox" class="mdc-switch__native-control" role="switch">
+							</div>
+						</div>
+					</div>
+				</label>
+
+			</div>
+
+			<hr class="mdc-list-divider">
+
+			<div class="mdc-list" role="group">
+
+				<label for="popupFixedNative" class="mdc-list-item" role="checkbox" aria-checked="false">
+					<span data-msg="optionPopupStays">Popup stays when opening bookmarks</span>
+
+					<div class="mdc-switch mdc-switch--checked mdc-list-item__meta" id="popupFixed">
+						<div class="mdc-switch__track"></div>
+						<div class="mdc-switch__thumb-underlay">
+							<div class="mdc-switch__thumb">
+								<input id="popupFixedNative" type="checkbox" class="mdc-switch__native-control" role="switch">
+							</div>
+						</div>
+					</div>
+				</label>
+
+				<label for="preserveStateNative" class="mdc-list-item" role="checkbox" aria-checked="true">
+					<span data-msg="optionRememberPrevState">Remember last state when popup open</span>
+
+					<div class="mdc-switch mdc-switch--checked mdc-list-item__meta" id="preserveState">
+						<div class="mdc-switch__track"></div>
+						<div class="mdc-switch__thumb-underlay">
+							<div class="mdc-switch__thumb">
+								<input id="preserveStateNative" type="checkbox" class="mdc-switch__native-control" role="switch" checked>
+							</div>
+						</div>
+					</div>
+				</label>
+
+			</div>
+
+		</div>
+	</section>
+
+
+	<section class="section">
+		<h2 data-msg="icon" class="mdc-typography--subtitle1">Icon</h2>
+
+		<div class="mdc-card">
+
+			<h3 data-msg="style" class="mdc-typography--subtitle2 headline">Style</h2>
+
+			<ul class="icon-list">
+				<li class="icon-list-item">
+					<input id="iconStar" class="icon-list-item__native-control" type="radio" name="icon-type-group" value="star" checked>
+					<label for="iconStar" class="icon-list-item__graphic icon-list-item__graphic--star"></label>
+				</li>
+				<li class="icon-list-item">
+					<input id="iconBookmark" class="icon-list-item__native-control" type="radio" name="icon-type-group" value="bookmark">
+					<label for="iconBookmark" class="icon-list-item__graphic icon-list-item__graphic--bookmark"></label>
+				</li>
+				<li class="icon-list-item">
+					<input id="iconStars" class="icon-list-item__native-control" type="radio" name="icon-type-group" value="stars">
+					<label for="iconStars" class="icon-list-item__graphic icon-list-item__graphic--stars"></label>
+				</li>
+			</ul>
+
+			<hr class="mdc-list-divider">
+
+			<h3 data-msg="color" class="mdc-typography--subtitle2 headline">Color</h2>
+
+			<div class="mdc-list" role="group" aria-label="List with checkbox items">
+				<label for="iconStyleAutoNative" class="mdc-list-item" role="checkbox" aria-checked="false">
+					<span data-msg="iconStyleAuto">Switch color automatically</span>
+
+					<div id="iconStyleAuto" class="mdc-switch mdc-switch--checked mdc-list-item__meta">
+						<div class="mdc-switch__track"></div>
+						<div class="mdc-switch__thumb-underlay">
+							<div class="mdc-switch__thumb">
+								<input id="iconStyleAutoNative" type="checkbox" class="mdc-switch__native-control" role="switch" id="another-basic-switch" class="mdc-switch__native-control" role="switch" checked>
+							</div>
+						</div>
+					</div>
+				</label>
+			</div>
+
+			<div class="icon-style-panel hidden">
+
+				<div class="icon-style-list">
+					<div class="icon-style-list-item">
+						<input id="styleDark" class="icon-list-item__native-control" type="radio" name="icon-style-group" value="dark" checked>
+						<label data-msg="dark" for="styleDark" class="icon-style-list-item__label">Dark</label>
+					</div>
+					<div class="icon-style-list-item" data-style="light">
+						<input id="styleLight" class="icon-list-item__native-control" type="radio" name="icon-style-group" value="light">
+						<label data-msg="light" for="styleLight" class="icon-style-list-item__label">Light</label>
+					</div>
+					<div class="icon-style-list-item" data-style="colored">
+						<input id="styleColored" class="icon-list-item__native-control" type="radio" name="icon-style-group" value="colored">
+						<label data-msg="colored" for="styleColored" class="icon-style-list-item__label">Colored</label>
+					</div>
 				</div>
 			</div>
+
 		</div>
 
 	</section>
 
-	<footer class="footer">
-		<p id="optionsFooterText"></p>
-	</footer>
 
-	<script src="js/material.min.js"></script>
-	<script src="js/options.js"></script>
 	<script src="js/neatools.js"></script>
+	<script src="js/options.js"></script>
 </body>
 
 </html>

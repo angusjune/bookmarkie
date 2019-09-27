@@ -112,10 +112,10 @@
     "message": "Your Bookmarks"
   },
   "general": {
-    "message": "General Settings"
+    "message": "General"
   },
   "appearance": {
-    "message": "Appearance Settings"
+    "message": "Appearance"
   },
   "msgHeightDefault": {
     "message": "Default"
@@ -157,7 +157,7 @@
     "message": "Open in Incognito Window"
   },
   "openNewTab": {
-    "message": "Open in New Tab"
+    "message": "Open bookmarks in new tabs"
   },
   "openNewWindow": {
     "message": "Open in New Window"
@@ -166,90 +166,54 @@
     "message": "Always open bookmarks in new tabs."
   },
   "optionCloseUnusedFolders": {
-    "message": "Close unused folders when opening a folder."
+    "message": "Collapse other folders when opening one"
   },
   "optionConfirmOpenFolder": {
-    "message": "Display confirmation when opening a lot of bookmarks from a folder."
+    "message": "Display confirmation when opening a lot of bookmarks from a folder"
   },
   "optionOpenNewTab": {
-    "message": "Middle-click or control-click opens bookmark in new background tab (instead of foreground)."
+    "message": "ctrl + click to open bookmarks in new background tabs (instead of foreground)"
   },
   "optionOpenNewTabMac": {
     "description": "For mac users",
-    "message": "Middle-click or ⌘-click opens bookmark in new background tab"
+    "message": "⌘ + click to open bookmarks in new background tabs"
   },
   "optionPopupStays": {
-    "message": "Popup stays open when opening (left-clicking) bookmarks."
+    "message": "Fix popup when opening bookmarks"
   },
   "optionRememberPrevState": {
-    "message": "Remember previous state (scroll position and opened folders)."
+    "message": "Preserve scroll position and opened folders"
   },
-  "optionsFooterText1": {
-    "description": "Footer text for the Options page",
-    "message": "Email the developer at $neaterEmail$",
-    "placeholders": {
-      "neaterEmail": {
-        "content": "$1"
-      }
-    }
-  },
-  "optionsFooterText2": {
-    "message": "$extName$ is open source! $neaterGithub$",
-    "placeholders": {
-      "extName": {
-        "content": "$1"
-      },
-      "neaterGithub": {
-        "content": "$2"
-      }
-    }
-  },
-  "optionsFooterText3": {
-    "message": "FAQ: $neaterFaq$",
-    "placeholders": {
-      "neaterFaq": {
-        "content": "$1"
-      }
-    }
-  },
-  "optionsFooterText4": {
-    "message": "View issues or submit a new one: $neaterIssues$",
-    "placeholders": {
-      "neaterIssues": {
-        "content": "$1"
-      }
-    }
-  },
-  "optionsFooterText5": {
-    "message": "Browse custom icons: $neaterIcons$",
-    "placeholders": {
-      "neaterIcons": {
-        "content": "$1"
-      }
-    }
-  },
-  "optionsFooterText6": {
-    "message": "Help translate $extName$ at $neaterTranslate$",
-    "placeholders": {
-      "extName": {
-        "content": "$1"
-      },
-      "neaterTranslate": {
-        "content": "$2"
-      }
-    }
-  },
-  "optionsFooterText7": {
-    "message": "Based on $neatGithub$",
-    "placeholders": {
-      "neatGithub": {
-        "content": "$1"
-      }
-    }
-  },
+
   "options": {
     "message": "Options"
   },
+  "icon": {
+    "message": "Icon"
+  },
+  "style": {
+    "message": "Style"
+  },
+  "color": {
+    "message": "Color"
+  },
+
+  "iconStyleAuto": {
+    "message": "Switch color automatically"
+  },
+
+  "dark": {
+    "message": "Dark"
+  },
+
+  "light": {
+    "message": "Light"
+  },
+
+  "colored": {
+    "message": "Colored"
+  },
+
   "optionZoom": {
     "message": "Zoom"
   },

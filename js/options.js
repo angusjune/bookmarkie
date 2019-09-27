@@ -1,23 +1,22 @@
+// mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
+const ripple = mdc.ripple.MDCRipple.attachTo(document.querySelector('.icon-list-item__graphic'));
+
 window.addEventListener('load', getMessage, false);
-var os = (navigator.platform.toLowerCase().match(/mac|win|linux/i) || ['other'])[0];
-var _m = chrome.i18n.getMessage;
+const os = (navigator.platform.toLowerCase().match(/mac|win|linux/i) || ['other'])[0];
+const _m = chrome.i18n.getMessage;
 
-var extName = _m('extName');
+const extName = _m('extName');
 
+// i18n of text strings
 function getMessage() {
-	// i18n of text strings
 
 	// Distinct mac and windows
 	if (os == 'mac') {
 		$('optionOpenNewTab').dataset.msg = 'optionOpenNewTabMac';
 	}
 
-	var neatGithub = '<a href="http://github.com/cheeaun/neat-bookmarks">Neat Bookmarks</a>';
-	$('optionsFooterText').innerHTML = _m('optionsFooterText7', [neatGithub]);
-
-
-	var elements = document.querySelectorAll('[data-msg]');
-	Array.prototype.forEach.call(elements, function (el, i) {
+	const elements = document.querySelectorAll('[data-msg]');
+	elements.forEach((el, i) => {
 		el.textContent = _m(el.dataset.msg);
 	});
 
@@ -33,114 +32,156 @@ function setOption(name, value) {
 	},optionSaved);
 }
 
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', () => {
+	if (chrome.storage === null) {
+		alert("Chrome storage not available");
+		return;
+	}
 
-	var alwaysOpenNewTab   = $('always-open-new-tab'),
-			openNewTabInBg     = $('open-new-tab-in-bg'),
-			closeOtherFolders  = $('close-other-folders'),
-			popupStayOpen      = $('popup-stay-open'),
-			// confirmOpenMultiple = $('confirm-open-multiple'),
-			rememberLastState  = $('remember-last-state'),
-			btnConfirmPh       = $('btn-confirm-ph'),
-			panelHeight        = $('panel-height');
-			// isHeightDefault     = $('remember-prev-state'),
-			// customHeightVal     = $('remember-prev-state');
+	const ctrlOpenNewTabs = mdc.switchControl.MDCSwitch.attachTo(document.querySelector('#openNewTabs'));
+	const ctrlOpenTabsInBg = mdc.switchControl.MDCSwitch.attachTo($('openTabsInBg'));
+	const ctrlCloseOtherFolders = mdc.switchControl.MDCSwitch.attachTo($('closeOtherFolders'));
+	const ctrlPopupFixed = mdc.switchControl.MDCSwitch.attachTo($('popupFixed'));
+	const ctrlPreserveState = mdc.switchControl.MDCSwitch.attachTo($('preserveState'));
+	const ctrlIconStyleAuto = mdc.switchControl.MDCSwitch.attachTo($('iconStyleAuto'));
+
+	const ctrlOpenNewTabsNative = $('openNewTabsNative');
+	const ctrlOpenTabsInBgNative = $('openTabsInBgNative');
+	const ctrlCloseOtherFoldersNative = $('closeOtherFoldersNative');
+	const ctrlPopupFixedNative = $('popupFixedNative');
+	const ctrlPreserveStateNative = $('preserveStateNative');
+	const ctrlIconStyleAutoNative = $('iconStyleAutoNative');
+
+	const iconColorPanel = document.querySelector('.icon-style-panel');
+
+	let iconType = 'star';
+	let iconStyle = 'dark';
 
 	chrome.storage.sync.get({
-		alwaysOpenNewTab:    false,
-		openNewTabInBg:      false,
+		openNewTabs:    false,
+		openTabsInBg:      false,
 		closeOtherFolders:   false,
-		popupStayOpen:       false,
-		// confirmOpenMultiple: true,
-		rememberLastState:   true,
-		panelHeight: '500px'
+		popupFixed:       false,
+		preserveState:   true,
+		panelHeight: '500px',
 		// isHeightDefault:     true,
 		// customHeightVal:     '600px'
-	}, function(items){
-		alwaysOpenNewTab.checked  = items.alwaysOpenNewTab;
-		openNewTabInBg.checked    = items.openNewTabInBg;
-		closeOtherFolders.checked = items.closeOtherFolders;
-		popupStayOpen.checked     = items.popupStayOpen;
-		rememberLastState.checked = items.rememberLastState;
-		panelHeight.value         = items.panelHeight;
+		iconType: 'star',
+		iconStyle: 'dark',
+		iconStyleAuto: true,
+	}, props => {
+		ctrlOpenNewTabs.checked  = props.openNewTabs;
+		ctrlOpenTabsInBg.checked    = props.openTabsInBg;
+		ctrlCloseOtherFolders.checked = props.closeOtherFolders;
+		ctrlPopupFixed.checked     = props.popupFixed;
+		ctrlPreserveState.checked = props.preserveState;
+		ctrlIconStyleAuto.checked = props.iconStyleAuto;
+
+		ctrlIconStyleAuto.checked ? iconColorPanel.classList.add('hidden') : iconColorPanel.classList.remove('hidden');		
 	});
 
 /* Always open bookmarks in a new tab */
-
-	// var clickNewTab = $('click-new-tab');
-	// clickNewTab.checked = !!localStorage.leftClickNewTab;
-	alwaysOpenNewTab.addEventListener('change', function(){
-		// localStorage.leftClickNewTab = clickNewTab.checked ? '1' : '';
-		// setOption('alwaysOpenNewTab', alwaysOpenNewTab.checked);
+	ctrlOpenNewTabsNative.addEventListener('change', () => {
 		chrome.storage.sync.set({
-			alwaysOpenNewTab: alwaysOpenNewTab.checked
-		},optionSaved);
+			openNewTabs: ctrlOpenNewTabs.checked
+		}, optionSaved);
 	});
 
 	/* Open bookmark in background while holding cmd */
-
-	// var openNewTabBg = $('open-new-tab-bg');
-	// openNewTabBg.checked = !!localStorage.middleClickBgTab;
-	openNewTabInBg.addEventListener('change', function(){
-		// setOption('openNewTabInBg', openNewTabInBg.checked);
+	ctrlOpenTabsInBgNative.addEventListener('change', () => {
 		chrome.storage.sync.set({
-			openNewTabInBg: openNewTabInBg.checked
+			openTabsInBg: ctrlOpenTabsInBg.checked
 		},optionSaved);
 	});
 
 	/* Close others folders when opening a new one */
-
-	// var closeUnusedFolders = $('close-unused-folders');
-	// closeUnusedFolders.checked = !!localStorage.closeUnusedFolders;
-	closeOtherFolders.addEventListener('change', function(){
-		// localStorage.closeUnusedFolders = closeUnusedFolders.checked ? '1' : '';
-		// setOption('closeOtherFolders', closeOtherFolders.checked);
+	ctrlCloseOtherFoldersNative.addEventListener('change', () => {
 		chrome.storage.sync.set({
-			closeOtherFolders: closeOtherFolders.checked
-		},optionSaved);
+			closeOtherFolders: ctrlCloseOtherFolders.checked
+		}, optionSaved);
 	});
 
 	/* Popup stay open when opening a bookmark */
-
-	// var popupStayOpen = $('popup-stay-open');
-	// popupStayOpen.checked = !!localStorage.bookmarkClickStayOpen;
-	popupStayOpen.addEventListener('change', function(){
-		// localStorage.bookmarkClickStayOpen = popupStayOpen.checked ? '1' : '';
-		// setOption('popupStayOpen', popupStayOpen.checked);
+	ctrlPopupFixedNative.addEventListener('change', () => {
 		chrome.storage.sync.set({
-			popupStayOpen: popupStayOpen.checked
-		},optionSaved);
+			popupFixed: ctrlPopupFixed.checked
+		}, optionSaved);
 	});
-
-	/* Confirm when trying to open multiple bookmarks */
-
-	// var confirmOpenFolder = $('confirm-open-folder');
-	// confirmOpenFolder.checked = !localStorage.dontConfirmOpenFolder;
-	// confirmOpenFolder.addEventListener('change', function(){
-	// 	localStorage.dontConfirmOpenFolder = confirmOpenFolder.checked ? '' : '1';
-	// });
 
 /* Remember last state */
-
-	// var rememberPrevState = $('remember-prev-state');
-	// rememberPrevState.checked = !localStorage.dontRememberState;
-	rememberLastState.addEventListener('change', function(){
-		// localStorage.dontRememberState = rememberPrevState.checked ? '' : '1';
-		// setOption('rememberLastState', rememberLastState.checked);
+	ctrlPreserveStateNative.addEventListener('change', () => {
 		chrome.storage.sync.set({
-			rememberLastState: rememberLastState.checked
+			preserveState: ctrlPreserveState.checked
 		},optionSaved);
 	});
 
-	btnConfirmPh.addEventListener('click', function(){
-		var heightVal = panelHeight.value;
-
-		if (heightVal.match(/(\d+%)|(\d+px)/i)) {
-			chrome.storage.sync.set({
-				panelHeight: heightVal
-			}, optionSaved);
-		}
+	ctrlIconStyleAutoNative.addEventListener('change', () => {
+		chrome.storage.sync.set({
+			iconStyleAuto: ctrlIconStyleAuto.checked
+		}, optionSaved);
 	});
+
+	document.querySelectorAll('input[name=icon-type-group]').forEach(el => {
+		el.addEventListener('change', res=> {
+			const target = res.target;
+			ripple.activate();
+
+			if (target.checked) {
+				chrome.storage.sync.set({
+					iconType: target.value
+				}, () =>  {
+					optionSaved();
+					iconType = target.value;
+					chrome.browserAction.setIcon({path: `/images/${iconType}-${iconStyle}-128.png`});
+					el.style.backgroundImage = `url(/images/${iconType}-${iconStyle}-128.png)`
+				})
+
+			}
+		});
+	});
+
+	document.querySelectorAll('[name=icon-style-group]').forEach(el => {
+		el.addEventListener('change', res=> {
+			const target = res.target;
+
+			if (target.checked) {
+				chrome.storage.sync.set({
+					iconStyle: target.value
+				}, () =>  {
+					optionSaved();
+					iconStyle = target.value;
+					chrome.browserAction.setIcon({path: `/images/${iconType}-${iconStyle}-128.png`});
+				})
+
+			}
+		});
+	});
+
+	chrome.storage.onChanged.addListener(changes => {
+		console.log(changes)
+
+		if (changes.iconStyleAuto) {
+			const val = changes.iconStyleAuto.newValue;
+			val ? iconColorPanel.classList.add('hidden') : iconColorPanel.classList.remove('hidden');
+
+			const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+        if (isDarkMode) {
+            chrome.browserAction.setIcon({ path: `/images/${items.iconType}-light-128.png`});
+        }
+		}
+	})
+
+
+		// btnConfirmPh.addEventListener('click', () => {
+	// 	var heightVal = panelHeight.value;
+
+	// 	if (heightVal.match(/(\d+%)|(\d+px)/i)) {
+	// 		chrome.storage.sync.set({
+	// 			panelHeight: heightVal
+	// 		}, optionSaved);
+	// 	}
+	// });
 
 
 /* Customize panel height */
@@ -181,12 +222,4 @@ document.addEventListener('DOMContentLoaded', function(){
 // 	heightValue.addEventListener('focus', function(){
 // 		heightCustom.checked = true;
 // 	});
-});
-
-document.addEventListener('DOMContentLoaded', function(){
-	// check if options can be saved locally
-	if (chrome.storage == null) {
-		alert("Chrome storage not available");
-		return;
-	}
 });

@@ -1,33 +1,127 @@
-.textfield {
-  margin-bottom: 5px;
+* {
+  --mdc-theme-primary: #3674E0;
+  --mdc-theme-secondary: #3674E0;
+  --selection-bg: rgba(0, 0, 0, 0.04);
+  --selection-selected-bg: #E0EAFC;
 }
 
-.textfield__label {
+body {
+  background: #f2f2f2;
+  padding-bottom: 32px;
+}
+
+.section {
+  border-radius: 4px;
+  margin: 16px 0;
+}
+
+.headline {
+  padding-left: 16px;
+  padding-inline-start: 16px;
+}
+
+.icon-list {
+  width: 100%;
+  padding: 0 0 16px 16px;
+  padding-inline-start: 16px;
+}
+
+.icon-list-item {
+  list-style: none;
+  float: left;
+  margin-right: 10px;
+}
+
+.icon-list-item__graphic {
   display: block;
-  padding-bottom: 5px;
+  width: 40px;
+  height: 40px;
+  background-color: var(--selection-bg);
+  background-repeat: no-repeat;
+  background-size: 24px 24px;
+  background-position: center;
+  border-radius: 4px;
+  box-sizing: border-box;
+  border: 2px solid transparent;
+  overflow: hidden;
+  transition: all 0.2s linear;
 }
 
-.warning-msg {
-  color: #888;
-  opacity: 0;
-  will-change: opacity;
-  transition: opacity 0.12s;
-  padding-top: 5px;
+.icon-list-item__native-control {
+  display: none;
 }
 
-.textfield__input:invalid ~ .warning-msg {
-  opacity: 1;
+.icon-list-item__native-control:checked ~ .icon-list-item__graphic {
+  background-color: var(--selection-selected-bg);
+  border: 2px solid var(--mdc-theme-primary);
 }
 
-.textfield__btn {
-  margin-right: 1px;
+.icon-list-item__graphic--star {
+  background-image: url(/images/star-dark-128.png);
 }
 
-.footer {
-  opacity: 0.6;
-  /*color: rgba(0, 0, 0, 0.6);*/
-  /*border: 0;*/
-  /*border-top: 1px solid rgba(0, 0, 0, 0.1);*/
-  padding: 5px 0;
-  /*margin-top: 5px;*/
+.icon-list-item__graphic--star.light {
+  background-image: url(/images/star-light-128.png);
+}
+
+.icon-list-item__graphic--star.colored {
+  background-image: url(/images/star-colored-128.png);
+}
+
+.icon-list-item__graphic--bookmark {
+  background-image: url(/images/bookmark-dark-128.png);
+}
+.icon-list-item__graphic--bookmark.light {
+  background-image: url(/images/bookmark-light-128.png);
+}
+.icon-list-item__graphic--bookmark.colored {
+  background-image: url(/images/bookmark-colored-128.png);
+}
+
+.icon-list-item__graphic--stars {
+  background-image: url(/images/stars-dark-128.png);
+}
+.icon-list-item__graphic--stars.light {
+  background-image: url(/images/stars-light-128.png);
+}
+.icon-list-item__graphic--stars.colored {
+  background-image: url(/images/stars-colored-128.png);
+}
+
+.icon-style-panel {
+
+}
+
+.icon-style-list {
+  padding: 16px;
+  padding-inline-start: 16px;
+}
+
+.icon-style-list-item {
+  display: inline-block;
+}
+
+.icon-style-list-item__label {
+  display: block;
+  padding: 0 16px;
+  height: 36px;
+  line-height: 36px;
+  border-radius: 18px;
+  background: var(--selection-bg);
+  transition: background 0.2s linear;
+}
+
+.icon-list-item__native-control:checked ~ .icon-style-list-item__label {
+  background: var(--selection-selected-bg);
+  color: var(--mdc-theme-primary);
+  font-weight: 700;
+}
+
+.icon-style-panel {
+  overflow: hidden;
+  transition: all 0.2s linear;
+}
+
+.icon-style-panel.hidden {
+  height: 0;
 }
