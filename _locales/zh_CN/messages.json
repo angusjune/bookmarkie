@@ -304,5 +304,8 @@
   "phWarning": {
     "description": "选项弹窗高度格式错误提示",
     "message": "使用以 px 或 % 为单位的数值，例如：600px, 92%"
+  },
+  "viewBookmarksOnChrome": {
+    "message": "Chrome 书签管理器"
   }
 }

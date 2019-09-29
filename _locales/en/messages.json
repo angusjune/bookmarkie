@@ -268,5 +268,8 @@
   "phWarning": {
     "description": "",
     "message": "Use numbers with \"px\" or \"%\" as unit，e.g：600px, 92%"
+  },
+  "viewBookmarksOnChrome": {
+    "message": "Chrome Bookmark Manager"
   }
 }

@@ -16,3 +16,14 @@ chrome.storage.sync.get({
 
     }
 })
+
+// Context menus
+
+// Go to Chrome bookmarks
+chrome.contextMenus.create({
+    "title": chrome.i18n.getMessage('viewBookmarksOnChrome'),
+    "contexts": ["browser_action"],
+    "onclick": () => {
+      chrome.tabs.create({ url: "chrome://bookmarks" });
+    }
+});

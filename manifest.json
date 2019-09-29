@@ -10,10 +10,7 @@
 		"128": "images/icon128.png"
 	},
 	"browser_action": {
-		"default_icon": {
-			"19": "images/icon19.png",
-			"38": "images/icon38.png"
-		},
+		"default_icon": "images/icon128.png",
 		"default_popup": "popup.html",
 		"default_title": "__MSG_extActionTitle"
 	},
@@ -31,7 +28,8 @@
 		"chrome://bookmarks/",
 		"bookmarks",
 		"tabs",
-		"storage"
+		"storage",
+		"contextMenus"
 	],
 	"minimum_chrome_version": "63",
 	"default_locale": "en"
