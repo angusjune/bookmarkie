@@ -25,7 +25,6 @@
 		"http://*/*",
 		"https://*/*",
 		"chrome://favicon/",
-		"chrome://bookmarks/",
 		"bookmarks",
 		"tabs",
 		"storage",

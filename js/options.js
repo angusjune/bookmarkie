@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	let iconType = 'star';
 	let iconStyle = 'dark';
+	let iconStyleAuto = true;
 
 	chrome.storage.sync.get({
 		openNewTabs:    false,
@@ -64,8 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		popupFixed:       false,
 		preserveState:   true,
 		panelHeight: '500px',
-		// isHeightDefault:     true,
-		// customHeightVal:     '600px'
 		iconType: 'star',
 		iconStyle: 'dark',
 		iconStyleAuto: true,
@@ -77,7 +76,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		ctrlPreserveState.checked = props.preserveState;
 		ctrlIconStyleAuto.checked = props.iconStyleAuto;
 
-		ctrlIconStyleAuto.checked ? iconColorPanel.classList.add('hidden') : iconColorPanel.classList.remove('hidden');		
+		ctrlIconStyleAuto.checked ? iconColorPanel.classList.add('hidden') : iconColorPanel.classList.remove('hidden');
+
+		iconType = props.iconType;
+		iconStyle = props.iconStyle;
+		iconStyleAuto = props.iconStyleAuto;
+
+		document.querySelector(`[name=icon-type-group][value=${props.iconType}]`).setAttribute('checked', true);
+		document.querySelector(`[name=icon-style-group][value=${props.iconStyle}]`).setAttribute('checked', true);
 	});
 
 /* Always open bookmarks in a new tab */
@@ -129,12 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			if (target.checked) {
 				chrome.storage.sync.set({
 					iconType: target.value
-				}, () =>  {
-					optionSaved();
-					iconType = target.value;
-					chrome.browserAction.setIcon({path: `/images/${iconType}-${iconStyle}-128.png`});
-					el.style.backgroundImage = `url(/images/${iconType}-${iconStyle}-128.png)`
-				})
+				}, optionSaved);
 
 			}
 		});
@@ -158,68 +159,40 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
 
 	chrome.storage.onChanged.addListener(changes => {
-		console.log(changes)
+		const setIcon = (iconType = 'star', iconStyle = 'dark', iconStyleAuto = true) => {
+			const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches; // OS set to dark mode
+			const isIncognito = chrome.extension.inIncognitoContext; // Chrome is in incognito context
+		
+			if (iconStyleAuto) {
+				if (isDarkMode || isIncognito) {
+					// set light-colored icon in dark UI
+					chrome.browserAction.setIcon({ path: `/images/${iconType}-light-128.png`});
+				} else {
+					chrome.browserAction.setIcon({ path: `/images/${iconType}-dark-128.png`});
+				}
+			} else {
+				chrome.browserAction.setIcon({ path: `/images/${iconType}-${iconStyle}-128.png`});
+			}
+		}
+
+		if (changes.iconType) {
+			const val = changes.iconType.newValue;
+			iconType = val;
+			setIcon(iconType, iconStyle, iconStyleAuto);
+		}
+
+		if (changes.iconStyle) {
+			const val = changes.iconStyle.newValue;
+			iconStyle = val;
+			setIcon(iconType, iconStyle, iconStyleAuto);
+		}
 
 		if (changes.iconStyleAuto) {
 			const val = changes.iconStyleAuto.newValue;
 			val ? iconColorPanel.classList.add('hidden') : iconColorPanel.classList.remove('hidden');
 
-			const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-        if (isDarkMode) {
-            chrome.browserAction.setIcon({ path: `/images/${items.iconType}-light-128.png`});
-        }
+			iconStyleAuto = val;
+			setIcon(iconType, iconStyle, iconStyleAuto);
 		}
-	})
-
-
-		// btnConfirmPh.addEventListener('click', () => {
-	// 	var heightVal = panelHeight.value;
-
-	// 	if (heightVal.match(/(\d+%)|(\d+px)/i)) {
-	// 		chrome.storage.sync.set({
-	// 			panelHeight: heightVal
-	// 		}, optionSaved);
-	// 	}
-	// });
-
-
-/* Customize panel height */
-
-// 	var heightDefault = $('height-default');
-// 	var heightCustom  = $('height-custom');
-// 	var heightValue   = $('height-value');
-// 	var heightVal = heightValue.value.toLowerCase().replace(' ', '');
-//
-// 	console.log(heightVal);
-//
-// 	localStorage.isHeightDefault = localStorage.isHeightDefault ? localStorage.isHeightDefault : true;
-//
-// 	var isHeightDefault = localStorage.isHeightDefault;
-//
-// 	if (isHeightDefault) {
-// 		heightDefault.checked = true;
-// 	} else {
-// 		heightCustom.checked = true;
-// 	}
-//
-// 	heightDefault.addEventListener('change', function(){
-// 		localStorage.isHeightDefault = heightDefault.checked ? '' : '1';
-// 	});
-//
-// 	heightCustom.addEventListener('change', function(){
-//
-//
-// 		if (heightVal.match(/(\d+%)|(\d+px)/i)) {
-// 			localStorage.customHeight = heightVal;
-// 			console.log(localStorage.customHeight + 'lc');
-//
-// 		} else {
-// 			document.querySelector('.height-value-tip')
-// 		}
-// 	});
-//
-// 	heightValue.addEventListener('focus', function(){
-// 		heightCustom.checked = true;
-// 	});
+	});
 });

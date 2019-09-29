@@ -3,10 +3,18 @@
   --mdc-theme-secondary: #3674E0;
   --selection-bg: rgba(0, 0, 0, 0.04);
   --selection-selected-bg: #E0EAFC;
+  --bg: #f2f2f2;
+  --section-bg: #fff;
+
+  --headline-color: rgba(0, 0, 0, 0.65);
+  --subtitle-color: rgba(0, 0, 0, 0.9);
+  --body-color: rgba(0, 0, 0, 0.9);
+
+  --divider-bg: rgba(0, 0, 0, 0.12);
 }
 
 body {
-  background: #f2f2f2;
+  background: var(--bg);
   padding-bottom: 32px;
 }
 
@@ -15,9 +23,18 @@ body {
   margin: 16px 0;
 }
 
+.section .mdc-card {
+  background: var(--section-bg);
+}
+
 .headline {
+  color: var(--headline-color);
+}
+
+.subtitle {
   padding-left: 16px;
   padding-inline-start: 16px;
+  color: var(--subtitle-color);
 }
 
 .icon-list {
@@ -108,6 +125,7 @@ body {
   line-height: 36px;
   border-radius: 18px;
   background: var(--selection-bg);
+  color: var(--body-color);
   transition: background 0.2s linear;
 }
 
@@ -124,4 +142,41 @@ body {
 
 .icon-style-panel.hidden {
   height: 0;
+}
+
+
+/* Overrides of Material Design Components */
+
+.mdc-switch {
+  transform: scale(0.8);
+}
+
+.mdc-list-item {
+  /* color: var(--body-color); */
+}
+
+.mdc-list-divider {
+  background: var(--divider-bg);
+}
+
+
+
+@media (prefers-color-scheme: dark) {
+  * {
+    --mdc-theme-primary: #8ab4f9;
+    --mdc-theme-secondary: #8ab4f9;
+    --selection-bg: #323639; /* toolbar color in dark mode */
+    --selection-selected-bg: #404447;
+    --bg: #202124;
+    --section-bg: #292a2d;
+
+    --headline-color: rgba(255, 255, 255, 0.7);
+    --subtitle-color: rgba(255, 255, 255, 0.9);
+    --body-color: #fff;
+    --mdc-theme-text-primary-on-background: #fff;
+    --mdc-theme-text-secondary-on-background: rgba(255, 255, 255, 0.7);
+
+    --divider-bg: rgba(255, 255, 255, 0.12);
+
+  }
 }
