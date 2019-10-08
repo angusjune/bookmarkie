@@ -3,4 +3,4 @@ const $ = function(id){
 };
 const _m = chrome.i18n.getMessage;
 
-module.exports= [$, _m]--mdc-theme-secondary
+module.exports= [$, _m]
