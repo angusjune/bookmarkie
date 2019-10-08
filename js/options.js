@@ -54,6 +54,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	const iconColorPanel = document.querySelector('.icon-style-panel');
 
+	const setIcon = (iconType = 'star', iconStyle = 'dark', iconStyleAuto = true) => {
+		const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches; // OS set to dark mode
+		const isIncognito = chrome.extension.inIncognitoContext; // Chrome is in incognito context
+	
+		if (iconStyleAuto) {
+			if (isDarkMode || isIncognito) {
+				// set light-colored icon in dark UI
+				chrome.browserAction.setIcon({ path: `/images/${iconType}-light-128.png`});
+				document.querySelectorAll('.icon-list-item__graphic').forEach(el => {
+					el.classList.remove('dark', 'light', 'colored');
+					el.classList.add('light');
+				});
+			} else {
+				chrome.browserAction.setIcon({ path: `/images/${iconType}-dark-128.png`});
+				document.querySelectorAll('.icon-list-item__graphic').forEach(el => {
+					el.classList.remove('dark', 'light', 'colored');
+					el.classList.add('dark');
+				});
+			}
+		} else {
+			chrome.browserAction.setIcon({ path: `/images/${iconType}-${iconStyle}-128.png`});
+			document.querySelectorAll('.icon-list-item__graphic').forEach(el => {
+				el.classList.remove('dark', 'light', 'colored');
+				el.classList.add(iconStyle);
+			});
+		}
+	}
+
 	let iconType = 'star';
 	let iconStyle = 'dark';
 	let iconStyleAuto = true;
@@ -84,6 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		document.querySelector(`[name=icon-type-group][value=${props.iconType}]`).setAttribute('checked', true);
 		document.querySelector(`[name=icon-style-group][value=${props.iconStyle}]`).setAttribute('checked', true);
+
+		setIcon(iconType, iconStyle, iconStyleAuto);
 	});
 
 /* Always open bookmarks in a new tab */
@@ -141,6 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	});
 
+	// Setting icon color
 	document.querySelectorAll('[name=icon-style-group]').forEach(el => {
 		el.addEventListener('change', res=> {
 			const target = res.target;
@@ -150,30 +181,14 @@ document.addEventListener('DOMContentLoaded', () => {
 					iconStyle: target.value
 				}, () =>  {
 					optionSaved();
-					iconStyle = target.value;
-					chrome.browserAction.setIcon({path: `/images/${iconType}-${iconStyle}-128.png`});
+					// iconStyle = target.value;
+					// chrome.browserAction.setIcon({path: `/images/${iconType}-${iconStyle}-128.png`});
 				})
-
 			}
 		});
 	});
 
 	chrome.storage.onChanged.addListener(changes => {
-		const setIcon = (iconType = 'star', iconStyle = 'dark', iconStyleAuto = true) => {
-			const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches; // OS set to dark mode
-			const isIncognito = chrome.extension.inIncognitoContext; // Chrome is in incognito context
-		
-			if (iconStyleAuto) {
-				if (isDarkMode || isIncognito) {
-					// set light-colored icon in dark UI
-					chrome.browserAction.setIcon({ path: `/images/${iconType}-light-128.png`});
-				} else {
-					chrome.browserAction.setIcon({ path: `/images/${iconType}-dark-128.png`});
-				}
-			} else {
-				chrome.browserAction.setIcon({ path: `/images/${iconType}-${iconStyle}-128.png`});
-			}
-		}
 
 		if (changes.iconType) {
 			const val = changes.iconType.newValue;
@@ -181,6 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			setIcon(iconType, iconStyle, iconStyleAuto);
 		}
 
+		// if icon color is changed
 		if (changes.iconStyle) {
 			const val = changes.iconStyle.newValue;
 			iconStyle = val;
