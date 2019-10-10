@@ -5,12 +5,13 @@
 	"manifest_version": 2,
 	"description": "__MSG_extDesc__",
 	"icons": {
-		"16": "images/icon16.png",
-		"48": "images/icon48.png",
-		"128": "images/icon128.png"
+		"16": "images/icon16@2x.png",
+		"32": "images/icon32@2x.png",
+		"48": "images/icon48@2x.png",
+		"128": "images/icon128@2x.png"
 	},
 	"browser_action": {
-		"default_icon": "images/icon128.png",
+		"default_icon": "images/star-dark-128.png",
 		"default_popup": "popup.html",
 		"default_title": "__MSG_extActionTitle"
 	},
@@ -19,8 +20,8 @@
 		"chrome_style": true
 	},
 	"background": {
-		"scripts": ["js/background.js"]
-	},
+		"scripts": ["background.js"]
+	}, 
 	"permissions": [
 		"http://*/*",
 		"https://*/*",

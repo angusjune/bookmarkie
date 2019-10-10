@@ -1,5 +1,13 @@
-// mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
-const ripple = mdc.ripple.MDCRipple.attachTo(document.querySelector('.icon-list-item__graphic'));
+// import {MDCList} from '@material/list';
+// const list = new MDCList(document.querySelector('.mdc-list'));
+
+// import {MDCRipple} from '@material/ripple';
+// const listItemRipples = list.listElements.map((listItemEl) => new MDCRipple(listItemEl));
+
+import {MDCSwitch} from '@material/switch';
+// const switchControl = new MDCSwitch(document.querySelector('.mdc-switch'));
+
+
 
 window.addEventListener('load', getMessage, false);
 const os = (navigator.platform.toLowerCase().match(/mac|win|linux/i) || ['other'])[0];
@@ -12,7 +20,7 @@ function getMessage() {
 
 	// Distinct mac and windows
 	if (os == 'mac') {
-		$('optionOpenNewTab').dataset.msg = 'optionOpenNewTabMac';
+		document.querySelector('#optionOpenNewTab').dataset.msg = 'optionOpenNewTabMac';
 	}
 
 	const elements = document.querySelectorAll('[data-msg]');
@@ -38,19 +46,19 @@ document.addEventListener('DOMContentLoaded', () => {
 		return;
 	}
 
-	const ctrlOpenNewTabs = mdc.switchControl.MDCSwitch.attachTo(document.querySelector('#openNewTabs'));
-	const ctrlOpenTabsInBg = mdc.switchControl.MDCSwitch.attachTo($('openTabsInBg'));
-	const ctrlCloseOtherFolders = mdc.switchControl.MDCSwitch.attachTo($('closeOtherFolders'));
-	const ctrlPopupFixed = mdc.switchControl.MDCSwitch.attachTo($('popupFixed'));
-	const ctrlPreserveState = mdc.switchControl.MDCSwitch.attachTo($('preserveState'));
-	const ctrlIconStyleAuto = mdc.switchControl.MDCSwitch.attachTo($('iconStyleAuto'));
+	const ctrlOpenNewTabs = new MDCSwitch(document.querySelector('#openNewTabs'));
+	const ctrlOpenTabsInBg = new MDCSwitch(document.querySelector('#openTabsInBg'));
+	const ctrlCloseOtherFolders = new MDCSwitch(document.querySelector('#closeOtherFolders'));
+	const ctrlPopupFixed = new MDCSwitch(document.querySelector('#popupFixed'));
+	const ctrlPreserveState = new MDCSwitch(document.querySelector('#preserveState'));
+	const ctrlIconStyleAuto = new MDCSwitch(document.querySelector('#iconStyleAuto'));
 
-	const ctrlOpenNewTabsNative = $('openNewTabsNative');
-	const ctrlOpenTabsInBgNative = $('openTabsInBgNative');
-	const ctrlCloseOtherFoldersNative = $('closeOtherFoldersNative');
-	const ctrlPopupFixedNative = $('popupFixedNative');
-	const ctrlPreserveStateNative = $('preserveStateNative');
-	const ctrlIconStyleAutoNative = $('iconStyleAutoNative');
+	const ctrlOpenNewTabsNative = document.querySelector('#openNewTabsNative');
+	const ctrlOpenTabsInBgNative = document.querySelector('#openTabsInBgNative');
+	const ctrlCloseOtherFoldersNative = document.querySelector('#closeOtherFoldersNative');
+	const ctrlPopupFixedNative = document.querySelector('#popupFixedNative');
+	const ctrlPreserveStateNative = document.querySelector('#preserveStateNative');
+	const ctrlIconStyleAutoNative = document.querySelector('#iconStyleAutoNative');
 
 	const iconColorPanel = document.querySelector('.icon-style-panel');
 
@@ -160,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	document.querySelectorAll('input[name=icon-type-group]').forEach(el => {
 		el.addEventListener('change', res=> {
 			const target = res.target;
-			ripple.activate();
+			// ripple.activate();
 
 			if (target.checked) {
 				chrome.storage.sync.set({

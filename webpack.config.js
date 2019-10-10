@@ -1,6 +1,7 @@
 const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: "production",
@@ -8,22 +9,28 @@ module.exports = {
     "options.style": "./src/scss/options.scss",
     "popup.style": "./src/scss/popup.scss",
     background: "./src/js/background.js",
-    popup: ["./src/js/neatools.js", "./src/js/popup.js"],
-    options: ["./src/js/neatools.js", "./src/js/options.js"],
+    popup: "./src/js/popup.js",
+    options: "./src/js/options.js",
     manifest: "./src/manifest.json",
-    popup: "./src/popup.html",
-    options: "./src/options.html"
   },
   plugins: [
-      new CleanWebpackPlugin(),
-      new CopyWebpackPlugin([
-        {from:'src/images',to:'images'},
-        {from:'src/_locales',to:'_locales'},
+    new CleanWebpackPlugin(),
+    new CopyWebpackPlugin([
+      { from: "src/images", to: "images" },
+      { from: "_locales/**", to: "./", context: "src/" }
     ]),
-    ],
+    new HtmlWebpackPlugin({
+      // filename: 'popup.html',
+      template: 'src/popup.html'
+    }),
+    new HtmlWebpackPlugin({
+      // filename: 'options.html',
+      template: 'src/options.html'
+    }),
+  ],
   output: {
+    filename: '[name].js',
     path: path.resolve(__dirname, "dist")
-    //   filename: "[name].js"
   },
   module: {
     rules: [
@@ -33,8 +40,7 @@ module.exports = {
           {
             loader: "file-loader",
             options: {
-              name: "[name].css",
-              outputPath: "css"
+              name: "[name].css"
             }
           },
           { loader: "extract-loader" },
@@ -56,7 +62,6 @@ module.exports = {
           presets: ["@babel/preset-env"]
         }
       },
-
       {
         type: "javascript/auto",
         test: /\.json$/,
@@ -67,20 +72,11 @@ module.exports = {
         use: [{ loader: "file-loader", options: { name: "[name].html" } }]
       },
       {
-        test: /\.svg$/,
+        test: /\.(svg|png)/,
         use: [
           {
             loader: "file-loader",
-            options: { name: "[name].svg", outputPath: "images" }
-          }
-        ]
-      },
-      {
-        test: /\.png$/,
-        use: [
-          {
-            loader: "file-loader",
-            options: { name: "[name].png", outputPath: "images" }
+            options: { name: "[name].[ext]", outputPath: "images" }
           }
         ]
       }
