@@ -2,7 +2,7 @@
 
 An elegant Chrome bookmark viewer.
 
-[Download from Chrome Web Store][download]
+This is the version in dev and may not work on your device. To download the stable version, go to [Chrome Web Store][download].
 
 [download]: https://chrome.google.com/webstore/detail/even-neater-bookmarks/ahlphbdcaacfhkiajebghpngknafklbj
 
