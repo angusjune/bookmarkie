@@ -2,17 +2,20 @@
 <meta charset="UTF-8">
 <html>
 <header>
-	<link rel="stylesheet" href="css/popup.css">
+	<link rel="stylesheet" href="popup.css">
 </header>
 
 <body>
 	<div class="search" role="search">
-		<input class="input input--search" id="search-input">
+		<div class="search__textfield">
+			<input class="input" autocomplete="off" id="search-input">
+			<div class="search__textfield__leading-icon"></div>
+		</div>
 	</div>
 
 	<div class="container">
 		<div class="tree" id="tree" tabindex="-1"></div>
-		<div class="results" id="results" tabindex="-1" style="display: none"></div>
+		<div class="tree tree--search-results" id="results" tabindex="-1" style="display: none"></div>
 	</div>
 
 	<div class="drop-overlay" id="drop-overlay"></div>
@@ -40,46 +43,51 @@
 	<div class="cover" id="cover"></div>
 
 	<div class="dialog dialog--normal dialog--alert" id="alert-dialog" role="dialog">
-		<h1 class="dialog__title" id="alert-dialog-text"></h1>
+		<h1 class="mdc-typography--subtitle1" id="alert-dialog-text"></h1>
 
 		<div class="dialog__footer">
-			<button class="button" id="alert-dialog-cancel" type="button"></button>
+			<button class="mdc-button mdc-button--dense" id="alert-dialog-cancel" type="button"></button>
 		</div>
 	</div>
 
 	<div class="dialog dialog--normal dialog--confirm" id="confirm-dialog" role="dialog">
-		<h1 class="dialog__title" id="confirm-dialog-text"></h1>
+		<h1 class="mdc-typography--subtitle1" id="confirm-dialog-text"></h1>
 
 		<div class="dialog__footer">
-			<button class="button" id="confirm-dialog-button-2"></button>
-			<button class="button button--primary" id="confirm-dialog-button-1"></button>
+			<button class="mdc-button mdc-button--dense" id="confirm-dialog-button-2"></button>
+			<button class="mdc-button mdc-button--dense mdc-button--unelevated" id="confirm-dialog-button-1"></button>
 		</div>
 	</div>
 
 	<div class="dialog dialog--normal dialog--edit" id="edit-dialog" role="dialog">
-		<h1 class="dialog__title" id="edit-dialog-text"></h1>
+		<h1 class="mdc-typography--subtitle1" id="edit-dialog-text"></h1>
 		<form>
 
-			<div class="textfield">
+			<div class="dialog__textfield">
 				<label class="label" for="edit-dialog-name" id="label-edit-dialog-name"></label>
 				<input class="input" id="edit-dialog-name">
+				<div class="dialog__textfield__underline"></div>
 			</div>
 
-			<div class="textfield">
+			<div class="dialog__textfield">
 				<label class="label" for="edit-dialog-url" id="label-edit-dialog-url"></label>
 				<input class="input" type="url" id="edit-dialog-url" aria-required="true" required>
+				<div class="dialog__textfield__underline"></div>
 			</div>
 
 			<div class="dialog__footer">
-				<button class="button" id="edit-dialog-cancel" type="button"></button>
-				<button class="button button--primary" id="edit-dialog-button" type="submit"></button>
+				<button class="mdc-button mdc-button--dense" id="edit-dialog-cancel" >
+					<span class="mdc-button__label" data-msg="cancel">Cancel</span>
+				</button>
+				<button class="mdc-button mdc-button--unelevated mdc-button--dense" id="edit-dialog-button" type="submit">
+					<span class="mdc-button__label" data-msg="save">Save</span>
+				</button>
 			</div>
 
 		</form>
 	</div>
 
-	<script src="js/neatools.js"></script>
-	<script src="js/popup.js"></script>
+	<script src="popup.js"></script>
 </body>
 
 </html>

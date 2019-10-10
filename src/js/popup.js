@@ -1,3 +1,124 @@
+function $extend(original, extended){
+	for (var key in (extended || {})) original[key] = extended[key];
+	return original;
+};
+
+function $each(obj, fn, bind){
+	for (var key in obj){
+		if (obj.hasOwnProperty(key)) fn.call(bind, obj[key], key, obj);
+	}
+}
+
+var $slice = Array.prototype.slice;
+
+$extend(String.prototype, {
+	widont: function(){
+		return this.replace(/\s([^\s]+)$/i, '&nbsp;$1');
+	},
+	toInt: function(base){
+		return parseInt(this, base || 10);
+	},
+	hyphenate: function(){
+		return this.replace(/[A-Z]/g, function(match){
+			return ('-' + match.charAt(0).toLowerCase());
+		});
+	},
+	htmlspecialchars: function(){
+		return this.replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+	},
+	escapeRegExp: function(){
+		return this.replace(/([-.*+?^${}()|[\]\/\\])/g, '\\$1');
+	}
+});
+
+$extend(Array.prototype, {
+	contains: function(item, from){
+		return this.indexOf(item, from) != -1;
+	},
+	clean: function(){
+		return this.filter(function(obj){
+			return (obj != undefined);
+		});
+	},
+	getLast: function(){
+		return (this.length) ? this[this.length - 1] : null;
+	}
+});
+
+// Array generic
+['map', 'filter', 'forEach'].forEach(function(method){
+	if (!Array[method]) Array[method] = function(){
+		var args = $slice.call(arguments);
+		return Array.prototype[method].apply(args.pop(), args);
+	};
+});
+
+$extend(Element.prototype, {
+	getComputedStyle: function(property){
+		return window.getComputedStyle(this, null).getPropertyValue(property.hyphenate());
+	},
+	destroy: function(){
+		return (this.parentNode) ? this.parentNode.removeChild(this) : this;
+	},
+	hasClass: function(className){
+		return this.classList.contains(className);
+	},
+	addClass: function(className){
+		this.classList.add(className);
+		return this;
+	},
+	removeClass: function(className){
+		this.classList.remove(className);
+		return this;
+	},
+	toggleClass: function(className){
+		this.classList.toggle(className);
+		return this;
+	},
+	getAllNext: function(){
+		var elements = [];
+		var node = this;
+		while (node = node.nextElementSibling){
+			elements.push(node);
+		}
+		return elements;
+	},
+	getAllPrevious: function(){
+		var elements = [];
+		var node = this;
+		while (node = node.previousElementSibling){
+			elements.push(node);
+		}
+		return elements;
+	},
+	getSiblings: function(){
+		return this.getAllNext().concat(this.getAllPrevious());
+	},
+});
+
+(function(){
+	var inserters = {
+		before: function(context, element){
+			var parent = element.parentNode;
+			if (parent) parent.insertBefore(context, element);
+		},
+		after: function(context, element){
+			var parent = element.parentNode;
+			if (parent) parent.insertBefore(context, element.nextSibling);
+		},
+		bottom: function(context, element){
+			element.appendChild(context);
+		},
+		top: function(context, element){
+			element.insertBefore(context, element.firstChild);
+		}
+	};
+	Element.prototype.inject = function(el, where){
+		inserters[where || 'bottom'](this, el);
+		return this;
+	};
+})();
+
 window.addEventListener('load', init, false);
 
 var alwaysOpenNewTab ,
@@ -53,7 +174,7 @@ function init() {
 	var AlertDialog = {
 		open: function(dialog){
 			if (!dialog) return;
-			$('alert-dialog-text').innerHTML = dialog;
+			document.querySelector('#alert-dialog-text').innerHTML = dialog;
 			body.addClass('needAlert');
 		},
 		close: function(){
@@ -82,9 +203,9 @@ function init() {
 	})();
 
 	// Some i18n
-	$('search-input').placeholder = _m('searchBookmarks');
-	$('edit-dialog-name').placeholder = _m('name');
-	$('edit-dialog-url').placeholder = _m('url');
+	document.querySelector('#search-input').placeholder = _m('searchBookmarks');
+	document.querySelector('#edit-dialog-name').placeholder = _m('name');
+	document.querySelector('#edit-dialog-url').placeholder = _m('url');
 	$each({
 		'bookmark-new-tab': 'openNewTab',
 		'bookmark-new-window': 'openNewWindow',
@@ -99,7 +220,7 @@ function init() {
 		'edit-dialog-button': 'save',
 		'edit-dialog-cancel': 'cancel'
 	}, function(msg, id){
-		var el = $(id);
+		var el = document.querySelector('#' + id);
 		var m  = _m(msg);
 		if (el.tagName == 'COMMAND') el.label = m;
 		el.textContent = m;
@@ -172,13 +293,13 @@ function init() {
 		}
 		tooltipURL = tooltipURL.htmlspecialchars();
 		var name = title.htmlspecialchars() || (httpsPattern.test(url) ? url.replace(httpsPattern, '') : _m('noTitle'));
-		return '<a href="' + u + '"' + ' title="' + tooltipURL + '" tabindex="0" ' + extras + '>'
-			+ '<img src="' + favicon + '" width="16" height="16" alt=""><i>' + name + '</i>' + '</a>';
+		return '<a class="list list--url" href="' + u + '"' + ' title="' + tooltipURL + '" tabindex="0" ' + extras + '>'
+			+ '<i class="icon" style="background-image:url(' + favicon + ')"></i><i>' + name + '</i>' + '</a>';
 	};
 
 	var generateHTML = function(data, level){
 		if (!level) level = 0;
-		var paddingStart = 14 * level;
+		var paddingInlineStart = 14 * level + 8;
 		var group = (level == 0) ? 'tree' : 'group';
 		var html = '<ul role="' + group + '" data-level="' + level + '">';
 
@@ -203,21 +324,15 @@ function init() {
 
 				/* @ altered */
 				html += '<li class="parent' + open + '"' + idHTML + ' role="treeitem" aria-expanded="' + isOpen + '" data-parentid="' + parentID + '">'
-					+ '<span tabindex="0" style="-webkit-padding-start: ' + paddingStart + 'px"><b class="twisty"></b>'
-					+ '<i class="icon-folder"></i><i>' + (title || _m('noTitle')) + '</i>' + '</span>';
+					+ '<span class="list list--folder" tabindex="0" style="padding-inline-start: ' + paddingInlineStart + 'px"><b class="arrow"></b>'
+					+ '<i class="icon icon--folder"></i><i>' + (title || _m('noTitle')) + '</i>' + '</span>';
 				/* @ end of altered */
 
 				if (isOpen){
 
-					// Foldr opened style
-					// html += '<img src="images/empty38.png" width="16" height="16" alt=""><i>' + (title || _m('noTitle')) + '</i>' + '</span>';
-
 					if (children){
 						html += generateHTML(children, level + 1);
 					} else {
-
-						// Folder not opened style
-						// html += '<img src="images/folder32.png" width="16" height="16" alt=""><i>' + (title || _m('noTitle')) + '</i>' + '</span>';
 
 						(function(_id){
 							chrome.bookmarks.getChildren(_id, function(children){
@@ -225,7 +340,7 @@ function init() {
 								var div = document.createElement('div');
 								div.innerHTML = html;
 								var ul = div.querySelector('ul');
-								ul.inject($('neat-tree-item-' + _id));
+								ul.inject(document.querySelector('#neat-tree-item-' + _id));
 								div.destroy();
 							});
 						})(id);
@@ -233,7 +348,7 @@ function init() {
 				}
 			} else {
 				html += '<li class="child"' + idHTML + ' role="treeitem" data-parentid="' + parentID + '">'
-					+ generateBookmarkHTML(title, url, 'style="-webkit-padding-start: ' + paddingStart + 'px"');
+					+ generateBookmarkHTML(title, url, 'style="padding-inline-start: ' + paddingInlineStart + 'px"');
 			}
 			html += '</li>';
 		}
@@ -241,7 +356,7 @@ function init() {
 		return html;
 	};
 
-	var $tree = $('tree');
+	var $tree = document.querySelector('#tree');
 	chrome.bookmarks.getTree(function(tree){
 		var html = generateHTML(tree[0].children);
 		$tree.innerHTML = html;
@@ -251,7 +366,7 @@ function init() {
 
 		var focusID = localStorage.focusID;
 		if (typeof focusID != 'undefined' && focusID != null){
-			var focusEl = $('neat-tree-item-' + focusID);
+			var focusEl = document.querySelector('#neat-tree-item-' + focusID);
 			if (focusEl){
 				var oriOverflow = $tree.style.overflow;
 				$tree.style.overflow = 'hidden';
@@ -340,9 +455,9 @@ function init() {
 	});
 
 	// Search
-	var $results = $('results');
+	var $results = document.querySelector('#results');
 	var searchMode = false;
-	var searchInput = $('search-input');
+	var searchInput = document.querySelector('#search-input');
 	var prevValue = '';
 
 	var search = function(){
@@ -443,7 +558,7 @@ function init() {
 			}
 		} else if (key == 9 && !searchMode){ // tab
 			if (typeof focusID != 'undefined' && focusID != null){
-				var focusEl = $('neat-tree-item-' + focusID);
+				var focusEl = document.querySelector('#neat-tree-item-' + focusID);
 				if (focusEl){
 					e.preventDefault();
 					focusEl.firstElementChild.focus();
@@ -503,17 +618,17 @@ function init() {
 	$tree.addEventListener('keyup', resetHeight);
 
 	// Confirm dialog event listeners
-	$('confirm-dialog-button-1').addEventListener('click', function(){
+	document.querySelector('#confirm-dialog-button-1').addEventListener('click', function(){
 		ConfirmDialog.fn1();
 		ConfirmDialog.close();
 	}, false);
 
-	$('confirm-dialog-button-2').addEventListener('click', function(){
+	document.querySelector('#confirm-dialog-button-2').addEventListener('click', function(){
 		ConfirmDialog.fn2();
 		ConfirmDialog.close();
 	}, false);
 
-	$('edit-dialog-cancel').addEventListener('click', function(){
+	document.querySelector('#edit-dialog-cancel').addEventListener('click', function(){
 		EditDialog.justClose();
 		return false;
 	}, false);
@@ -522,12 +637,12 @@ function init() {
 	var ConfirmDialog = {
 		open: function(opts){
 			if (!opts) return;
-			$('confirm-dialog-text').innerHTML = opts.dialog.widont();
-			$('confirm-dialog-button-1').innerHTML = opts.button1;
-			$('confirm-dialog-button-2').innerHTML = opts.button2;
+			document.querySelector('#confirm-dialog-text').innerHTML = opts.dialog.widont();
+			document.querySelector('#confirm-dialog-button-1').innerHTML = opts.button1;
+			document.querySelector('#confirm-dialog-button-2').innerHTML = opts.button2;
 			if (opts.fn1) ConfirmDialog.fn1 = opts.fn1;
 			if (opts.fn2) ConfirmDialog.fn2 = opts.fn2;
-			$('confirm-dialog-button-' + (opts.focusButton || 1)).focus();
+			document.querySelector('#confirm-dialog-button-' + (opts.focusButton || 1)).focus();
 			document.body.addClass('needConfirm');
 		},
 		close: function(){
@@ -538,7 +653,7 @@ function init() {
 	};
 
 	// Edit dialog event listener
-	$('edit-dialog').addEventListener('submit', function(){
+	document.querySelector('#edit-dialog').addEventListener('submit', function(){
 		EditDialog.close();
 		return false;
 	}, false);
@@ -547,15 +662,15 @@ function init() {
 	var EditDialog = window.EditDialog = {
 		open: function(opts){
 			if (!opts) return;
-			$('edit-dialog-text').innerHTML = opts.dialog.widont();
+			document.querySelector('#edit-dialog-text').innerHTML = opts.dialog.widont();
 			if (opts.fn) EditDialog.fn = opts.fn;
 			var type = opts.type || 'bookmark';
-			var name = $('edit-dialog-name');
+			var name = document.querySelector('#edit-dialog-name');
 			name.value = opts.name;
 			name.focus();
 			name.select();
 			name.scrollLeft = 0; // very delicate, show first few words instead of last
-			var url = $('edit-dialog-url');
+			var url = document.querySelector('#edit-dialog-url');
 			if (type == 'bookmark'){
 				url.style.display = '';
 				url.disabled = false;
@@ -568,14 +683,14 @@ function init() {
 			body.addClass('needEdit');
 		},
 		close: function(){
-			var urlInput = $('edit-dialog-url');
+			var urlInput = document.querySelector('#edit-dialog-url');
 			var url = urlInput.value;
 			if (!urlInput.validity.valid){
 				urlInput.value = 'http://' + url;
 				if (!urlInput.validity.valid) url = ''; // if still invalid, forget it.
 				url = 'http://' + url;
 			}
-			EditDialog.fn($('edit-dialog-name').value, url);
+			EditDialog.fn(document.querySelector('#edit-dialog-name').value, url);
 			body.removeClass('needEdit');
 		},
 		justClose: function() {
@@ -702,7 +817,7 @@ function init() {
 						}, function(n){
 							var title = n.title;
 							var url = n.url;
-							var li = $('neat-tree-item-' + id);
+							var li = document.querySelector('#neat-tree-item-' + id);
 							if (li){
 								if (isBookmark){
 									var css = li.querySelector('a').style.cssText;
@@ -714,7 +829,7 @@ function init() {
 								}
 							}
 							if (searchMode){
-								li = $('results-item-' + id);
+								li = document.querySelector('#results-item-' + id);
 								li.innerHTML = generateBookmarkHTML(title, url);
 							}
 							li.firstElementChild.focus();
@@ -725,8 +840,8 @@ function init() {
 		},
 
 		deleteBookmark: function(id){
-			var li1 = $('neat-tree-item-' + id);
-			var li2 = $('results-item-' + id);
+			var li1 = document.querySelector('#neat-tree-item-' + id);
+			var li2 = document.querySelector('#results-item-' + id);
 			chrome.bookmarks.remove(id, function(){
 				if (li1){
 					var nearLi1 = li1.nextElementSibling || li1.previousElementSibling;
@@ -742,7 +857,7 @@ function init() {
 		},
 
 		deleteBookmarks: function(id, bookmarkCount, folderCount){
-			var li = $('neat-tree-item-' + id);
+			var li = document.querySelector('#neat-tree-item-' + id);
 			var item = li.querySelector('span');
 			if (bookmarkCount || folderCount){
 				var dialog = '';
@@ -839,8 +954,8 @@ function init() {
 	});
 
 	// Context menu
-	var $bookmarkContextMenu = $('bookmark-context-menu');
-	var $folderContextMenu = $('folder-context-menu');
+	var $bookmarkContextMenu = document.querySelector('#bookmark-context-menu');
+	var $folderContextMenu = document.querySelector('#folder-context-menu');
 
 	var clearMenu = function(e){
 		currentContext = null;
@@ -1065,7 +1180,7 @@ function init() {
 				} else if (rtl){
 					var parentID = li.dataset.parentid;
 					if (parentID == '0') return;
-					$('neat-tree-item-' + parentID).querySelector('span').focus();
+					document.querySelector('#neat-tree-item-' + parentID).querySelector('span').focus();
 				}
 				break;
 			case 37: // left (right for RTL)
@@ -1077,7 +1192,7 @@ function init() {
 				} else if (!rtl){
 					var parentID = li.dataset.parentid;
 					if (parentID == '0') return;
-					$('neat-tree-item-' + parentID).querySelector('span').focus();
+					document.querySelector('#neat-tree-item-' + parentID).querySelector('span').focus();
 				}
 				break;
 			case 32: // space
@@ -1296,8 +1411,8 @@ function init() {
 	var draggedOut = false;
 	var canDrop = false;
 	var zoomLevel = 1;
-	var bookmarkClone = $('bookmark-clone');
-	var dropOverlay = $('drop-overlay');
+	var bookmarkClone = document.querySelector('#bookmark-clone');
+	var dropOverlay = document.querySelector('#drop-overlay');
 	$tree.addEventListener('mousedown', function(e){
 		if (e.button != 0) return;
 		var el = e.target;
@@ -1378,7 +1493,7 @@ function init() {
 			var top = (clientY >= elRectTop + elRect.height / 2) ? elRectBottom : elRectTop;
 			dropOverlay.className = 'bookmark';
 			dropOverlay.style.top = top + 'px';
-			dropOverlay.style.left = rtl ? '0px' : el.style.webkitPaddingStart.toInt() + 16 + 'px';
+			dropOverlay.style.left = rtl ? '0px' : el.style.paddingInlineStart.toInt() + 16 + 'px';
 			dropOverlay.style.width = (el.getComputedStyle('width').toInt() - 12) + 'px';
 			dropOverlay.style.height = null;
 		} else if (el.tagName == 'SPAN'){
@@ -1407,7 +1522,8 @@ function init() {
 			} else {
 				dropOverlay.className = 'bookmark';
 				dropOverlay.style.top = top + 'px';
-				dropOverlay.style.left = el.style.webkitPaddingStart.toInt() + 16 + 'px';
+				dropOverlay.style.left = el.style.paddingInlineStart.toInt() + 16 + 'px';
+				console.log(el);
 				dropOverlay.style.width = (el.getComputedStyle('width').toInt() - 12) + 'px';
 				dropOverlay.style.height = null;
 			}
@@ -1454,7 +1570,7 @@ function init() {
 						index: moveBottom ? ++index : index
 					}, function(){
 						draggedBookmarkParent.inject(elParent, moveBottom ? 'after' : 'before');
-						draggedBookmark.style.webkitPaddingStart = el.style.webkitPaddingStart;
+						draggedBookmark.style.paddingInlineStart = el.style.paddingInlineStart;
 						draggedBookmark.focus();
 						onDrop();
 					});
@@ -1484,7 +1600,7 @@ function init() {
 						index: moveBottom ? ++index : index
 					}, function(){
 						draggedBookmarkParent.inject(elParent, moveBottom ? 'after' : 'before');
-						draggedBookmark.style.webkitPaddingStart = el.style.webkitPaddingStart;
+						draggedBookmark.style.paddingInlineStart = el.style.paddingInlineStart;
 						draggedBookmark.focus();
 						onDrop();
 					});
@@ -1495,7 +1611,7 @@ function init() {
 				}, function(){
 					var ul = elParent.querySelector('ul');
 					var level = parseInt(elParent.parentNode.dataset.level) + 1;
-					draggedBookmark.style.webkitPaddingStart = (14 * level) + 'px';
+					draggedBookmark.style.paddingInlineStart = (14 * level) + 'px';
 					if (ul){
 						draggedBookmarkParent.inject(ul);
 					} else {
@@ -1511,7 +1627,7 @@ function init() {
 	});
 
 	// Resizer
-	var $resizer = $('resizer');
+	var $resizer = document.querySelector('#resizer');
 	var resizerDown = false;
 	var bodyWidth, screenX;
 	$resizer.addEventListener('mousedown', function(e){
@@ -1553,7 +1669,7 @@ function init() {
 			searchInput.select();
 		}
 	});
-	$('cover').addEventListener('click', closeDialogs);
+	document.querySelector('#cover').addEventListener('click', closeDialogs);
 
 	// Make webkit transitions work only after elements are settled down
 	setTimeout(function(){

@@ -1,6 +1,12 @@
+@import "@material/typography/mdc-typography";
+@import "@material/switch/mdc-switch";
+@import "@material/list/mdc-list";
+@import "@material/card/mdc-card";
+
+@import "variables.scss";
+
 * {
-  --mdc-theme-primary: #3674E0;
-  --mdc-theme-secondary: #3674E0;
+  --theme-primary: $theme-primary;
   --selection-bg: rgba(0, 0, 0, 0.04);
   --selection-selected-bg: #E0EAFC;
   --bg: #f2f2f2;
@@ -70,7 +76,7 @@ body {
 
 .icon-list-item__native-control:checked ~ .icon-list-item__graphic {
   background-color: var(--selection-selected-bg);
-  border: 2px solid var(--mdc-theme-primary);
+  border: 2px solid var(--theme-primary);
 }
 
 .icon-list-item__graphic--star, .icon-list-item__graphic--star.dark {
@@ -134,7 +140,7 @@ body {
 
 .icon-list-item__native-control:checked ~ .icon-style-list-item__label {
   background: var(--selection-selected-bg);
-  color: var(--mdc-theme-primary);
+  color: var(--theme-primary);
   font-weight: 700;
 }
 
@@ -150,24 +156,22 @@ body {
 
 /* Overrides of Material Design Components */
 
-.mdc-switch {
+.mdc-list-item__meta {
   transform: scale(0.8);
-}
-
-.mdc-list-item {
-  /* color: var(--body-color); */
 }
 
 .mdc-list-divider {
   background: var(--divider-bg);
 }
 
+.mdc-switch {
+  @include mdc-switch-toggled-on-color($theme-primary);
+}
+
 
 
 @media (prefers-color-scheme: dark) {
   * {
-    --mdc-theme-primary: #8ab4f9;
-    --mdc-theme-secondary: #8ab4f9;
     --selection-bg: #323639; /* toolbar color in dark mode */
     --selection-selected-bg: #404447;
     --bg: #202124;
@@ -181,5 +185,10 @@ body {
 
     --divider-bg: rgba(255, 255, 255, 0.12);
 
+  }
+
+  .mdc-switch {
+    @include mdc-switch-toggled-on-color($theme-primary-dark);
+    @include mdc-switch-toggled-off-track-color(#fff);
   }
 }
