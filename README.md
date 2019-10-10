@@ -1,6 +1,6 @@
 # Bookmarkie
 
-A refined Neat Bookmarks Chrome extension with bugs fixed and more modern UI.
+An elegant Chrome bookmark viewer.
 
 [Download from Chrome Web Store][download]
 
