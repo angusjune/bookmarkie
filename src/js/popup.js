@@ -121,51 +121,40 @@ $extend(Element.prototype, {
 
 window.addEventListener('load', init, false);
 
-var alwaysOpenNewTab ,
-		openNewTabInBg,
-		closeOtherFolders,
-		popupStayOpen,
-		rememberLastState,
-		btnConfirmPh,
-		panelHeight;
+let openNewTabs ,
+	openTabsInBg,
+	closeOtherFolders,
+	popupFixed,
+	preserveState,
+	btnConfirmPh,
+	panelHeight;
 
 chrome.storage.sync.get({
-	alwaysOpenNewTab:    false,
-	openNewTabInBg:      false,
-	closeOtherFolders:   false,
-	popupStayOpen:       false,
-	// confirmOpenMultiple: true,
-	rememberLastState:   true,
+	openNewTabs: false,
+	openTabsInBg: false,
+	closeOtherFolders: false,
+	popupFixed: false,
+	preserveState: true,
 	panelHeight: '500px',
-	// opens: []
-	// isHeightDefault:     true,
-	// customHeightVal:     '600px'
-}, function(items){
-	alwaysOpenNewTab  = items.alwaysOpenNewTab;
-	openNewTabInBg    = items.openNewTabInBg;
-	closeOtherFolders = items.closeOtherFolders;
-	popupStayOpen     = items.popupStayOpen;
-	rememberLastState = items.rememberLastState;
-	panelHeight       = items.panelHeight;
-	// opens = JSON.parse(items.opens);
+}, props => {
+	openNewTabs = props.openNewTabs;
+	openTabsInBg = props.openTabsInBg;
+	closeOtherFolders = props.closeOtherFolders;
+	popupFixed = props.popupFixed; // not useful
+	preserveState = props.preserveState;
+	panelHeight = props.panelHeight;
 
-	console.log(items);
+	console.log(props);
 });
 
 function init() {
 	if (panelHeight != null) {
 		document.body.style.height = panelHeight;
-		console.log('ph: ' + panelHeight);
+		// console.log('ph: ' + panelHeight);
 	}
-	// if (localStorage.popupHeight) document.body.style.height = localStorage.popupHeight + 'px';
-	// if (localStorage.popupWidth) document.body.style.width = localStorage.popupWidth + 'px';
 };
 
 (function(window){
-	// var document = window.document;
-	// var chrome = window.chrome;
-	// var localStorage = window.localStorage;
-	// var navigator = window.navigator;
 	var body = document.body;
 	var _m = chrome.i18n.getMessage;
 	var _b = chrome.extension.getBackgroundPage().console;
@@ -257,34 +246,10 @@ function init() {
 		}
 	};
 
- // var getBase64Image = function(img) {
- //    // Create an empty canvas element
- //    var canvas = document.createElement("canvas");
- //    canvas.width = img.width;
- //    canvas.height = img.height;
- //
- //    // Copy the image contents to the canvas
- //    var ctx = canvas.getContext("2d");
- //    ctx.drawImage(img, 0, 0);
- //
- //    // Get the data-URL formatted image
- //    // Firefox supports PNG and JPEG. You could check img.src to
- //    // guess the original format, but be aware the using "image/jpg"
- //    // will re-encode the image.
- //    var dataURL = canvas.toDataURL("image/png");
- //
- //    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
- // }
-
 	var generateBookmarkHTML = function(title, url, extras){
 		if (!extras) extras = '';
 		var u = url.htmlspecialchars();
 		var favicon = 'chrome://favicon/size/16@2x/' + u;
-
-		// var imgUri  = getBase64Image(favicon + '.png');
-		// if(imgUri == 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAMklEQVR4AWMgEkT9R4INWBUgKX0Q1YBXQYQCkhKEMDILogSnAhhEV4AGRqoCTEhkPAMAbO9DU+cdCDkAAAAASUVORK5CYII='){
-		// 	favicon = 'images/empty38.png';
-		// }
 
 		var tooltipURL = url;
 		if (/^javascript:/i.test(url)){
@@ -315,7 +280,7 @@ function init() {
 			if (isFolder){
 				var isOpen = false;
 				var open = '';
-				if (rememberLastState){
+				if (preserveState){
 					isOpen = opens.contains(id);
 					if (isOpen) open = ' open';
 					console.log('id: ' + id);
@@ -356,13 +321,13 @@ function init() {
 		return html;
 	};
 
-	var $tree = document.querySelector('#tree');
+	const $tree = document.querySelector('#tree');
 	chrome.bookmarks.getTree(function(tree){
 		var html = generateHTML(tree[0].children);
 		$tree.innerHTML = html;
 
 		// recall scroll position (from top of popup) when tree opened
-		if (rememberLastState) $tree.scrollTop = localStorage.scrollTop || 0;
+		if (preserveState) $tree.scrollTop = localStorage.scrollTop || 0;
 
 		var focusID = localStorage.focusID;
 		if (typeof focusID != 'undefined' && focusID != null){
@@ -587,7 +552,7 @@ function init() {
 	});
 
 	// Saved search query
-	if (rememberLastState && localStorage.searchQuery){
+	if (preserveState && localStorage.searchQuery){
 		searchInput.value = localStorage.searchQuery;
 		search();
 		searchInput.select();
@@ -700,14 +665,13 @@ function init() {
 	};
 
 	// Bookmark handling
-	// var dontConfirmOpenFolder = !!localStorage.dontConfirmOpenFolder;
 	var dontConfirmOpenFolder = false;
-	// var bookmarkClickStayOpen = !!localStorage.bookmarkClickStayOpen;
-	var bookmarkClickStayOpen = popupStayOpen;
+	var bookmarkClickStayOpen = popupFixed;
 	var openBookmarksLimit = 10;
 	var actions = {
 		openBookmark: function(url){
-			chrome.tabs.getSelected(null, function(tab){
+			chrome.tabs.query({ active: true }, tabs => {
+				const tab = tabs[0];
 				try {
                     decodedURL = decodeURIComponent(url);
                 } catch (e) {
@@ -721,14 +685,17 @@ function init() {
 		},
 
 		openBookmarkNewTab: function(url, selected, blankTabCheck){
-			var open = function(){
+
+			const open = () => {
 				chrome.tabs.create({
 					url: url,
-					selected: selected
+					active: selected
 				});
 			};
 			if (blankTabCheck){
-				chrome.tabs.getSelected(null, function(tab){
+				chrome.tabs.query({ active: true }, tabs => {
+					const tab = tabs[0]
+
 					if (/^chrome:\/\/newtab/i.test(tab.url)){
 						chrome.tabs.update(tab.id, {
 							url: url
@@ -894,12 +861,8 @@ function init() {
 		}
 	};
 
-	// var middleClickBgTab = !!localStorage.middleClickBgTab;
-	var middleClickBgTab = openNewTabInBg;
-	// var leftClickNewTab = !!localStorage.leftClickNewTab;
-	var leftClickNewTab = alwaysOpenNewTab;
-	var noOpenBookmark = false;
-	var bookmarkHandler = function(e){
+	const noOpenBookmark = false;
+	const bookmarkHandler = e => {
 		e.preventDefault();
 		if (e.button != 0) return; // force left-click
 		if (noOpenBookmark){ // flag that disables opening bookmark
@@ -909,18 +872,23 @@ function init() {
 		var el = e.target;
 		var ctrlMeta = (e.ctrlKey || e.metaKey);
 		var shift = e.shiftKey;
+
 		if (el.tagName == 'A'){
+			// clicks bookmark
+
 			var url = el.href;
 			if (ctrlMeta){ // ctrl/meta click
-				actions.openBookmarkNewTab(url, middleClickBgTab ? shift : !shift);
+				actions.openBookmarkNewTab(url, openTabsInBg ? shift : !shift);
 			} else { // click
 				if (shift){
 					actions.openBookmarkNewWindow(url);
 				} else {
-					leftClickNewTab ? actions.openBookmarkNewTab(url, true, true) : actions.openBookmark(url);
+					openNewTabs ? actions.openBookmarkNewTab(url, true, true) : actions.openBookmark(url);
 				}
 			}
 		} else if (el.tagName == 'SPAN'){
+			// clicks folder
+
 			var li = el.parentNode;
 			var id = li.id.replace('neat-tree-item-', '');
 			chrome.bookmarks.getChildren(id, function(children){
@@ -930,7 +898,7 @@ function init() {
 				var urlsLen = urls.length;
 				if (!urlsLen) return;
 				if (ctrlMeta){ // ctrl/meta click
-					actions.openBookmarks(urls, middleClickBgTab ? shift : !shift);
+					actions.openBookmarks(urls, openTabsInBg ? shift : !shift);
 				} else if (shift){ // shift click
 					actions.openBookmarksNewWindow(urls);
 				}
