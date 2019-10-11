@@ -95,11 +95,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	let iconStyleAuto = true;
 
 	chrome.storage.sync.get({
-		openNewTabs:    false,
-		openTabsInBg:      false,
-		closeOtherFolders:   false,
-		popupFixed:       false,
-		preserveState:   true,
+		openNewTabs: false,
+		openTabsInBg: false,
+		closeOtherFolders: false,
+		popupFixed: false,
+		preserveState: true,
 		panelHeight: '500px',
 		iconType: 'star',
 		iconStyle: 'dark',
