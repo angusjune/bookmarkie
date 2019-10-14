@@ -677,9 +677,10 @@ function init() {
                 } catch (e) {
                     return;
                 }
-				chrome.tabs.update(tab.id, {
+				chrome.tabs.update({
 					url: decodedURL
 				});
+				
 				if (!bookmarkClickStayOpen) setTimeout(window.close, 200);
 			});
 		},
