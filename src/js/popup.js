@@ -670,19 +670,16 @@ function init() {
 	var openBookmarksLimit = 10;
 	var actions = {
 		openBookmark: function(url){
-			chrome.tabs.query({ active: true }, tabs => {
-				const tab = tabs[0];
-				try {
-                    decodedURL = decodeURIComponent(url);
-                } catch (e) {
-                    return;
-                }
-				chrome.tabs.update({
-					url: decodedURL
-				});
-				
-				if (!bookmarkClickStayOpen) setTimeout(window.close, 200);
+			try {
+				decodedURL = decodeURIComponent(url);
+			} catch (e) {
+				return;
+			}
+			chrome.tabs.update({
+				url: decodedURL
 			});
+			
+			if (!bookmarkClickStayOpen) setTimeout(window.close, 200);
 		},
 
 		openBookmarkNewTab: function(url, selected, blankTabCheck){
