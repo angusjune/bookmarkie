@@ -16,8 +16,8 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin([
-      { from: "src/images", to: "images" },
-      { from: "_locales/**", to: "./", context: "src/" }
+      { from: "src/images", to: "images", copyUnmodified: true },
+      { from: "_locales/**", to: "./", context: "src/", copyUnmodified: true }
     ]),
     new HtmlWebpackPlugin({
       // filename: 'popup.html',
