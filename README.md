@@ -14,7 +14,7 @@ This is the version in dev and may not work on your device. To download the stab
 
 ## Develop your own
 
-1. run `npm install` and `npm run watch`
+1. run `npm install` and `npm run build:dev`
 
 2. Load folder `dist` in your Chrome extension settings page
 

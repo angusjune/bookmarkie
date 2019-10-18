@@ -14,7 +14,7 @@ module.exports = {
     manifest: "./src/manifest.json",
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({cleanStaleWebpackAssets: false}), // resolve conflict with `CopyWebpackPlugin`
     new CopyWebpackPlugin([
       { from: "src/images", to: "images" },
       { from: "_locales/**", to: "./", context: "src/" }
