@@ -13,7 +13,7 @@
 	"browser_action": {
 		"default_icon": "images/star-dark-128.png",
 		"default_popup": "popup.html",
-		"default_title": "__MSG_extActionTitle"
+		"default_title": "__MSG_extActionTitle__"
 	},
 	"options_ui": {
 		"page": "options.html",
