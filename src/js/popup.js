@@ -152,9 +152,10 @@ function init() {
 		document.body.style.height = panelHeight;
 		// console.log('ph: ' + panelHeight);
 	}
+	ready(window);
 };
 
-(function(window){
+function ready (window) {
 	var body = document.body;
 	var _m = chrome.i18n.getMessage;
 	var _b = chrome.extension.getBackgroundPage().console;
@@ -1701,7 +1702,7 @@ function init() {
 		style.textContent = localStorage.userstyle;
 		style.inject(document.body);
 	}
-})(window);
+}
 
 onerror = function(){
 	chrome.extension.sendRequest({error: [].slice.call(arguments)})

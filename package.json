@@ -39,6 +39,7 @@
     "@material/list": "^3.2.0",
     "@material/switch": "^3.2.0",
     "@material/typography": "^3.1.0",
+    "@types/chrome": "0.0.91",
     "path": "^0.12.7"
   }
 }
