@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch",
-    "dev": "webpack --watch --mode=development --devtool source-map"
+    "build:dev": "webpack --watch --mode=development --devtool source-map"
   },
   "repository": {
     "type": "git",

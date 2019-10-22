@@ -692,7 +692,7 @@ function ready (window) {
 				});
 			};
 			if (blankTabCheck){
-				chrome.tabs.query({ active: true }, tabs => {
+				chrome.tabs.query({ currentWindow: true, active: true }, tabs => {
 					const tab = tabs[0]
 
 					if (/^chrome:\/\/newtab/i.test(tab.url)){
