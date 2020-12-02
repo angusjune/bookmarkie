@@ -16,7 +16,7 @@
   --subtitle-color: rgba(0, 0, 0, 0.9);
   --body-color: rgba(0, 0, 0, 0.9);
 
-  --divider-bg: rgba(0, 0, 0, 0.12);
+  --divider-bg: rgba(0, 0, 0, 0.08);
 }
 
 body {
@@ -158,11 +158,15 @@ body {
 
 
 .mdc-list-divider {
-  background: var(--divider-bg);
+  border-bottom-color: var(--divider-bg);
 }
 
 .mdc-switch {
   @include mdc-switch-toggled-on-color($theme-primary);
+}
+
+.mdc-list-item {
+  font-size: 14px;
 }
 
 

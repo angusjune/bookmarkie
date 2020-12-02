@@ -184,69 +184,33 @@
   "optionRememberPrevState": {
     "message": "记住上次状态（滚动条位置、所打开文件夹）"
   },
-  "optionsFooterText1": {
-    "description": "设置页页脚信息",
-    "message": "联系开发者：$neaterEmail$",
-    "placeholders": {
-      "neaterEmail": {
-        "content": "$1"
-      }
-    }
+  
+  "icon": {
+    "message": "图标"
   },
-  "optionsFooterText2": {
-    "message": "$extName$ 代码在 $neaterGithub$",
-    "placeholders": {
-      "extName": {
-        "content": "$1"
-      },
-      "neaterGithub": {
-        "content": "$2"
-      }
-    }
+  "style": {
+    "message": "样式"
   },
-  "optionsFooterText3": {
-    "message": "常见问题：$neaterFaq$",
-    "placeholders": {
-      "neaterFaq": {
-        "content": "$1"
-      }
-    }
+  "color": {
+    "message": "颜色"
   },
-  "optionsFooterText4": {
-    "message": "查看已知问题或报告新问题：$neaterIssues$",
-    "placeholders": {
-      "neaterIssues": {
-        "content": "$1"
-      }
-    }
+
+  "iconStyleAuto": {
+    "message": "自动切换颜色"
   },
-  "optionsFooterText5": {
-    "message": "查看自定义图标：$neaterIcons$",
-    "placeholders": {
-      "neaterIcons": {
-        "content": "$1"
-      }
-    }
+
+  "dark": {
+    "message": "深色"
   },
-  "optionsFooterText6": {
-    "message": "帮助我们翻译 $extName$ 到你的语言！ $neaterTranslate$",
-    "placeholders": {
-      "extName": {
-        "content": "$1"
-      },
-      "neaterTranslate": {
-        "content": "$2"
-      }
-    }
+
+  "light": {
+    "message": "浅色"
   },
-  "optionsFooterText7": {
-    "message": "基于 $neatGithub$ 开发",
-    "placeholders": {
-      "neatGithub": {
-        "content": "$1"
-      }
-    }
+
+  "colored": {
+    "message": "黄色"
   },
+  
   "options": {
     "message": "选项"
   },
