@@ -1,0 +1,311 @@
+{
+  "accessibility": {
+    "message": "辅助功能设置"
+  },
+  "confirmDeleteFolderBookmarks": {
+    "message": "您确定要删除文件夹[$folderName$]（包含 $bookmarkCount$ 个书签）？",
+    "placeholders": {
+      "bookmarkCount": {
+        "content": "$2"
+      },
+      "folderName": {
+        "content": "$1"
+      }
+    }
+  },
+  "confirmDeleteFolderSubfoldersBookmarks": {
+    "message": "您确定要删除文件夹[$folderName$]（包含 $subFolderCount$ 个子目录和 $bookmarkCount$ 个书签）？",
+    "placeholders": {
+      "bookmarkCount": {
+        "content": "$3"
+      },
+      "folderName": {
+        "content": "$1"
+      },
+      "subFolderCount": {
+        "content": "$2"
+      }
+    }
+  },
+  "confirmDeleteFolderSubfolders": {
+    "message": "您确定要删除文件夹[$folderName$]（包含 $subFolderCount$ 个子目录）？",
+    "placeholders": {
+      "folderName": {
+        "content": "$1"
+      },
+      "subFolderCount": {
+        "content": "$2"
+      }
+    }
+  },
+  "confirmOpenBookmarks": {
+    "description": "打开所有书签的确认信息",
+    "message": "您确定要打开 $count$ 个书签？",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "confirmOpenBookmarksNewIncognitoWindow": {
+    "description": "在隐身窗口中打开所有书签的确认信息",
+    "message": "您确定要在隐身窗口中打开 $count$ 个书签？",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "confirmOpenBookmarksNewWindow": {
+    "description": "在新窗口中打开所有书签的确认信息",
+    "message": "您确定要在新窗口中打开 $count$ 个书签？",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "customIcon": {
+    "message": "自定义图标"
+  },
+  "customIconText": {
+    "message": "图标尺寸必须为 19*19，否则图标将会被缩放以适应大小"
+  },
+  "customStyles": {
+    "message": "自定义样式"
+  },
+  "customStylesText": {
+    "message": "在此处输入你的自定义CSS",
+    "placeholders": {
+      "linkGithubGist": {
+        "content": "$1"
+      }
+    }
+  },
+  "deleteEllipsis": {
+    "message": "删除 ..."
+  },
+  "delete": {
+    "message": "删除"
+  },
+  "editBookmark": {
+    "message": "编辑书签"
+  },
+  "editFolder": {
+    "message": "编辑文件夹"
+  },
+  "edit": {
+    "message": "编辑 ..."
+  },
+  "errorOccured": {
+    "message": "出错了"
+  },
+  "extDesc": {
+    "description": "扩展描述",
+    "message": "简单，漂亮，优雅的弹出书签"
+  },
+  "extName": {
+    "description": "扩展名",
+    "message": "Bookmarkie"
+  },
+  "extActionTitle": {
+    "message": "查看书签"
+  },
+  "general": {
+    "message": "常规设置"
+  },
+  "appearance": {
+    "message": "样式设置"
+  },
+  "msgHeightDefault": {
+    "message": "默认"
+  },
+  "heightCustom": {
+    "message": "自定义"
+  },
+  "ignore": {
+    "message": "忽略"
+  },
+  "name": {
+    "description": "书签名或文件夹名",
+    "message": "名字"
+  },
+  "nope": {
+    "message": "取消"
+  },
+  "cancel": {
+    "message": "取消"
+  },
+  "noTitle": {
+    "description": "没 http(s) 开头的书签或没有命名的文件夹的统一标题",
+    "message": "（无标题）"
+  },
+  "openBookmarksIncognitoWindow": {
+    "message": "在隐身窗口中打开所有书签"
+  },
+  "openBookmarks": {
+    "message": "打开所有书签"
+  },
+  "openBookmarksNewWindow": {
+    "message": "在新窗口中打开所有书签"
+  },
+  "open": {
+    "description": "打开书签的动作",
+    "message": "打开"
+  },
+  "openIncognitoWindow": {
+    "message": "在隐身窗口中打开"
+  },
+  "openNewTab": {
+    "message": "在新标签页中打开"
+  },
+  "openNewWindow": {
+    "message": "在新窗口中打开"
+  },
+  "optionClickNewTab": {
+    "message": "总在新标签页打开书签"
+  },
+  "optionCloseUnusedFolders": {
+    "message": "展开文件夹时折叠其它已展开的文件夹"
+  },
+  "optionConfirmOpenFolder": {
+    "message": "打开多个书签前需确认"
+  },
+  "optionOpenNewTab": {
+    "message": "鼠标中键或按住 Ctrl 键左击时在后台打开书签"
+  },
+  "optionOpenNewTabMac": {
+    "description": "For mac users",
+    "message": "鼠标中键或按住 ⌘ 键左击时在后台打开书签"
+  },
+  "optionPopupStays": {
+    "message": "打开（鼠标左击）书签时不关闭弹出页面"
+  },
+  "optionRememberPrevState": {
+    "message": "记住上次状态（滚动条位置、所打开文件夹）"
+  },
+  "optionsFooterText1": {
+    "description": "设置页页脚信息",
+    "message": "联系开发者：$neaterEmail$",
+    "placeholders": {
+      "neaterEmail": {
+        "content": "$1"
+      }
+    }
+  },
+  "optionsFooterText2": {
+    "message": "$extName$ 代码在 $neaterGithub$",
+    "placeholders": {
+      "extName": {
+        "content": "$1"
+      },
+      "neaterGithub": {
+        "content": "$2"
+      }
+    }
+  },
+  "optionsFooterText3": {
+    "message": "常见问题：$neaterFaq$",
+    "placeholders": {
+      "neaterFaq": {
+        "content": "$1"
+      }
+    }
+  },
+  "optionsFooterText4": {
+    "message": "查看已知问题或报告新问题：$neaterIssues$",
+    "placeholders": {
+      "neaterIssues": {
+        "content": "$1"
+      }
+    }
+  },
+  "optionsFooterText5": {
+    "message": "查看自定义图标：$neaterIcons$",
+    "placeholders": {
+      "neaterIcons": {
+        "content": "$1"
+      }
+    }
+  },
+  "optionsFooterText6": {
+    "message": "帮助我们翻译 $extName$ 到你的语言！ $neaterTranslate$",
+    "placeholders": {
+      "extName": {
+        "content": "$1"
+      },
+      "neaterTranslate": {
+        "content": "$2"
+      }
+    }
+  },
+  "optionsFooterText7": {
+    "message": "基于 $neatGithub$ 开发",
+    "placeholders": {
+      "neatGithub": {
+        "content": "$1"
+      }
+    }
+  },
+  "options": {
+    "message": "选项"
+  },
+  "optionZoom": {
+    "message": "缩放"
+  },
+  "parentFolder": {
+    "description": "搜索结果列表中提示书签所在目录",
+    "message": "所在目录：$folderName$",
+    "placeholders": {
+      "folderName": {
+        "content": "$1",
+        "example": "书签栏"
+      }
+    }
+  },
+  "reportedToDeveloper": {
+    "description": "此异常已提交给开发者",
+    "message": "已提交给开发者"
+  },
+  "reportError": {
+    "message": "报告此错误"
+  },
+  "reset": {
+    "message": "重置"
+  },
+  "resetSettings": {
+    "message": "重置设置"
+  },
+  "resetText": {
+    "message": "重置 $extName$ 的所有设置",
+    "placeholders": {
+      "extName": {
+        "content": "$1"
+      }
+    }
+  },
+  "save": {
+    "message": "保存"
+  },
+  "searchBookmarks": {
+    "description": "搜索框里的提示文字",
+    "message": "搜索书签"
+  },
+  "url": {
+    "message": "网址"
+  },
+  "confirm": {
+    "message": "确认"
+  },
+  "panelHeight": {
+    "description": "选项菜单中弹出窗高度",
+    "message": "弹出窗高度"
+  },
+  "phWarning": {
+    "description": "选项弹窗高度格式错误提示",
+    "message": "使用以 px 或 % 为单位的数值，例如：600px, 92%"
+  },
+  "viewBookmarksOnChrome": {
+    "message": "Chrome 书签管理器"
+  }
+}

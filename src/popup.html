@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html>
+<header>
+	<link rel="stylesheet" href="popup.css">
+</header>
+
+<body>
+	<div class="search" role="search">
+		<div class="search__textfield">
+			<input class="input" autocomplete="off" id="search-input" autofocus>
+			<div class="search__textfield__leading-icon"></div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="tree" id="tree" tabindex="-1"></div>
+		<div class="tree tree--search-results" id="results" tabindex="-1" style="display: none"></div>
+	</div>
+
+	<div class="drop-overlay" id="drop-overlay"></div>
+	<div class="bookmark-clone" id="bookmark-clone"></div>
+
+	<menu class="context-menu context-menu--bookmark" id="bookmark-context-menu" type="context" tabindex="-1">
+		<command class="cmd cmd--bookmark-new-tab" id="bookmark-new-tab" tabindex="-1">
+		<command class="cmd cmd--bookmark-new-window" id="bookmark-new-window" tabindex="-1">
+		<command class="cmd cmd--bookmark-new-incognito-window" id="bookmark-new-incognito-window" tabindex="-1">
+		<hr>
+		<command class="cmd cmd--bookmark-edit" id="bookmark-edit" tabindex="-1">
+		<command class="cmd cmd--bookmark-delete" id="bookmark-delete" tabindex="-1">
+	</menu>
+
+	<menu class="context-menu context-menu--folder" id="folder-context-menu" type="context" tabindex="-1">
+		<command class="cmd cmd--folder-window" id="folder-window" tabindex="-1">
+		<command class="cmd cmd--folder-new-window" id="folder-new-window" tabindex="-1">
+		<command class="cmd cmd--folder-new-new-incognito-window" id="folder-new-incognito-window" tabindex="-1">
+		<hr>
+		<command class="cmd cmd--folder-edit" id="folder-edit" tabindex="-1">
+		<command class="cmd cmd--folder-delete" id="folder-delete" tabindex="-1">
+	</menu>
+
+	<div class="resizer" id="resizer"></div>
+	<div class="cover" id="cover"></div>
+
+	<div class="dialog dialog--normal dialog--alert" id="alert-dialog" role="dialog">
+		<h1 class="mdc-typography--subtitle1" id="alert-dialog-text"></h1>
+
+		<div class="dialog__footer">
+			<button class="mdc-button mdc-button--dense" id="alert-dialog-cancel" type="button"></button>
+		</div>
+	</div>
+
+	<div class="dialog dialog--normal dialog--confirm" id="confirm-dialog" role="dialog">
+		<h1 class="mdc-typography--subtitle1" id="confirm-dialog-text"></h1>
+
+		<div class="dialog__footer">
+			<button class="mdc-button mdc-button--dense" id="confirm-dialog-button-2"></button>
+			<button class="mdc-button mdc-button--dense mdc-button--unelevated" id="confirm-dialog-button-1"></button>
+		</div>
+	</div>
+
+	<div class="dialog dialog--normal dialog--edit" id="edit-dialog" role="dialog">
+		<h1 class="mdc-typography--subtitle1" id="edit-dialog-text"></h1>
+		<form>
+
+			<div class="dialog__textfield">
+				<label class="label" for="edit-dialog-name" id="label-edit-dialog-name"></label>
+				<input class="input" id="edit-dialog-name">
+				<div class="dialog__textfield__underline"></div>
+			</div>
+
+			<div class="dialog__textfield">
+				<label class="label" for="edit-dialog-url" id="label-edit-dialog-url"></label>
+				<input class="input" type="url" id="edit-dialog-url" aria-required="true" required>
+				<div class="dialog__textfield__underline"></div>
+			</div>
+
+			<div class="dialog__footer">
+				<button class="mdc-button mdc-button--dense" id="edit-dialog-cancel" >
+					<span class="mdc-button__label" data-msg="cancel">Cancel</span>
+				</button>
+				<button class="mdc-button mdc-button--unelevated mdc-button--dense" id="edit-dialog-button" type="submit">
+					<span class="mdc-button__label" data-msg="save">Save</span>
+				</button>
+			</div>
+
+		</form>
+	</div>
+
+	<script src="popup.js"></script>
+</body>
+
+</html>
