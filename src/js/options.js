@@ -1,13 +1,4 @@
-// import {MDCList} from '@material/list';
-// const list = new MDCList(document.querySelector('.mdc-list'));
-
-// import {MDCRipple} from '@material/ripple';
-// const listItemRipples = list.listElements.map((listItemEl) => new MDCRipple(listItemEl));
-
 import {MDCSwitch} from '@material/switch';
-// const switchControl = new MDCSwitch(document.querySelector('.mdc-switch'));
-
-
 
 window.addEventListener('load', getMessage, false);
 const os = (navigator.platform.toLowerCase().match(/mac|win|linux/i) || ['other'])[0];
