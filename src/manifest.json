@@ -1,6 +1,6 @@
 {
 	"name": "__MSG_extName__",
-	"version": "2.0.6",
+	"version": "2.0.7",
 	"short_name": "Bookmarks",
 	"manifest_version": 2,
 	"description": "__MSG_extDesc__",
@@ -17,7 +17,7 @@
 	},
 	"options_ui": {
 		"page": "options.html",
-		"chrome_style": true
+		"open_in_tab": false
 	},
 	"background": {
 		"scripts": ["background.js"]
