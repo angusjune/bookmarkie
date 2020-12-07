@@ -1,3 +1,8 @@
+// OS in dark mode or browser in incognito context
+const isBrowserDark = window.matchMedia("(prefers-color-scheme: dark)").matches || chrome.extension.inIncognitoContext;
+// Let background knows if the browser is dark
+chrome.runtime.sendMessage({ isBrowserDark: isBrowserDark });
+
 function $extend(original, extended){
 	for (var key in (extended || {})) original[key] = extended[key];
 	return original;
@@ -1696,12 +1701,6 @@ function ready (window) {
 			var top = body.scrollTop;
 			if (top != 0) body.scrollTop = 0;
 		}, 1500);
-	}
-
-	if (localStorage.userstyle){
-		var style = document.createElement('style');
-		style.textContent = localStorage.userstyle;
-		style.inject(document.body);
 	}
 }
 
