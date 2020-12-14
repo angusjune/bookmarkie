@@ -7,12 +7,12 @@ const setIcon = (isDark = false) => {
         if (props.iconStyleAuto) {
             if (isDark) {
                 // set light-colored icon in dark UI
-                chrome.browserAction.setIcon({ path: `/images/${props.iconType}-light-128.png`});
+                chrome.browserAction.setIcon({ path: `/images/${props.iconType}-light-32.png`});
             } else {
-                chrome.browserAction.setIcon({ path: `/images/${props.iconType}-dark-128.png`});
+                chrome.browserAction.setIcon({ path: `/images/${props.iconType}-dark-32.png`});
             }
         } else {
-            chrome.browserAction.setIcon({ path: `/images/${props.iconType}-${props.iconStyle}-128.png`});
+            chrome.browserAction.setIcon({ path: `/images/${props.iconType}-${props.iconStyle}-32.png`});
         }
     });   
 };

@@ -4,8 +4,6 @@ window.addEventListener('load', getMessage, false);
 const os = (navigator.platform.toLowerCase().match(/mac|win|linux/i) || ['other'])[0];
 const _m = chrome.i18n.getMessage;
 
-const extName = _m('extName');
-
 // i18n of text strings
 function getMessage() {
 
@@ -60,20 +58,20 @@ document.addEventListener('DOMContentLoaded', () => {
 		if (iconStyleAuto) {
 			if (isDarkMode || isIncognito) {
 				// set light-colored icon in dark UI
-				chrome.browserAction.setIcon({ path: `/images/${iconType}-light-128.png`});
+				chrome.browserAction.setIcon({ path: `/images/${iconType}-light-32.png`});
 				document.querySelectorAll('.icon-list-item__graphic').forEach(el => {
 					el.classList.remove('dark', 'light', 'colored');
 					el.classList.add('light');
 				});
 			} else {
-				chrome.browserAction.setIcon({ path: `/images/${iconType}-dark-128.png`});
+				chrome.browserAction.setIcon({ path: `/images/${iconType}-dark-32.png`});
 				document.querySelectorAll('.icon-list-item__graphic').forEach(el => {
 					el.classList.remove('dark', 'light', 'colored');
 					el.classList.add('dark');
 				});
 			}
 		} else {
-			chrome.browserAction.setIcon({ path: `/images/${iconType}-${iconStyle}-128.png`});
+			chrome.browserAction.setIcon({ path: `/images/${iconType}-${iconStyle}-32.png`});
 			document.querySelectorAll('.icon-list-item__graphic').forEach(el => {
 				el.classList.remove('dark', 'light', 'colored');
 				el.classList.add(iconStyle);
@@ -180,8 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
 					iconStyle: target.value
 				}, () =>  {
 					optionSaved();
-					// iconStyle = target.value;
-					// chrome.browserAction.setIcon({path: `/images/${iconType}-${iconStyle}-128.png`});
 				})
 			}
 		});
