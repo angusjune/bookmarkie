@@ -106,7 +106,7 @@
   },
   "extName": {
     "description": "The extension name.",
-    "message": "Bookmarkie"
+    "message": "Bookmarkie: view and manage your bookmarks in a popup"
   },
   "extActionTitle": {
     "message": "Your Bookmarks"
