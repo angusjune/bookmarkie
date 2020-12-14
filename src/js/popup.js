@@ -6,7 +6,7 @@ chrome.runtime.sendMessage({ isBrowserDark: isBrowserDark });
 function $extend(original, extended){
 	for (var key in (extended || {})) original[key] = extended[key];
 	return original;
-};
+}
 
 function $each(obj, fn, bind){
 	for (var key in obj){
