@@ -14,9 +14,9 @@
 	--menu-bg: #fff;
 	--divider-bg: rgba(0, 0, 0, 0.12);
 
-	--search-icon-url: url("../images/search.svg");
-	--folder-icon-url: url("../images/folder.svg");
-	--folder-open-icon-url: url("../images/folder-open.svg");
+	--search-icon-url: url("./images/search.svg");
+	--folder-icon-url: url("./images/folder.svg");
+	--folder-open-icon-url: url("./images/folder-open.svg");
 
 	box-sizing: border-box;
 }
@@ -455,9 +455,9 @@ body.transitional{
 
 		--divider-bg: rgba(255, 255, 255, 0.12);
 
-		--search-icon-url: url("../images/search-light.svg");
-		--folder-icon-url: url("../images/folder-light.svg");
-		--folder-open-icon-url: url("../images/folder-open-light.svg");
+		--search-icon-url: url("./images/search-light.svg");
+		--folder-icon-url: url("./images/folder-light.svg");
+		--folder-open-icon-url: url("./images/folder-open-light.svg");
 	}
 
 	.mdc-button {

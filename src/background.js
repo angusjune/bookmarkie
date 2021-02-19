@@ -1,3 +1,5 @@
+'use strict';
+
 const setIcon = (isDark = false) => {
     chrome.storage.sync.get({
         iconType: 'star',
@@ -18,7 +20,8 @@ const setIcon = (isDark = false) => {
 };
 
 // OS in dark mode or browser in incognito context
-const isBrowserDark = window.matchMedia("(prefers-color-scheme: dark)").matches || chrome.extension.inIncognitoContext;
+const colorSchemeMatchMedia = window.matchMedia("(prefers-color-scheme: dark)");
+const isBrowserDark = colorSchemeMatchMedia.matches || chrome.extension.inIncognitoContext;
 setIcon(isBrowserDark);
 
 // Change the icon if the browser becomes dark

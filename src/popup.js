@@ -1,3 +1,7 @@
+'use strict';
+
+import './popup.scss';
+
 // OS in dark mode or browser in incognito context
 const isBrowserDark = window.matchMedia("(prefers-color-scheme: dark)").matches || chrome.extension.inIncognitoContext;
 // Let background knows if the browser is dark
