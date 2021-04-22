@@ -14,9 +14,9 @@
 	--menu-bg: #fff;
 	--divider-bg: rgba(0, 0, 0, 0.12);
 
-	--search-icon-url: url("./images/search.svg");
-	--folder-icon-url: url("./images/folder.svg");
-	--folder-open-icon-url: url("./images/folder-open.svg");
+	--search-icon-fill: #5a5a5a;
+	--folder-icon-url: url(chrome-extension://__MSG_@@extension_id__/images/folder.svg);
+	--folder-open-icon-url: url(chrome-extension://__MSG_@@extension_id__/images/folder-open.svg);
 
 	box-sizing: border-box;
 }
@@ -86,10 +86,18 @@ body.transitional{
 		width: 20px;
 		height: 20px; 
 		background-size: cover;
-		background-image: var(--search-icon-url);
 		opacity: 0.6;
 		transition: opacity 0.12s;
 		will-change: opacity;
+
+		svg {
+			width: 100%;
+			height: 100%;
+		}
+
+		svg path {
+			fill: var(--search-icon-fill);
+		}
 
 		.input:focus ~ & {
 			opacity: 1;
@@ -455,9 +463,9 @@ body.transitional{
 
 		--divider-bg: rgba(255, 255, 255, 0.12);
 
-		--search-icon-url: url("./images/search-light.svg");
-		--folder-icon-url: url("./images/folder-light.svg");
-		--folder-open-icon-url: url("./images/folder-open-light.svg");
+		--search-icon-fill: #fff;
+		--folder-icon-url: url(chrome-extension://__MSG_@@extension_id__/images/folder-light.svg);
+		--folder-open-icon-url: url(chrome-extension://__MSG_@@extension_id__/images/folder-open-light.svg);
 	}
 
 	.mdc-button {
