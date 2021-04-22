@@ -29,8 +29,7 @@
 		"chrome://favicon/",
 		"bookmarks",
 		"tabs",
-		"storage",
-		"contextMenus"
+		"storage"
 	],
 	"minimum_chrome_version": "63",
 	"default_locale": "en"
