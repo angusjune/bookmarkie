@@ -1,9 +1,14 @@
-@import "@material/typography/mdc-typography";
-@import "@material/switch/mdc-switch";
-@import "@material/list/mdc-list";
-@import "@material/card/mdc-card";
+@use "@material/list";
+@use "@material/switch";
+@use "@material/card";
+@use "@material/typography";
 
 @import "variables.scss";
+
+@include list.deprecated-core-styles;
+@include switch.core-styles;
+@include card.core-styles;
+@include typography.core-styles;
 
 * {
   --theme-primary: $theme-primary;
@@ -67,7 +72,6 @@ body {
   box-sizing: border-box;
   border: 2px solid transparent;
   overflow: hidden;
-  transition: all 0.2s linear;
 }
 
 .icon-list-item__native-control {
@@ -80,35 +84,35 @@ body {
 }
 
 .icon-list-item__graphic--star, .icon-list-item__graphic--star.dark {
-  background-image: url(./images/star-dark-32.png);
+  background-image: url(chrome-extension://__MSG_@@extension_id__/images/star-dark-32.png);
 }
 
 .icon-list-item__graphic--star.light {
-  background-image: url(./images/star-light-32.png);
+  background-image: url(chrome-extension://__MSG_@@extension_id__/images/star-light-32.png);
 }
 
 .icon-list-item__graphic--star.colored {
-  background-image: url(./images/star-colored-32.png);
+  background-image: url(chrome-extension://__MSG_@@extension_id__/images/star-colored-32.png);
 }
 
 .icon-list-item__graphic--bookmark, .icon-list-item__graphic--bookmark.dark {
-  background-image: url(./images/bookmark-dark-32.png);
+  background-image: url(chrome-extension://__MSG_@@extension_id__/images/bookmark-dark-32.png);
 }
 .icon-list-item__graphic--bookmark.light {
-  background-image: url(./images/bookmark-light-32.png);
+  background-image: url(chrome-extension://__MSG_@@extension_id__/images/bookmark-light-32.png);
 }
 .icon-list-item__graphic--bookmark.colored {
-  background-image: url(./images/bookmark-colored-32.png);
+  background-image: url(chrome-extension://__MSG_@@extension_id__/images/bookmark-colored-32.png);
 }
 
 .icon-list-item__graphic--stars, .icon-list-item__graphic--stars.dark {
-  background-image: url(./images/stars-dark-32.png);
+  background-image: url(chrome-extension://__MSG_@@extension_id__/images/stars-dark-32.png);
 }
 .icon-list-item__graphic--stars.light {
-  background-image: url(./images/stars-light-32.png);
+  background-image: url(chrome-extension://__MSG_@@extension_id__/images/stars-light-32.png);
 }
 .icon-list-item__graphic--stars.colored {
-  background-image: url(./images/stars-colored-32.png);
+  background-image: url(chrome-extension://__MSG_@@extension_id__/images/stars-colored-32.png);
 }
 
 .icon-style-panel {
@@ -162,11 +166,18 @@ body {
 }
 
 .mdc-switch {
-  @include mdc-switch-toggled-on-color($theme-primary);
+  @include switch.toggled-on-color($theme-primary);
+  @include switch.ripple-size(32px);
 }
 
 .mdc-list-item {
   font-size: 14px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+
+  &__text {
+    flex: 1;
+  }
 }
 
 
@@ -189,7 +200,7 @@ body {
   }
 
   .mdc-switch {
-    @include mdc-switch-toggled-on-color($theme-primary-dark);
-    @include mdc-switch-toggled-off-track-color(#fff);
+    @include switch.toggled-on-color($theme-primary-dark);
+    @include switch.toggled-off-track-color(#fff);
   }
 }

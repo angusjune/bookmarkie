@@ -12,57 +12,67 @@
 
 		<div class="mdc-card">
 
-			<div class="mdc-list" role="group">
+			<ul class="mdc-list" role="group">
 
-				<label for="openNewTabsNative" class="mdc-list-item" role="checkbox" aria-checked="false">
-					<span data-msg="openNewTab">Always open bookmarks in new tabs</span>
+				<li class="mdc-list-item" role="checkbox" aria-checked="false">
+					<label class="mdc-list-item__text" for="openNewTabsNative" data-msg="openNewTab">Always open bookmarks in new tabs</label>
 
-					<div class="mdc-switch mdc-switch--checked mdc-list-item__meta" id="openNewTabs">
-						<div class="mdc-switch__track"></div>
-						<div class="mdc-switch__thumb-underlay">
-							<div class="mdc-switch__thumb">
-								<input id="openNewTabsNative" type="checkbox" class="mdc-switch__native-control" role="switch">
+					<span class="mdc-list-item__meta">
+						<div class="mdc-switch mdc-switch--checked" id="openNewTabs">
+							<div class="mdc-switch__track"></div>
+							<div class="mdc-switch__thumb-underlay">
+								<div class="mdc-switch__thumb">
+									<input id="openNewTabsNative" type="checkbox" class="mdc-switch__native-control" role="switch">
+								</div>
 							</div>
 						</div>
-					</div>
-				</label>
+					</span>
 
-				<label for="openTabsInBgNative" class="mdc-list-item" role="checkbox" aria-checked="false">
-					<span data-msg="optionOpenNewTab" id="optionOpenNewTab">Open new tabs in background</span>
+				</li>
+				</ul>
+				<ul class="mdc-list" role="group">
+				<li class="mdc-list-item" role="checkbox" aria-checked="false">
+					<label class="mdc-list-item__text" for="openTabsInBgNative" data-msg="optionOpenNewTab" id="optionOpenNewTab">Open new tabs in background</label>
 
-					<div class="mdc-switch mdc-switch--checked mdc-list-item__meta" id="openTabsInBg">
-						<div class="mdc-switch__track"></div>
-						<div class="mdc-switch__thumb-underlay">
-							<div class="mdc-switch__thumb">
-								<input id="openTabsInBgNative" type="checkbox" class="mdc-switch__native-control" role="switch">
+					<span class="mdc-list-item__meta">
+						<div class="mdc-switch mdc-switch--checked" id="openTabsInBg">
+							<div class="mdc-switch__track"></div>
+							<div class="mdc-switch__thumb-underlay">
+								<div class="mdc-switch__thumb">
+									<input id="openTabsInBgNative" type="checkbox" class="mdc-switch__native-control" role="switch">
+								</div>
 							</div>
 						</div>
-					</div>
-				</label>
+					</span>
 
-			</div>
+				</li>
 
-			<hr class="mdc-list-divider">
+			</ul>
 
-			<div class="mdc-list" role="group" style="display: none;">
+			<hr class="mdc-deprecated-list-divider">
 
-				<label for="closeOtherFoldersNative" class="mdc-list-item" role="checkbox" aria-checked="false">
-					<span data-msg="optionCloseUnusedFolders">Close other folders</span>
+			<ul class="mdc-list" role="group">
 
-					<div class="mdc-switch mdc-switch--checked mdc-list-item__meta" id="closeOtherFolders">
-						<div class="mdc-switch__track"></div>
-						<div class="mdc-switch__thumb-underlay">
-							<div class="mdc-switch__thumb">
-								<input id="closeOtherFoldersNative" type="checkbox" class="mdc-switch__native-control" role="switch">
+				<li class="mdc-list-item" role="checkbox" aria-checked="false">
+					<label class="mdc-list-item__text" for="closeOtherFoldersNative" data-msg="optionCloseUnusedFolders">Close unused folders</label>
+
+					<span class="mdc-list-item__meta">
+						<div class="mdc-switch mdc-switch--checked mdc-list-item__meta" id="closeOtherFolders">
+							<div class="mdc-switch__track"></div>
+							<div class="mdc-switch__thumb-underlay">
+								<div class="mdc-switch__thumb">
+									<input id="closeOtherFoldersNative" type="checkbox" class="mdc-switch__native-control" role="switch">
+								</div>
 							</div>
 						</div>
-					</div>
-				</label>
+					</span>
 
-			</div>
+				</li>
+
+			</ul>
 
 
-			<div class="mdc-list" role="group">
+			<ul class="mdc-list" role="group">
 
 				<!-- currently not possible -->
 				<label for="popupFixedNative" class="mdc-list-item" role="checkbox" aria-checked="false" style="display: none;">
@@ -78,20 +88,23 @@
 					</div>
 				</label>
 
-				<label for="preserveStateNative" class="mdc-list-item" role="checkbox" aria-checked="true">
-					<span data-msg="optionRememberPrevState">Remember last state when popup open</span>
+				<li class="mdc-list-item" role="checkbox" aria-checked="true">
+					<label class="mdc-list-item__text" data-msg="optionRememberPrevState" for="preserveStateNative">Remember last state when popup open</label>
 
-					<div class="mdc-switch mdc-switch--checked mdc-list-item__meta" id="preserveState">
-						<div class="mdc-switch__track"></div>
-						<div class="mdc-switch__thumb-underlay">
-							<div class="mdc-switch__thumb">
-								<input id="preserveStateNative" type="checkbox" class="mdc-switch__native-control" role="switch" checked>
+					<span class="mdc-list-item__meta">
+						<div class="mdc-switch mdc-switch--checked" id="preserveState">
+							<div class="mdc-switch__track"></div>
+							<div class="mdc-switch__thumb-underlay">
+								<div class="mdc-switch__thumb">
+									<input id="preserveStateNative" type="checkbox" class="mdc-switch__native-control" role="switch" checked>
+								</div>
 							</div>
 						</div>
-					</div>
-				</label>
+					</span>
 
-			</div>
+				</li>
+
+			</ul>
 
 		</div>
 	</section>
@@ -119,24 +132,27 @@
 				</li>
 			</ul>
 
-			<hr class="mdc-list-divider">
+			<hr class="mdc-deprecated-list-divider">
 
 			<h3 data-msg="color" class="mdc-typography--subtitle2 subtitle">Color</h2>
 
-			<div class="mdc-list" role="group" aria-label="List with checkbox items">
-				<label for="iconStyleAutoNative" class="mdc-list-item" role="checkbox" aria-checked="false">
-					<span data-msg="iconStyleAuto">Switch color automatically</span>
+			<ul class="mdc-list" role="group" aria-label="List with checkbox items">
+				<li class="mdc-list-item" role="checkbox" aria-checked="false">
+					<label class="mdc-list-item__text" for="iconStyleAutoNative" data-msg="iconStyleAuto">Switch color automatically</label>
 
-					<div id="iconStyleAuto" class="mdc-switch mdc-switch--checked mdc-list-item__meta">
-						<div class="mdc-switch__track"></div>
-						<div class="mdc-switch__thumb-underlay">
-							<div class="mdc-switch__thumb">
-								<input id="iconStyleAutoNative" type="checkbox" class="mdc-switch__native-control" role="switch" id="another-basic-switch" class="mdc-switch__native-control" role="switch" checked>
+					<span class="mdc-list-item__meta">
+						<div id="iconStyleAuto" class="mdc-switch mdc-switch--checked">
+							<div class="mdc-switch__track"></div>
+							<div class="mdc-switch__thumb-underlay">
+								<div class="mdc-switch__thumb">
+									<input id="iconStyleAutoNative" type="checkbox" class="mdc-switch__native-control" role="switch" id="another-basic-switch" class="mdc-switch__native-control" role="switch" checked>
+								</div>
 							</div>
 						</div>
-					</div>
-				</label>
-			</div>
+					</span>
+
+				</li>
+			</ul>
 
 			<div class="icon-style-panel hidden">
 

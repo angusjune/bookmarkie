@@ -166,7 +166,6 @@ document.addEventListener('DOMContentLoaded', () => {
 				chrome.storage.sync.set({
 					iconType: target.value
 				}, optionSaved);
-
 			}
 		});
 	});
@@ -181,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					iconStyle: target.value
 				}, () =>  {
 					optionSaved();
-				})
+				});
 			}
 		});
 	});
