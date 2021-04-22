@@ -106,7 +106,7 @@
   },
   "extName": {
     "description": "The extension name.",
-    "message": "Bookmarkie: view and manage your bookmarks in a popup"
+    "message": "Bookmarkie - Bookmarks in a popup"
   },
   "extActionTitle": {
     "message": "Your Bookmarks"
@@ -141,13 +141,13 @@
     "message": "(no title)"
   },
   "openBookmarksIncognitoWindow": {
-    "message": "Open All Bookmarks in Incognito Window"
+    "message": "Open all Bookmarks in Incognito Mode"
   },
   "openBookmarks": {
     "message": "Open All Bookmarks"
   },
   "openBookmarksNewWindow": {
-    "message": "Open All Bookmarks in New Window"
+    "message": "Open All Bookmarks in a New Window"
   },
   "open": {
     "description": "Action to open bookmarks.",
@@ -163,7 +163,7 @@
     "message": "Open in New Window"
   },
   "optionClickNewTab": {
-    "message": "Always open bookmarks in new tabs."
+    "message": "Always Open Bookmarks in New Tabs."
   },
   "optionCloseUnusedFolders": {
     "message": "Collapse other folders when opening one"
@@ -172,11 +172,11 @@
     "message": "Display confirmation when opening a lot of bookmarks from a folder"
   },
   "optionOpenNewTab": {
-    "message": "ctrl + click to open bookmarks in new background tabs (instead of foreground)"
+    "message": "ctrl + click to open bookmarks in background"
   },
   "optionOpenNewTabMac": {
     "description": "For mac users",
-    "message": "⌘ + click to open bookmarks in new background tabs"
+    "message": "⌘ + click to open bookmarks in background"
   },
   "optionPopupStays": {
     "message": "Fix popup when opening bookmarks"
@@ -199,7 +199,7 @@
   },
 
   "iconStyleAuto": {
-    "message": "Switch color automatically"
+    "message": "Switch icon color automatically"
   },
 
   "dark": {
