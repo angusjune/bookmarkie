@@ -9,7 +9,11 @@
 	<div class="search" role="search">
 		<div class="search__textfield">
 			<input class="input" autocomplete="off" id="search-input" autofocus aria-label="Search your bookmark">
-			<div class="search__textfield__leading-icon"></div>
+			<div class="search__textfield__leading-icon">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M15.5 14H14.71L14.43 13.73C15.41 12.59 16 11.11 16 9.5C16 5.91 13.09 3 9.5 3C5.91 3 3 5.91 3 9.5C3 13.09 5.91 16 9.5 16C11.11 16 12.59 15.41 13.73 14.43L14 14.71V15.5L19 20.49L20.49 19L15.5 14V14ZM9.5 14C7.01 14 5 11.99 5 9.5C5 7.01 7.01 5 9.5 5C11.99 5 14 7.01 14 9.5C14 11.99 11.99 14 9.5 14Z" fill="#5A5A5A"/>
+				</svg>					
+			</div>
 		</div>
 	</div>
 
@@ -21,6 +25,7 @@
 	<div class="drop-overlay" id="drop-overlay"></div>
 	<div class="bookmark-clone" id="bookmark-clone"></div>
 
+	<!-- Context menu of a link -->
 	<ul class="context-menu context-menu--bookmark" id="bookmark-context-menu" role="menu">
 		<li role="none">
 			<a class="cmd cmd--bookmark-new-tab" id="bookmark-new-tab" role="menuitem">Open in a new tab</a>
@@ -40,6 +45,7 @@
 		</li>
 	</ul>
 
+	<!-- Context menu of a folder -->
 	<ul class="context-menu context-menu--folder" id="folder-context-menu" role="menu">
 		<li role="none">
 			<a class="cmd cmd--folder-window" id="folder-window" role="menuitem">Open all in tabs</a>
@@ -66,7 +72,7 @@
 		<h1 class="mdc-typography--subtitle1" id="alert-dialog-text"></h1>
 
 		<div class="dialog__footer">
-			<button class="mdc-button mdc-button--dense" id="alert-dialog-cancel" type="button"></button>
+			<button class="mdc-button mdc-button--dense" id="alert-dialog-cancel" type="button">Cancel</button>
 		</div>
 	</div>
 
@@ -79,6 +85,7 @@
 		</div>
 	</div>
 
+	<!-- Dialog of editting bookmark -->
 	<div class="dialog dialog--normal dialog--edit" id="edit-dialog" role="dialog">
 		<h1 class="mdc-typography--subtitle1" id="edit-dialog-text"></h1>
 		<form>

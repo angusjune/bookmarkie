@@ -128,7 +128,7 @@ $extend(Element.prototype, {
 	};
 })();
 
-window.addEventListener('load', init, false);
+// window.addEventListener('load', init, false);
 
 let openNewTabs ,
 	openTabsInBg,
@@ -154,6 +154,7 @@ chrome.storage.sync.get({
 	panelHeight = props.panelHeight;
 
 	console.log(props);
+	init();
 });
 
 function init() {
@@ -162,12 +163,12 @@ function init() {
 		// console.log('ph: ' + panelHeight);
 	}
 	ready(window);
-};
+}
 
 function ready (window) {
 	var body = document.body;
 	var _m = chrome.i18n.getMessage;
-	var _b = chrome.extension.getBackgroundPage().console;
+	// var _b = chrome.extension.getBackgroundPage().console;
 
 	// Error alert
 	var AlertDialog = {
@@ -189,18 +190,6 @@ function ready (window) {
 	var os = (navigator.platform.toLowerCase().match(/mac|win|linux/i) || ['other'])[0];
 	body.addClass(os);
 
-	// Chrome version detection
-	var version = (function(){
-		var v = {};
-		var keys = ['major', 'minor', 'build', 'patch'];
-		var matches = navigator.userAgent.match(/chrome\/([\d]+)\.([\d]+)\.([\d]+)\.([\d]+)/i);
-		if (!matches) return null;
-		matches.slice(1).forEach(function(m, i){
-			v[keys[i]] = m.toInt();
-		});
-		return v;
-	})();
-
 	// Some i18n
 	document.querySelector('#search-input').placeholder = _m('searchBookmarks');
 	document.querySelector('#edit-dialog-name').placeholder = _m('name');
@@ -221,7 +210,7 @@ function ready (window) {
 	}, function(msg, id){
 		var el = document.querySelector('#' + id);
 		var m  = _m(msg);
-		if (el.tagName == 'COMMAND') el.label = m;
+		// if (el.tagName == 'COMMAND') el.label = m;
 		el.textContent = m;
 	});
 
@@ -377,7 +366,7 @@ function ready (window) {
 			localStorage.focusID = null;
 		}
 	}, true);
-	var closeUnusedFolders = localStorage.closeUnusedFolders;
+	var closeUnusedFolders = closeOtherFolders;
 	$tree.addEventListener('click', function(e){
 		if (e.button != 0) return;
 		var el = e.target;
@@ -571,13 +560,14 @@ function ready (window) {
 
 	// Popup auto-height
 	var resetHeight = function(){
-		var zoomLevel = localStorage.zoom ? localStorage.zoom.toInt() / 100 : 1;
+		// var zoomLevel = localStorage.zoom ? localStorage.zoom.toInt() / 100 : 1;
+		let zoomLevel = 1;
 		setTimeout(function(){
 			var neatTree = $tree.firstElementChild;
 			if (neatTree){
 				var fullHeight = (neatTree.offsetHeight + $tree.offsetTop + 16) * zoomLevel;
 				// Slide up faster than down
-				body.style.webkitTransitionDuration = (fullHeight < window.innerHeight) ? '.3s' : '.1s';
+				body.style.transitionDuration = (fullHeight < window.innerHeight) ? '.3s' : '.1s';
 				var maxHeight = screen.height - window.screenY - 50;
 				var height = Math.max(200, Math.min(fullHeight, maxHeight));
 				// body.style.height
@@ -679,7 +669,8 @@ function ready (window) {
 	var bookmarkClickStayOpen = popupFixed;
 	var openBookmarksLimit = 10;
 	var actions = {
-		openBookmark: function(url){
+		openBookmark: url => {
+			let decodedURL;
 			try {
 				decodedURL = decodeURIComponent(url);
 			} catch (e) {
@@ -692,7 +683,7 @@ function ready (window) {
 			if (!bookmarkClickStayOpen) setTimeout(window.close, 200);
 		},
 
-		openBookmarkNewTab: function(url, selected, blankTabCheck){
+		openBookmarkNewTab: (url, selected, blankTabCheck) => {
 
 			const open = () => {
 				chrome.tabs.create({
@@ -702,7 +693,7 @@ function ready (window) {
 			};
 			if (blankTabCheck){
 				chrome.tabs.query({ currentWindow: true, active: true }, tabs => {
-					const tab = tabs[0]
+					const tab = tabs[0];
 
 					if (/^chrome:\/\/newtab/i.test(tab.url)){
 						chrome.tabs.update(tab.id, {
@@ -718,21 +709,21 @@ function ready (window) {
 			}
 		},
 
-		openBookmarkNewWindow: function(url, incognito){
+		openBookmarkNewWindow: (url, incognito) => {
 			chrome.windows.create({
 				url: url,
 				incognito: incognito
 			});
 		},
 
-		openBookmarks: function(urls, selected){
-			var urlsLen = urls.length;
-			var open = function(){
+		openBookmarks: (urls, selected) => {
+			const urlsLen = urls.length;
+			const open = function() {
 				chrome.tabs.create({
 					url: urls.shift(),
 					selected: selected // first tab will be selected
 				});
-				for (var i = 0, l = urls.length; i < l; i++){
+				for (let i = 0, l = urls.length; i < l; i++){
 					chrome.tabs.create({
 						url: urls[i],
 						selected: false
@@ -741,7 +732,7 @@ function ready (window) {
 			};
 			if (!dontConfirmOpenFolder && urlsLen > openBookmarksLimit){
 				ConfirmDialog.open({
-					dialog: _m('confirmOpenBookmarks', ''+urlsLen),
+					dialog: _m('confirmOpenBookmarks', ''+ urlsLen),
 					button1: '<strong>' + _m('open') + '</strong>',
 					button2: _m('nope'),
 					fn1: open
@@ -869,7 +860,7 @@ function ready (window) {
 		}
 	};
 
-	const noOpenBookmark = false;
+	let noOpenBookmark = false;
 	const bookmarkHandler = e => {
 		e.preventDefault();
 		if (e.button != 0) return; // force left-click
@@ -1020,7 +1011,7 @@ function ready (window) {
 		e.stopPropagation();
 		if (!currentContext) return;
 		var el = e.target;
-		if (el.tagName != 'COMMAND') return;
+		// if (el.tagName != 'COMMAND') return;
 		var url = currentContext.href;
 		switch (el.id){
 			case 'bookmark-new-tab':
@@ -1058,7 +1049,7 @@ function ready (window) {
 	var folderContextHandler = function(e){
 		if (!currentContext) return;
 		var el = e.target;
-		if (el.tagName != 'COMMAND') return;
+		// if (el.tagName != 'COMMAND') return;
 		var li = currentContext.parentNode;
 		var id = li.id.replace('neat-tree-item-', '');
 		chrome.bookmarks.getChildren(id, function(children){
@@ -1654,50 +1645,47 @@ function ready (window) {
 	}, 10);
 
 	// Zoom
-	if (localStorage.zoom){
-		body.dataset.zoom = localStorage.zoom;
-	}
-	var zoom = function(val){
-		if (draggedBookmark) return; // prevent zooming when drag-n-droppping
-		var dataZoom = body.dataset.zoom;
-		var currentZoom = dataZoom ? dataZoom.toInt() : 100;
-		if (val == 0){
-			delete body.dataset.zoom;
-			localStorage.removeItem('zoom');
-		} else {
-			var z = (val>0) ? currentZoom + 10 : currentZoom - 10;
-			z = Math.min(150, Math.max(90, z));
-			body.dataset.zoom = z;
-			localStorage.zoom = z;
-		}
-		body.addClass('dummy').removeClass('dummy'); // force redraw
-		resetHeight();
-	};
-	document.addEventListener('mousewheel', function(e){
-		if (!e.metaKey && !e.ctrlKey) return;
-		e.preventDefault();
-		zoom(e.wheelDelta);
-	});
-	document.addEventListener('keydown', function(e){
-		if (!e.metaKey && !e.ctrlKey) return;
-		switch (e.keyCode){
-			case 187: // + (plus)
-				e.preventDefault();
-				zoom(1);
-				break;
-			case 189: // - (minus)
-				e.preventDefault();
-				zoom(-1);
-				break;
-			case 48: // 0 (zero)
-				e.preventDefault();
-				zoom(0);
-				break;
-		}
-	});
-
-	// Fix stupid Chrome build 536 bug
-	if (version.build >= 536) body.addClass('chrome-536');
+	// if (localStorage.zoom){
+	// 	body.dataset.zoom = localStorage.zoom;
+	// }
+	// var zoom = function(val){
+	// 	if (draggedBookmark) return; // prevent zooming when drag-n-droppping
+	// 	var dataZoom = body.dataset.zoom;
+	// 	var currentZoom = dataZoom ? dataZoom.toInt() : 100;
+	// 	if (val == 0){
+	// 		delete body.dataset.zoom;
+	// 		localStorage.removeItem('zoom');
+	// 	} else {
+	// 		var z = (val>0) ? currentZoom + 10 : currentZoom - 10;
+	// 		z = Math.min(150, Math.max(90, z));
+	// 		body.dataset.zoom = z;
+	// 		localStorage.zoom = z;
+	// 	}
+	// 	body.addClass('dummy').removeClass('dummy'); // force redraw
+	// 	resetHeight();
+	// };
+	// document.addEventListener('mousewheel', function(e){
+	// 	if (!e.metaKey && !e.ctrlKey) return;
+	// 	e.preventDefault();
+	// 	zoom(e.wheelDelta);
+	// });
+	// document.addEventListener('keydown', function(e){
+	// 	if (!e.metaKey && !e.ctrlKey) return;
+	// 	switch (e.keyCode){
+	// 		case 187: // + (plus)
+	// 			e.preventDefault();
+	// 			zoom(1);
+	// 			break;
+	// 		case 189: // - (minus)
+	// 			e.preventDefault();
+	// 			zoom(-1);
+	// 			break;
+	// 		case 48: // 0 (zero)
+	// 			e.preventDefault();
+	// 			zoom(0);
+	// 			break;
+	// 	}
+	// });
 
 	// Fix stupid wrong offset of the page on Mac
 	if (os == 'mac'){
@@ -1709,5 +1697,5 @@ function ready (window) {
 }
 
 onerror = function(){
-	chrome.extension.sendRequest({error: [].slice.call(arguments)})
+	chrome.runtime.sendMessage({error: [].slice.call(arguments)})
 };
