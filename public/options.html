@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="options.css">
+</head>
+
+<body>
+
+	<section class="section">
+		<h2 data-msg="general" class="mdc-typography--subtitle1 headline">General</h2>
+
+		<div class="mdc-card">
+
+			<ul class="mdc-list" role="group">
+
+				<li class="mdc-list-item" role="checkbox" aria-checked="false">
+					<label class="mdc-list-item__text" for="openNewTabsNative" data-msg="openNewTab">Always open bookmarks in new tabs</label>
+
+					<span class="mdc-list-item__meta">
+						<div class="mdc-switch mdc-switch--checked" id="openNewTabs">
+							<div class="mdc-switch__track"></div>
+							<div class="mdc-switch__thumb-underlay">
+								<div class="mdc-switch__thumb">
+									<input id="openNewTabsNative" type="checkbox" class="mdc-switch__native-control" role="switch">
+								</div>
+							</div>
+						</div>
+					</span>
+
+				</li>
+				</ul>
+				<ul class="mdc-list" role="group">
+				<li class="mdc-list-item" role="checkbox" aria-checked="false">
+					<label class="mdc-list-item__text" for="openTabsInBgNative" data-msg="optionOpenNewTab" id="optionOpenNewTab">Open new tabs in background</label>
+
+					<span class="mdc-list-item__meta">
+						<div class="mdc-switch mdc-switch--checked" id="openTabsInBg">
+							<div class="mdc-switch__track"></div>
+							<div class="mdc-switch__thumb-underlay">
+								<div class="mdc-switch__thumb">
+									<input id="openTabsInBgNative" type="checkbox" class="mdc-switch__native-control" role="switch">
+								</div>
+							</div>
+						</div>
+					</span>
+
+				</li>
+
+			</ul>
+
+			<hr class="mdc-deprecated-list-divider">
+
+			<ul class="mdc-list" role="group">
+
+				<li class="mdc-list-item" role="checkbox" aria-checked="false">
+					<label class="mdc-list-item__text" for="closeOtherFoldersNative" data-msg="optionCloseUnusedFolders">Close unused folders</label>
+
+					<span class="mdc-list-item__meta">
+						<div class="mdc-switch mdc-switch--checked mdc-list-item__meta" id="closeOtherFolders">
+							<div class="mdc-switch__track"></div>
+							<div class="mdc-switch__thumb-underlay">
+								<div class="mdc-switch__thumb">
+									<input id="closeOtherFoldersNative" type="checkbox" class="mdc-switch__native-control" role="switch">
+								</div>
+							</div>
+						</div>
+					</span>
+
+				</li>
+
+			</ul>
+
+
+			<ul class="mdc-list" role="group">
+
+				<!-- currently not possible -->
+				<label for="popupFixedNative" class="mdc-list-item" role="checkbox" aria-checked="false" style="display: none;">
+					<span data-msg="optionPopupStays">Popup stays when opening bookmarks</span>
+
+					<div class="mdc-switch mdc-switch--checked mdc-list-item__meta" id="popupFixed">
+						<div class="mdc-switch__track"></div>
+						<div class="mdc-switch__thumb-underlay">
+							<div class="mdc-switch__thumb">
+								<input id="popupFixedNative" type="checkbox" class="mdc-switch__native-control" role="switch">
+							</div>
+						</div>
+					</div>
+				</label>
+
+				<li class="mdc-list-item" role="checkbox" aria-checked="true">
+					<label class="mdc-list-item__text" data-msg="optionRememberPrevState" for="preserveStateNative">Remember last state when popup open</label>
+
+					<span class="mdc-list-item__meta">
+						<div class="mdc-switch mdc-switch--checked" id="preserveState">
+							<div class="mdc-switch__track"></div>
+							<div class="mdc-switch__thumb-underlay">
+								<div class="mdc-switch__thumb">
+									<input id="preserveStateNative" type="checkbox" class="mdc-switch__native-control" role="switch" checked>
+								</div>
+							</div>
+						</div>
+					</span>
+
+				</li>
+
+			</ul>
+
+		</div>
+	</section>
+
+
+	<section class="section">
+		<h2 data-msg="icon" class="mdc-typography--subtitle1 headline">Icon</h2>
+
+		<div class="mdc-card">
+
+			<h3 data-msg="style" class="mdc-typography--subtitle2 subtitle">Style</h2>
+
+			<ul class="icon-list">
+				<li class="icon-list-item">
+					<input id="iconStar" class="icon-list-item__native-control" type="radio" name="icon-type-group" value="star" checked>
+					<label for="iconStar" class="icon-list-item__graphic icon-list-item__graphic--star"></label>
+				</li>
+				<li class="icon-list-item">
+					<input id="iconBookmark" class="icon-list-item__native-control" type="radio" name="icon-type-group" value="bookmark">
+					<label for="iconBookmark" class="icon-list-item__graphic icon-list-item__graphic--bookmark"></label>
+				</li>
+				<li class="icon-list-item">
+					<input id="iconStars" class="icon-list-item__native-control" type="radio" name="icon-type-group" value="stars">
+					<label for="iconStars" class="icon-list-item__graphic icon-list-item__graphic--stars"></label>
+				</li>
+			</ul>
+
+			<hr class="mdc-deprecated-list-divider">
+
+			<h3 data-msg="color" class="mdc-typography--subtitle2 subtitle">Color</h2>
+
+			<ul class="mdc-list" role="group" aria-label="List with checkbox items">
+				<li class="mdc-list-item" role="checkbox" aria-checked="false">
+					<label class="mdc-list-item__text" for="iconStyleAutoNative" data-msg="iconStyleAuto">Switch color automatically</label>
+
+					<span class="mdc-list-item__meta">
+						<div id="iconStyleAuto" class="mdc-switch mdc-switch--checked">
+							<div class="mdc-switch__track"></div>
+							<div class="mdc-switch__thumb-underlay">
+								<div class="mdc-switch__thumb">
+									<input id="iconStyleAutoNative" type="checkbox" class="mdc-switch__native-control" role="switch" id="another-basic-switch" class="mdc-switch__native-control" role="switch" checked>
+								</div>
+							</div>
+						</div>
+					</span>
+
+				</li>
+			</ul>
+
+			<div class="icon-style-panel hidden">
+
+				<div class="icon-style-list">
+					<div class="icon-style-list-item">
+						<input id="styleDark" class="icon-list-item__native-control" type="radio" name="icon-style-group" value="dark" checked>
+						<label data-msg="dark" for="styleDark" class="icon-style-list-item__label">Dark</label>
+					</div>
+					<div class="icon-style-list-item" data-style="light">
+						<input id="styleLight" class="icon-list-item__native-control" type="radio" name="icon-style-group" value="light">
+						<label data-msg="light" for="styleLight" class="icon-style-list-item__label">Light</label>
+					</div>
+					<div class="icon-style-list-item" data-style="colored">
+						<input id="styleColored" class="icon-list-item__native-control" type="radio" name="icon-style-group" value="colored">
+						<label data-msg="colored" for="styleColored" class="icon-style-list-item__label">Colored</label>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</section>
+
+	<script src="options.js"></script>
+</body>
+
+</html>

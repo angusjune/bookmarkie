@@ -1,0 +1,36 @@
+{
+	"name": "__MSG_extName__",
+	"version": "2.3.0",
+	"short_name": "Bookmarkie",
+	"manifest_version": 2,
+	"description": "__MSG_extDesc__",
+	"icons": {
+		"16": "icons/icon-16.png",
+		"48": "icons/icon-48.png",
+		"128": "icons/icon-128.png"
+	},
+	"background": {
+		"script": "background.js"
+	},
+	"browser_action": {
+		"default_icon": {
+			"16": "icons/star-dark-16.png",
+			"24": "icons/star-dark-24.png",
+			"32": "icons/star-dark-32.png"
+		},
+		"default_popup": "popup.html",
+		"default_title": "__MSG_extActionTitle__"
+	},
+	"options_ui": {
+		"page": "options.html",
+		"open_in_tab": false
+	},
+	"permissions": [
+		"chrome://favicon/",
+		"bookmarks",
+		"tabs",
+		"storage"
+	],
+	"minimum_chrome_version": "63",
+	"default_locale": "en"
+}

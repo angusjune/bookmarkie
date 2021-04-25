@@ -6,16 +6,16 @@ This is the version in dev and may not work on your device. To download the stab
 
 [download]: https://chrome.google.com/webstore/detail/even-neater-bookmarks/ahlphbdcaacfhkiajebghpngknafklbj
 
-## Build your own
+## Build
 
-1. run `npm install`
+1. run `yarn install`
 
-2. run `npm run build` to build
+2. run `yarn run build` to build
 
-## Develop your own
+## Develop
 
-1. run `npm install` and `npm run build:dev`
+1. run `yarn install` and `yarn run watch`
 
-2. Load folder `dist` in your Chrome extension settings page
+2. Load folder `build` in your Chrome extension settings page
 
 3. Code
