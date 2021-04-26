@@ -167,7 +167,7 @@ body {
 
 .mdc-switch {
   @include switch.toggled-on-color($theme-primary);
-  @include switch.ripple-size(32px);
+  @include switch.ripple-size(30px);
 }
 
 .mdc-list-item {
@@ -178,6 +178,11 @@ body {
   &__text {
     flex: 1;
   }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+  }
 }
 
 
@@ -185,7 +190,7 @@ body {
 @media (prefers-color-scheme: dark) {
   * {
     --selection-bg: #323639; /* toolbar color in dark mode */
-    --selection-selected-bg: #404447;
+    --selection-selected-bg: #63686d;
     --bg: #202124;
     --section-bg: #292a2d;
 
@@ -202,5 +207,9 @@ body {
   .mdc-switch {
     @include switch.toggled-on-color($theme-primary-dark);
     @include switch.toggled-off-track-color(#fff);
+  }
+
+  .mdc-list-item__text {
+    color: var(--headline-color);
   }
 }
