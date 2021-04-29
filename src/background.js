@@ -10,19 +10,23 @@ const setIcon = (isDark = false) => {
             if (isDark) {
                 // set light-colored icon in dark UI
                 chrome.browserAction.setIcon({ path: {
-                    16: `/images/${props.iconType}-light-16.png`,
-                    24: `/images/${props.iconType}-light-24.png`,
-                    32: `/images/${props.iconType}-light-32.png`,
+                    16: `/icons/${props.iconType}-light-16.png`,
+                    24: `/icons/${props.iconType}-light-24.png`,
+                    32: `/icons/${props.iconType}-light-32.png`,
                 }});
             } else {
                 chrome.browserAction.setIcon({ path: {
-                    16: `/images/${props.iconType}-dark-16.png`,
-                    24: `/images/${props.iconType}-dark-24.png`,
-                    32: `/images/${props.iconType}-dark-32.png`
+                    16: `/icons/${props.iconType}-dark-16.png`,
+                    24: `/icons/${props.iconType}-dark-24.png`,
+                    32: `/icons/${props.iconType}-dark-32.png`
                 }});
             }
         } else {
-            chrome.browserAction.setIcon({ path: `/images/${props.iconType}-${props.iconStyle}-16.png`});
+            chrome.browserAction.setIcon({ path: {
+                16: `/icons/${props.iconType}-${props.iconStyle}-16.png`,
+                24: `/icons/${props.iconType}-${props.iconStyle}-24.png`,
+                32: `/icons/${props.iconType}-${props.iconStyle}-32.png`
+            }});
         }
     });   
 };
