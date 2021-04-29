@@ -2,6 +2,12 @@
 
 import './popup.scss';
 
+import {MDCRipple} from '@material/ripple';
+
+document.querySelectorAll('.mdc-button').forEach(el => {
+	new MDCRipple(el);
+});
+
 // OS in dark mode or browser in incognito context
 const isBrowserDark = window.matchMedia("(prefers-color-scheme: dark)").matches || chrome.extension.inIncognitoContext;
 // Let background knows if the browser is dark
@@ -311,8 +317,7 @@ function ready (window) {
 					}
 				}
 			} else {
-				html += '<li class="child"' + idHTML + ' role="treeitem" data-parentid="' + parentID + '">'
-					+ generateBookmarkHTML(title, url, 'style="padding-inline-start: ' + paddingInlineStart + 'px"');
+				html += '<li class="child"' + idHTML + ' role="treeitem" data-parentid="' + parentID + '">' + generateBookmarkHTML(title, url, 'style="padding-inline-start: ' + paddingInlineStart + 'px"');
 			}
 			html += '</li>';
 		}
@@ -366,6 +371,15 @@ function ready (window) {
 			localStorage.focusID = null;
 		}
 	}, true);
+
+	function isElementInViewport (el) {
+		const rect = el.getBoundingClientRect();
+		return (
+			rect.top >= 30 &&
+			rect.bottom <= window.innerHeight - 30
+		);
+	}
+
 	var closeUnusedFolders = closeOtherFolders;
 	$tree.addEventListener('click', function(e){
 		if (e.button != 0) return;
@@ -397,6 +411,15 @@ function ready (window) {
 				if (li.hasClass('parent')){
 					li.removeClass('open').setAttribute('aria-expanded', false);
 				}
+			}
+
+			const focusEl = document.querySelector(`#neat-tree-item-${localStorage.focusID}`);
+			const focusFolderList = focusEl.querySelector('.list--folder');
+			const isInView = isElementInViewport(focusFolderList);
+
+			// if the expanded folder is not in view, reset its position
+			if (!isInView) {
+				$tree.scrollTop = ($tree.scrollTop + focusFolderList.getBoundingClientRect().top - 60); // 60 is the height of search bar plus height of the list element
 			}
 		}
 		var opens = $tree.querySelectorAll('li.open');
@@ -570,9 +593,6 @@ function ready (window) {
 				body.style.transitionDuration = (fullHeight < window.innerHeight) ? '.3s' : '.1s';
 				var maxHeight = screen.height - window.screenY - 50;
 				var height = Math.max(200, Math.min(fullHeight, maxHeight));
-				// body.style.height
-				console.log('max height: ' + maxHeight);
-				console.log('full height: ' + fullHeight);
 				body.style.height = height + 'px';
 				localStorage.popupHeight = height;
 			}
@@ -1697,5 +1717,5 @@ function ready (window) {
 }
 
 onerror = function(){
-	chrome.runtime.sendMessage({error: [].slice.call(arguments)})
+	chrome.runtime.sendMessage({error: [].slice.call(arguments)});
 };
