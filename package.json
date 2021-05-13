@@ -39,6 +39,7 @@
     "@material/ripple": "^11.0.0",
     "@material/switch": "^11.0.0",
     "@material/typography": "^11.0.0",
+    "canvg": "^3.0.7",
     "lit-element": "^2.4.0"
   }
 }

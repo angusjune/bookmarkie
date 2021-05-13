@@ -166,7 +166,6 @@ chrome.storage.sync.get({
 function init() {
 	if (panelHeight != null) {
 		document.body.style.height = panelHeight;
-		// console.log('ph: ' + panelHeight);
 	}
 	ready(window);
 }
@@ -174,7 +173,6 @@ function init() {
 function ready (window) {
 	var body = document.body;
 	var _m = chrome.i18n.getMessage;
-	// var _b = chrome.extension.getBackgroundPage().console;
 
 	// Error alert
 	var AlertDialog = {
@@ -344,9 +342,6 @@ function ready (window) {
 				setTimeout(function(){
 					$tree.style.overflow = oriOverflow;
 				}, 1);
-				setTimeout(function(){
-					localStorage.removeItem('focusID');
-				}, 4000);
 			}
 		}
 
