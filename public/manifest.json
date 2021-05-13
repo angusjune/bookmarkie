@@ -1,6 +1,6 @@
 {
 	"name": "__MSG_extName__",
-	"version": "2.3.2",
+	"version": "2.3.3",
 	"short_name": "Bookmarkie",
 	"manifest_version": 2,
 	"description": "__MSG_extDesc__",
@@ -31,6 +31,6 @@
 		"tabs",
 		"storage"
 	],
-	"minimum_chrome_version": "63",
+	"minimum_chrome_version": "69",
 	"default_locale": "en"
 }
