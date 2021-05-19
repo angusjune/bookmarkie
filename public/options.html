@@ -15,7 +15,7 @@
 			<ul class="mdc-list" role="group">
 
 				<li class="mdc-list-item" role="checkbox" aria-checked="false">
-					<label class="mdc-list-item__text" for="openNewTabsNative" data-msg="openNewTab">Always open bookmarks in new tabs</label>
+					<label class="mdc-list-item__text" for="openNewTabsNative" data-msg="optionClickNewTab">Always open bookmarks in new tabs</label>
 
 					<span class="mdc-list-item__meta">
 						<div class="mdc-switch mdc-switch--checked" id="openNewTabs">
@@ -120,15 +120,33 @@
 			<ul class="icon-list">
 				<li class="icon-list-item">
 					<input id="iconStar" class="icon-list-item__native-control" type="radio" name="icon-type-group" value="star" checked>
-					<label for="iconStar" class="icon-list-item__graphic icon-list-item__graphic--star"></label>
+					<label for="iconStar" class="icon-list-item__graphic icon-list-item__graphic--star">
+						<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<defs>
+								<linearGradient id="gold"  x1="12.7971" y1="0.431819" x2="16.0862" y2="25.5697" gradientUnits="userSpaceOnUse">
+								<stop stop-color="#FFCE7A"/>
+								<stop offset="1" stop-color="#BA851E"/>
+								</linearGradient>
+							</defs>
+							<path d="M16 23.6995L24.652 29L22.356 19.01L30 12.2884L19.934 11.4216L16 2L12.066 11.4216L2 12.2884L9.644 19.01L7.348 29L16 23.6995Z" fill="#444444"/>
+						</svg>							
+					</label>
 				</li>
 				<li class="icon-list-item">
 					<input id="iconBookmark" class="icon-list-item__native-control" type="radio" name="icon-type-group" value="bookmark">
-					<label for="iconBookmark" class="icon-list-item__graphic icon-list-item__graphic--bookmark"></label>
+					<label for="iconBookmark" class="icon-list-item__graphic icon-list-item__graphic--bookmark">
+						<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M23 3H10C8.50714 3 7 4.53333 7 6V28L17 24L26 28V6C26 4.53333 24.4929 3 23 3Z" fill="#444444"/>
+						</svg>							
+					</label>
 				</li>
 				<li class="icon-list-item">
 					<input id="iconStars" class="icon-list-item__native-control" type="radio" name="icon-type-group" value="stars">
-					<label for="iconStars" class="icon-list-item__graphic icon-list-item__graphic--stars"></label>
+					<label for="iconStars" class="icon-list-item__graphic icon-list-item__graphic--stars">
+						<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M15.9867 2.66667C8.62667 2.66667 2.66667 8.64 2.66667 16C2.66667 23.36 8.62667 29.3333 15.9867 29.3333C23.36 29.3333 29.3333 23.36 29.3333 16C29.3333 8.64 23.36 2.66667 15.9867 2.66667ZM21.64 24L16 20.6L10.36 24L11.8533 17.5867L6.88 13.28L13.44 12.72L16 6.66667L18.56 12.7067L25.12 13.2667L20.1467 17.5733L21.64 24Z" fill="#444444"/>
+						</svg>							
+					</label>
 				</li>
 			</ul>
 
@@ -156,19 +174,39 @@
 
 			<div class="icon-style-panel hidden">
 
-				<div class="icon-style-list">
-					<div class="icon-style-list-item">
-						<input id="styleDark" class="icon-list-item__native-control" type="radio" name="icon-style-group" value="dark" checked>
-						<label data-msg="dark" for="styleDark" class="icon-style-list-item__label">Dark</label>
+				<div class="icon-color-list">
+					<div class="icon-color-list-item">
+						<input id="colorDark" class="icon-color-list-item__native-control" type="radio" name="icon-style-group" value="dark">
+						<label for="colorDark" class="icon-color-list-item__graphic dark"></label>
 					</div>
-					<div class="icon-style-list-item" data-style="light">
-						<input id="styleLight" class="icon-list-item__native-control" type="radio" name="icon-style-group" value="light">
-						<label data-msg="light" for="styleLight" class="icon-style-list-item__label">Light</label>
+					<div class="icon-color-list-item">
+						<input id="colorLight" class="icon-color-list-item__native-control" type="radio" name="icon-style-group" value="light">
+						<label for="colorLight" class="icon-color-list-item__graphic light"></label>
 					</div>
-					<div class="icon-style-list-item" data-style="colored">
-						<input id="styleColored" class="icon-list-item__native-control" type="radio" name="icon-style-group" value="colored">
-						<label data-msg="colored" for="styleColored" class="icon-style-list-item__label">Colored</label>
+					<div class="icon-color-list-item">
+						<input id="colorTrinidad" class="icon-color-list-item__native-control" type="radio" name="icon-style-group" value="trinidad">
+						<label for="colorTrinidad" class="icon-color-list-item__graphic trinidad"></label>
 					</div>
+					<div class="icon-color-list-item">
+						<input id="colorYellow" class="icon-color-list-item__native-control" type="radio" name="icon-style-group" value="yellow" checked>
+						<label for="colorYellow" class="icon-color-list-item__graphic yellow"></label>
+					</div>
+					<div class="icon-color-list-item">
+						<input id="colorPastel" class="icon-color-list-item__native-control" type="radio" name="icon-style-group" value="pastel">
+						<label for="colorPastel" class="icon-color-list-item__graphic pastel"></label>
+					</div>
+					<div class="icon-color-list-item">
+						<input id="colorNaval" class="icon-color-list-item__native-control" type="radio" name="icon-style-group" value="naval">
+						<label for="colorNaval" class="icon-color-list-item__graphic naval"></label>
+					</div>
+					<div class="icon-color-list-item">
+						<input id="colorOrchid" class="icon-color-list-item__native-control" type="radio" name="icon-style-group" value="orchid">
+						<label for="colorOrchid" class="icon-color-list-item__graphic orchid"></label>
+					</div>
+					<!-- <div class="icon-color-list-item">
+						<input id="colorGold" class="icon-color-list-item__native-control" type="radio" name="icon-style-group" value="gold">
+						<label for="colorGold" class="icon-color-list-item__graphic gold"></label>
+					</div> -->
 				</div>
 			</div>
 

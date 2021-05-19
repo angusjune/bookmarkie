@@ -49,7 +49,7 @@
   },
   "confirmOpenBookmarksNewIncognitoWindow": {
     "description": "Confirmation message for opening all bookmarks in a new incognito window.",
-    "message": "Are you sure you want to open all $count$ bookmarks in a new incognito window?",
+    "message": "Are you sure you want to open all $count$ bookmarks in new incognito window?",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -58,7 +58,7 @@
   },
   "confirmOpenBookmarksNewWindow": {
     "description": "Confirmation message for opening all bookmarks in a new window.",
-    "message": "Are you sure you want to open all $count$ bookmarks in a new window?",
+    "message": "Are you sure you want to open all $count$ bookmarks in new window?",
     "placeholders": {
       "count": {
         "content": "$1"
@@ -141,13 +141,13 @@
     "message": "(no title)"
   },
   "openBookmarksIncognitoWindow": {
-    "message": "Open all Bookmarks in Incognito Mode"
+    "message": "Open all in Incognito Window"
   },
   "openBookmarks": {
-    "message": "Open All Bookmarks"
+    "message": "Open All"
   },
   "openBookmarksNewWindow": {
-    "message": "Open All Bookmarks in a New Window"
+    "message": "Open All in New Window"
   },
   "open": {
     "description": "Action to open bookmarks.",
@@ -157,13 +157,13 @@
     "message": "Open in Incognito Window"
   },
   "openNewTab": {
-    "message": "Open bookmarks in new tabs"
+    "message": "Open in new tab"
   },
   "openNewWindow": {
     "message": "Open in New Window"
   },
   "optionClickNewTab": {
-    "message": "Always Open Bookmarks in New Tabs."
+    "message": "Always open bookmarks in new tabs"
   },
   "optionCloseUnusedFolders": {
     "message": "Collapse other folders when opening one"

@@ -1,5 +1,6 @@
-@import "@material/button/mdc-button";
-@import "@material/typography/mdc-typography";
+@use "@material/button";
+@use "@material/button/styles";
+@use "@material/typography/mdc-typography";
 
 @import "variables.scss";
 
@@ -10,7 +11,7 @@
 	--body-color: rgba(0, 0, 0, 0.8);
 
 	--input-bg: rgba(0, 0, 0, 0.08);
-	--list-focus-bg: rgba(54, 116, 224, 0.2);
+	--list-focus-bg: rgba(0, 0, 0, 0.04);
 	--menu-bg: #fff;
 	--divider-bg: rgba(0, 0, 0, 0.12);
 
@@ -245,13 +246,13 @@ body.transitional{
 	transition: opacity .3s;
 	opacity: 0;
 	margin: 0;
-	padding: 5px 0;
+	padding: 8px 0;
 	list-style: none;
 	position: absolute;
 	left: -999px;
-	border-radius: 8px;
+	border-radius: 4px;
 	background-color: var(--menu-bg);
-	box-shadow: 0 2px 6px rgba(0,0,0,.2);
+	box-shadow: 0 2px 6px rgba(0,0,0,.2), 0 4px 12px rgba(0,0,0,0.04);
 	outline: 0;
 	max-width: 100%;
 
@@ -259,7 +260,7 @@ body.transitional{
 		border: 0;
 		padding: 0;
 		height: 1px;
-		margin: 2px 0;
+		margin: 4px 0;
 		background-color: var(--divider-bg);
 		pointer-events: none;
 	}
@@ -267,14 +268,14 @@ body.transitional{
 
 .cmd {
 	display: block;
-	padding: 0 8px;
-	line-height: 26px;
+	padding: 0 16px;
+	line-height: 32px;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	text-transform: capitalize;
 
-	&:focus {
+	&:focus, &:hover {
 		background-color: var(--list-focus-bg);
 		outline: 0;
 	}
@@ -440,11 +441,11 @@ body.transitional{
 // Overrides of material components
 
 .mdc-button {
-	@include mdc-button-ink-color($theme-primary);
+	@include button.ink-color($theme-primary);
 }
 
 .mdc-button--unelevated {
-	@include mdc-button-filled-accessible($theme-primary);
+	@include button.filled-accessible($theme-primary);
 }
 
 
@@ -459,7 +460,7 @@ body.transitional{
 		--menu-bg: #292c2f;
 		--input-bg: #292c2f;
 
-		--list-focus-bg: rgba(138, 180, 249, 0.5);
+		--list-focus-bg: rgba(255, 255, 255, 0.03);
 
 		--divider-bg: rgba(255, 255, 255, 0.12);
 
@@ -469,10 +470,10 @@ body.transitional{
 	}
 
 	.mdc-button {
-		@include mdc-button-ink-color($theme-primary-dark);
+		@include button.ink-color($theme-primary-dark);
 	}
 
 	.mdc-button--unelevated {
-		@include mdc-button-filled-accessible($theme-primary-dark);
+		@include button.filled-accessible($theme-primary-dark);
 	}
 }

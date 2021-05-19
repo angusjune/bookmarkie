@@ -11,7 +11,7 @@
 @include typography.core-styles;
 
 * {
-  --theme-primary: $theme-primary;
+  --theme-primary: #3674E0;
   --selection-bg: rgba(0, 0, 0, 0.04);
   --selection-selected-bg: #E0EAFC;
   --bg: #f2f2f2;
@@ -22,11 +22,22 @@
   --body-color: rgba(0, 0, 0, 0.9);
 
   --divider-bg: rgba(0, 0, 0, 0.08);
+
+  --dark: #444;
+  --light: #fff;
+  --yellow: #f4a60e;
+  --trinidad: #d74c2e;
+  --pastel: #6ad37c;
+  --naval: #4277d7;
+  --orchid: #993fd6;
+  --gold: linear-gradient(#FFCE7A, #BA851E);
+
 }
 
 body {
   background: var(--bg);
   padding-bottom: 32px;
+  overflow-x: hidden;
 }
 
 .section {
@@ -72,6 +83,13 @@ body {
   box-sizing: border-box;
   border: 2px solid transparent;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    transform: scale(0.8);
+  }
 }
 
 .icon-list-item__native-control {
@@ -83,41 +101,55 @@ body {
   border: 2px solid var(--theme-primary);
 }
 
-.icon-list-item__graphic--star, .icon-list-item__graphic--star.dark {
-  background-image: url(chrome-extension://__MSG_@@extension_id__/images/star-dark-32.png);
+.icon-list-item__graphic, .dark .icon-list-item__graphic {
+  path {
+    fill: #444;
+  }
 }
 
-.icon-list-item__graphic--star.light {
-  background-image: url(chrome-extension://__MSG_@@extension_id__/images/star-light-32.png);
+.light .icon-list-item__graphic {
+  path {
+    fill: #fff;
+  }
 }
 
-.icon-list-item__graphic--star.colored {
-  background-image: url(chrome-extension://__MSG_@@extension_id__/images/star-colored-32.png);
+@mixin graphic-path($colorCLass) {
+  #{$colorCLass '.icon-list-item__graphic path'} {
+    @content;
+  }
 }
 
-.icon-list-item__graphic--bookmark, .icon-list-item__graphic--bookmark.dark {
-  background-image: url(chrome-extension://__MSG_@@extension_id__/images/bookmark-dark-32.png);
-}
-.icon-list-item__graphic--bookmark.light {
-  background-image: url(chrome-extension://__MSG_@@extension_id__/images/bookmark-light-32.png);
-}
-.icon-list-item__graphic--bookmark.colored {
-  background-image: url(chrome-extension://__MSG_@@extension_id__/images/bookmark-colored-32.png);
-}
+.icon-list-item__graphic path {
+  fill: var(--yellow);
+};
 
-.icon-list-item__graphic--stars, .icon-list-item__graphic--stars.dark {
-  background-image: url(chrome-extension://__MSG_@@extension_id__/images/stars-dark-32.png);
-}
-.icon-list-item__graphic--stars.light {
-  background-image: url(chrome-extension://__MSG_@@extension_id__/images/stars-light-32.png);
-}
-.icon-list-item__graphic--stars.colored {
-  background-image: url(chrome-extension://__MSG_@@extension_id__/images/stars-colored-32.png);
-}
+@include graphic-path('.yellow') { 
+  fill: var(--yellow);
+};
 
-.icon-style-panel {
+@include graphic-path('.trinidad') { 
+  fill: var(--trinidad);
+};
 
-}
+@include graphic-path('.pastel') { 
+  fill: var(--pastel);
+};
+
+@include graphic-path('.naval') { 
+  fill: var(--naval);
+};
+
+@include graphic-path('.orchid') { 
+  fill: var(--orchid);
+};
+
+@include graphic-path('.gold') { 
+  fill: url(#gold);
+};
+
+@include graphic-path('.metalic') { 
+  fill: url(#metalic);
+};
 
 .icon-style-list {
   padding: 16px;
@@ -140,12 +172,14 @@ body {
   background: var(--selection-bg);
   color: var(--body-color);
   transition: background 0.2s linear;
+  border: 2px solid transparent;
 }
 
 .icon-list-item__native-control:checked ~ .icon-style-list-item__label {
   background: var(--selection-selected-bg);
   color: var(--theme-primary);
   font-weight: 700;
+  border: 2px solid var(--theme-primary);
 }
 
 .icon-style-panel {
@@ -157,6 +191,64 @@ body {
   height: 0;
 }
 
+.icon-color-list {
+  padding: 16px;
+  padding-inline-start: 16px;
+}
+
+.icon-color-list-item {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.icon-color-list-item__graphic {
+  display: block;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+
+  .icon-color-list-item__native-control:checked ~ & {
+    box-shadow: 0 0 0 2px var(--theme-primary), inset 0 0 0 2px var(--section-bg);
+  }
+
+  &.dark {
+    background: var(--dark);
+  }
+
+  &.light {
+    background: var(--light);
+  }
+
+  &.yellow {
+    background: var(--yellow);
+  }
+
+  &.trinidad {
+    background: var(--trinidad);
+  }
+
+  &.pastel {
+    background: var(--pastel);
+  }
+
+  &.naval {
+    background: var(--naval);
+  }
+
+  &.orchid {
+    background: var(--orchid);
+  }
+
+  &.gold {
+    background: var(--gold);
+  }
+}
+
+.icon-color-list-item__native-control {
+  display: none;
+}
 
 /* Overrides of Material Design Components */
 
@@ -167,7 +259,7 @@ body {
 
 .mdc-switch {
   @include switch.toggled-on-color($theme-primary);
-  @include switch.ripple-size(32px);
+  @include switch.ripple-size(30px);
 }
 
 .mdc-list-item {
@@ -178,6 +270,11 @@ body {
   &__text {
     flex: 1;
   }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+  }
 }
 
 
@@ -185,9 +282,10 @@ body {
 @media (prefers-color-scheme: dark) {
   * {
     --selection-bg: #323639; /* toolbar color in dark mode */
-    --selection-selected-bg: #404447;
+    --selection-selected-bg: #63686d;
     --bg: #202124;
     --section-bg: #292a2d;
+    --theme-primary: #8ab4f9;
 
     --headline-color: rgba(255, 255, 255, 0.7);
     --subtitle-color: rgba(255, 255, 255, 0.9);
@@ -202,5 +300,9 @@ body {
   .mdc-switch {
     @include switch.toggled-on-color($theme-primary-dark);
     @include switch.toggled-off-track-color(#fff);
+  }
+
+  .mdc-list-item__text {
+    color: var(--headline-color);
   }
 }
