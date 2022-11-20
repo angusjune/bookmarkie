@@ -26,44 +26,24 @@
 	<div class="bookmark-clone" id="bookmark-clone"></div>
 
 	<!-- Context menu of a link -->
-	<ul class="context-menu context-menu--bookmark" id="bookmark-context-menu" role="menu">
-		<li role="none">
-			<a class="cmd cmd--bookmark-new-tab" id="bookmark-new-tab" role="menuitem">Open in a new tab</a>
-		</li>
-		<li role="none">
-			<a class="cmd cmd--bookmark-new-window" id="bookmark-new-window" role="menuitem">Open in a new window</a>
-		</li>
-		<li role="none">
-			<a class="cmd cmd--bookmark-new-incognito-window" id="bookmark-new-incognito-window" role="menuitem">Open in Incognito mode</a>
-		</li>
-		<li role="none"><hr role="separator"></li>
-		<li role="none">
-			<a class="cmd cmd--bookmark-edit" id="bookmark-edit" role="menuitem">Edit...</a>
-		</li>
-		<li role="none">
-			<a class="cmd cmd--bookmark-delete" id="bookmark-delete" role="menuitem">Delete</a>
-		</li>
-	</ul>
+	<div class="context-menu context-menu--bookmark" id="bookmark-context-menu" role="menu" tabindex="-1">
+		<a class="cmd cmd--bookmark-new-tab" id="bookmark-new-tab" role="menuitem" tabindex="-1">Open in a new tab</a>
+		<a class="cmd cmd--bookmark-new-window" id="bookmark-new-window" role="menuitem" tabindex="-1">Open in a new window</a>
+		<a class="cmd cmd--bookmark-new-incognito-window" id="bookmark-new-incognito-window" role="menuitem" tabindex="-1">Open in Incognito mode</a>
+		<hr role="separator">
+		<a class="cmd cmd--bookmark-edit" id="bookmark-edit" role="menuitem" tabindex="-1">Edit...</a>
+		<a class="cmd cmd--bookmark-delete" id="bookmark-delete" role="menuitem" tabindex="-1">Delete</a>
+	</div>
 
 	<!-- Context menu of a folder -->
-	<ul class="context-menu context-menu--folder" id="folder-context-menu" role="menu">
-		<li role="none">
-			<a class="cmd cmd--folder-window" id="folder-window" role="menuitem">Open all in tabs</a>
-		</li>
-		<li role="none">
-			<a class="cmd cmd--folder-new-window" id="folder-new-window" role="menuitem">Open all in a new window</a>
-		</li>
-		<li role="none">
-			<a class="cmd cmd--folder-new-new-incognito-window" id="folder-new-incognito-window" role="menuitem">Open all in Incognito mode</a>
-		</li>
-		<li role="none"><hr role="separator"></li>
-		<li role="none">
-			<a class="cmd cmd--folder-edit" id="folder-edit" role="menuitem">Edit...</a>
-		</li>
-		<li role="none">
-			<a class="cmd cmd--folder-delete" id="folder-delete" role="menuitem">Delete...</a>
-		</li>
-	</ul>
+	<div class="context-menu context-menu--folder" id="folder-context-menu" role="menu" tabindex="-1">
+		<a class="cmd cmd--folder-window" id="folder-window" role="menuitem" tabindex="-1">Open all in tabs</a>
+		<a class="cmd cmd--folder-new-window" id="folder-new-window" role="menuitem" tabindex="-1">Open all in a new window</a>
+		<a class="cmd cmd--folder-new-new-incognito-window" id="folder-new-incognito-window" role="menuitem" tabindex="-1">Open all in Incognito mode</a>
+		<hr role="separator">
+		<a class="cmd cmd--folder-edit" id="folder-edit" role="menuitem" tabindex="-1">Edit...</a>
+		<a class="cmd cmd--folder-delete" id="folder-delete" role="menuitem" tabindex="-1">Delete...</a>
+	</div>
 
 	<div class="resizer" id="resizer"></div>
 	<div class="cover" id="cover"></div>

@@ -1329,7 +1329,7 @@ function ready (window) {
 				if (metaKey){ // cmd + down (Mac)
 					menu.lastElementChild.focus();
 				} else {
-					if (item.tagName == 'COMMAND'){
+					if (item.tagName == 'A'){
 						var nextItem = item.nextElementSibling;
 						if (nextItem && nextItem.tagName == 'HR') nextItem = nextItem.nextElementSibling;
 						if (nextItem){
@@ -1347,7 +1347,7 @@ function ready (window) {
 				if (metaKey){ // cmd + up (Mac)
 					menu.firstElementChild.focus();
 				} else {
-					if (item.tagName == 'COMMAND'){
+					if (item.tagName == 'A'){
 						var prevItem = item.previousElementSibling;
 						if (prevItem && prevItem.tagName == 'HR') prevItem = prevItem.previousElementSibling;
 						if (prevItem){
