@@ -1,0 +1,330 @@
+{
+    "ext_name": {
+        "message": "Bookmarkie - zakładki w wyskakującym okienku"
+    },
+    "ext_desc": {
+        "message": "Przeglądaj i zarządzaj swoimi zakładkami w wyskakującym okienku."
+    },
+    "edit": {
+        "description": "one of the menu items",
+        "message": "Edytuj"
+    },
+    "delete": {
+        "description": "one of the menu items and button text",
+        "message": "Usuń"
+    },
+    "copy_url": {
+        "description": "one of the menu items",
+        "message": "Kopiuj adres linku"
+    },
+    "open_in_tab": {
+        "description": "one of the menu items",
+        "message": "Otwórz w nowej karcie"
+    },
+    "open_all": {
+        "description": "one of the menu items",
+        "message": "Otwórz wszystkie ($count$)",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
+    },
+    "open_in_window": {
+        "description": "one of the menu items",
+        "message": "Otwórz w nowym oknie"
+    },
+    "open_all_in_window": {
+        "description": "one of the menu items",
+        "message": "Otwórz wszystkie w nowym oknie"
+    },
+    "open_in_incognito": {
+        "description": "one of the menu items",
+        "message": "Otwórz w oknie incognito"
+    },
+    "open_all_in_incognito": {
+        "description": "one of the menu items",
+        "message": "Otwórz wszystkie w oknie incognito"
+    },
+    "add_folder": {
+        "description": "one of the menu items",
+        "message": "Dodaj folder"
+    },
+    "add_link": {
+        "description": "one of the menu items",
+        "message": "Dodaj zakładkę"
+    },
+    "open_manager": {
+        "description": "one of the menu items",
+        "message": "Menedżer zakładek"
+    },
+    "rename": {
+        "description": "dialog title text",
+        "message": "Zmień nazwę"
+    },
+    "dialog_delete_text": {
+        "description": "dialog text for delete confirmation",
+        "message": "Usunąć folder $folderName$ oraz $bookmarkCount$ zakładek?",
+        "placeholders": {
+            "folderName": {
+                "content": "$1"
+            },
+            "bookmarkCount": {
+                "content": "$2"
+            },
+            "plural": {
+                "content": "$3"
+            }
+        }
+    },
+    "dialog_delete_single_text": {
+        "description": "dialog text for delete confirmation",
+        "message": "Usunąć $folderName$?",
+        "placeholders": {
+            "folderName": {
+                "content": "$1"
+            }
+        }
+    },
+    "dialog_open_url_text": {
+        "description": "dialog text for open url confirmation",
+        "message": "Otworzyć $bookmarkCount$ zakładek z folderu $folderName$?",
+        "placeholders": {
+            "bookmarkCount": {
+                "content": "$1"
+            },
+            "folderName": {
+                "content": "$2"
+            }
+        }
+    },
+    "label_name": {
+        "description": "form label text",
+        "message": "Nazwa"
+    },
+    "label_url": {
+        "description": "form label text",
+        "message": "URL"
+    },
+    "save": {
+        "description": "button text",
+        "message": "Zapisz"
+    },
+    "add": {
+        "description": "button text",
+        "message": "Dodaj"
+    },
+    "confirm": {
+        "description": "button text",
+        "message": "Potwierdź"
+    },
+    "cancel": {
+        "description": "button text",
+        "message": "Anuluj"
+    },
+    "bookmark_added": {
+        "description": "notification text",
+        "message": "Dodano"
+    },
+    "bookmark_updated": {
+        "description": "notification text",
+        "message": "Zaktualizowano"
+    },
+    "bookmark_deleted": {
+        "description": "notification text",
+        "message": "Usunięto"
+    },
+    "link_copied": {
+        "description": "notification text",
+        "message": "Skopiowano"
+    },
+    "search": {
+        "description": "search placeholder text",
+        "message": "Szukaj"
+    },
+    "no_results": {
+        "description": "no search results",
+        "message": "Brak wyników"
+    },
+    "no_results_desc": {
+        "description": "no search results subtitle",
+        "message": "Szukaj nazw zakładek lub adresów URL"
+    },
+    "option_section_general": {
+        "description": "option section title",
+        "message": "Ogólne"
+    },
+    "option_section_appearance": {
+        "description": "option section title",
+        "message": "Wygląd"
+    },
+    "option_section_popup": {
+        "description": "option section title",
+        "message": "Wyskakujące okienko"
+    },
+    "option_section_icon": {
+        "description": "option section title",
+        "message": "Ikona"
+    },
+    "option_open_in_tab": {
+        "description": "option text",
+        "message": "Zawsze otwieraj w nowych kartach"
+    },
+    "option_open_in_background": {
+        "description": "option text",
+        "message": "Zawsze otwieraj w tle"
+    },
+    "option_hold_meta": {
+        "description": "option text",
+        "message": "Przytrzymaj $key$, aby otworzyć w tle",
+        "placeholders": {
+            "key": {
+                "content": "$1"
+            }
+        }
+    },
+    "option_middle_click_to_open_in_background": {
+        "description": "option text",
+        "message": "Środkowe kliknięcie otwiera w tle"
+    },
+    "option_collapse_sibling": {
+        "description": "option text",
+        "message": "Zwiń foldery rodzeństwa po rozwinięciu"
+    },
+    "option_fix_parent": {
+        "description": "option text",
+        "message": "Podczas przewijania pozostaw otwarty folder na górze"
+    },
+    "option_preserve_state": {
+        "description": "option text",
+        "message": "Zapamiętaj otwarte foldery podczas zamykania wyskakującego okienka"
+    },
+    "option_clear_search_results_on_close": {
+        "description": "option text",
+        "message": "Wyczyść wyniki wyszukiwania podczas zamykania wyskakującego okienka"
+    },
+    "option_enable_drag": {
+        "description": "option text",
+        "message": "Zezwalaj na przeciąganie w celu rozmieszczenia zakładek"
+    },
+    "option_show_search": {
+        "description": "option text",
+        "message": "Pokaż pasek wyszukiwania"
+    },
+    "option_show_folders_in_search": {
+        "description": "option text",
+        "message": "Pokaż foldery w wynikach wyszukiwania"
+    },
+    "option_hide_root_folder": {
+        "description": "option text",
+        "message": "Ukryj folder główny"
+    },
+    "option_popup_size": {
+        "description": "option text",
+        "message": "Rozmiar"
+    },
+    "option_node_density": {
+        "description": "option text",
+        "message": "Zagęszczenie listy"
+    },
+    "option_folder_type": {
+        "description": "option text",
+        "message": "Styl folderów"
+    },
+    "option_item_default": {
+        "description": "option text",
+        "message": "Domyślny"
+    },
+    "option_item_small": {
+        "description": "option text",
+        "message": "Mały"
+    },
+    "option_item_large": {
+        "description": "option text",
+        "message": "Duży"
+    },
+    "option_item_compact": {
+        "description": "option text",
+        "message": "Kompaktowy"
+    },
+    "option_item_comfortable": {
+        "description": "option text",
+        "message": "Wygodny"
+    },
+    "option_color_scheme": {
+        "description": "option text",
+        "message": "Schemat kolorów"
+    },
+    "option_theme_color": {
+        "description": "option text",
+        "message": "Motyw"
+    },
+    "option_icon_type": {
+        "description": "option text",
+        "message": "Styl"
+    },
+    "option_icon_color": {
+        "description": "option text",
+        "message": "Kolor"
+    },
+    "color_auto": {
+        "description": "color name in options",
+        "message": "Automatyczny"
+    },
+    "color_light": {
+        "description": "color name in options",
+        "message": "Jasny"
+    },
+    "color_dark": {
+        "description": "color name in options",
+        "message": "Ciemny"
+    },
+    "color_trinidad": {
+        "description": "color name in options",
+        "message": "Pomarańczowy"
+    },
+    "color_yellow": {
+        "description": "color name in options",
+        "message": "Żółty"
+    },
+    "color_pastel": {
+        "description": "color name in options",
+        "message": "Pastelowy"
+    },
+    "color_naval": {
+        "description": "color name in options",
+        "message": "Niebieski"
+    },
+    "color_orchid": {
+        "description": "color name in options",
+        "message": "Fioletowy"
+    },
+    "color_blue": {
+        "description": "color name in options",
+        "message": "Niebieski"
+    },
+    "color_warm_grey": {
+        "description": "color name in options",
+        "message": "Ciepły szary"
+    },
+    "color_cool_grey": {
+        "description": "color name in options",
+        "message": "Chłodny szary"
+    },
+    "color_beige": {
+        "description": "color name in options",
+        "message": "Beżowy"
+    },
+    "context_menu_bookmark_manager": {
+        "description": "context menu item",
+        "message": "Menedżer zakładek"
+    },
+    "context_menu_open_in_tab": {
+        "description": "context menu item",
+        "message": "Otwórz w karcie"
+    },
+    "context_menu_open_in_side_panel": {
+        "description": "context menu item",
+        "message": "Otwórz w panelu bocznym"
+    }
+}
