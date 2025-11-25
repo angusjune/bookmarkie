@@ -1,6 +1,6 @@
 # Bookmarkie
 
-An elegant Chrome bookmark viewer.
+An elegant Chrome MV3 bookmark viewer.
 
 This is the version in dev and may not work on your device. To download the stable version, go to [Chrome Web Store][download].
 
