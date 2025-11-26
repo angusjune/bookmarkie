@@ -3,9 +3,7 @@
 import Canvg, { presets } from 'canvg';
 
 const storageCache = {};
-
-/** @todo will be deprecated on MV3 */
-let isBrowserDark = window.matchMedia("(prefers-color-scheme: dark)").matches || chrome.extension.inIncognitoContext;
+let isBrowserDark = false; // Service workers have no window; rely on messages to update this flag.
 
 const initStorageCache = getAllStorageSyncData().then(items => {
   Object.assign(storageCache, items);
@@ -57,7 +55,7 @@ const setIcon = async (iconType = 'star', iconStyle = 'dark', iconStyleAuto = tr
     const blob = await offscreen.convertToBlob();
     const pngUrl = URL.createObjectURL(blob);
 	
-    chrome.browserAction.setIcon({ path: {
+    chrome.action.setIcon({ path: {
         32: pngUrl
     }});
 };
@@ -72,11 +70,12 @@ chrome.storage.onChanged.addListener((changes, namepsace) => {
 });
 
 chrome.tabs.onUpdated.addListener(() => {
-    isBrowserDark = window.matchMedia("(prefers-color-scheme: dark)").matches || chrome.extension.inIncognitoContext;
     setIcon(storageCache.iconType, storageCache.iconStyle, storageCache.iconStyleAuto, isBrowserDark);
 });
 
 chrome.runtime.onMessage.addListener(message => {
-    isBrowserDark = message.isBrowserDark;
-    setIcon(storageCache.iconType, storageCache.iconStyle, storageCache.iconStyleAuto, isBrowserDark);
+    if (typeof message.isBrowserDark === 'boolean') {
+        isBrowserDark = message.isBrowserDark;
+        setIcon(storageCache.iconType, storageCache.iconStyle, storageCache.iconStyleAuto, isBrowserDark);
+    }
 });
