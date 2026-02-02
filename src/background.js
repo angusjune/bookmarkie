@@ -1,6 +1,7 @@
 'use strict';
 
-import Canvg, { presets } from 'canvg';
+import Canvg from 'canvg';
+import { parseHTML } from 'linkedom';
 
 const storageCache = {};
 let isBrowserDark = false; // Service workers have no window; rely on messages to update this flag.
@@ -50,14 +51,21 @@ const setIcon = async (iconType = 'star', iconStyle = 'dark', iconStyleAuto = tr
 
     const offscreen = new OffscreenCanvas(32, 32);
     const ctx = offscreen.getContext('2d');
-    const v = await Canvg.fromString(ctx, svg[iconType], presets.offscreen());
+
+    // 使用 linkedom 提供 DOMParser，因为 Service Worker 中没有原生 DOMParser
+    const { DOMParser } = parseHTML('');
+    const v = await Canvg.fromString(ctx, svg[iconType], {
+        ignoreAnimation: true,
+        ignoreMouse: true,
+        DOMParser: DOMParser,
+        createCanvas: (width, height) => new OffscreenCanvas(width, height),
+        createImage: (src) => fetch(src).then(res => res.blob()).then(blob => createImageBitmap(blob))
+    });
     await v.render();
-    const blob = await offscreen.convertToBlob();
-    const pngUrl = URL.createObjectURL(blob);
-	
-    chrome.action.setIcon({ path: {
-        32: pngUrl
-    }});
+
+    // 使用 ImageData 直接设置图标，因为 Service Worker 中没有 URL.createObjectURL
+    const imageData = ctx.getImageData(0, 0, 32, 32);
+    chrome.action.setIcon({ imageData: { 32: imageData } });
 };
 
 chrome.storage.onChanged.addListener((changes, namepsace) => {

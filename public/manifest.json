@@ -26,7 +26,8 @@
 	"permissions": [
 		"bookmarks",
 		"tabs",
-		"storage"
+		"storage",
+		"favicon"
 	],
 	"minimum_chrome_version": "88",
 	"default_locale": "en"

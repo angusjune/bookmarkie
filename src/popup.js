@@ -252,7 +252,7 @@ function ready (window) {
 	var generateBookmarkHTML = function(title, url, extras){
 		if (!extras) extras = '';
 		var u = url.htmlspecialchars();
-		var favicon = 'chrome://favicon/size/16@2x/' + u;
+		var favicon = chrome.runtime.getURL('_favicon/') + '?pageUrl=' + encodeURIComponent(url) + '&size=32';
 
 		var tooltipURL = url;
 		if (/^javascript:/i.test(url)){

@@ -4,9 +4,9 @@
   "description": "An elegant bookmark viewer for Chrome",
   "private": true,
   "scripts": {
-    "build": "webpack --mode=production --config config/webpack.config.js",
-    "watch": "webpack --watch --mode=development --config config/webpack.config.js",
-    "build:dev": "webpack --watch --mode=development --devtool source-map --config config/webpack.config.js"
+    "build": "NODE_OPTIONS=--openssl-legacy-provider webpack --mode=production --config config/webpack.config.js",
+    "watch": "NODE_OPTIONS=--openssl-legacy-provider webpack --watch --mode=development --config config/webpack.config.js",
+    "build:dev": "NODE_OPTIONS=--openssl-legacy-provider webpack --watch --mode=development --devtool source-map --config config/webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -40,6 +40,7 @@
     "@material/switch": "^11.0.0",
     "@material/typography": "^11.0.0",
     "canvg": "^3.0.7",
+    "linkedom": "^0.18.12",
     "lit-element": "^2.4.0"
   }
 }
